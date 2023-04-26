@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html layout:decorate="~{Layout}">
+<head>
+   
+    <meta charset="UTF-8"/>
+   
+</head>
+<body>
+
+	    <section class="layout-content" layout:fragment="corpo">
+	
+	        <nav class="navbar navbar-expand-md bg-light">
+	            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	                <ul class="navbar-nav mr-auto">
+	                    <li class="nav-item active">
+	                        <i class="oi oi-caret-right"></i>
+	                        <span>Cadastrar Exercicio</span>
+	                    </li>
+	                </ul>
+	                <a class="btn btn-primary btn-md" href="/departamentos/listar" role="button">
+	                    <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
+	                    <span>Listar Treino</span>
+	                </a>
+	            </div>
+	        </nav>
+	
+	        <div class="container" id="cadastro">
+	            <form action="/fichatreinos/salvar" method="POST">
+	                   <div class="form-group col-md-6">
+	                        <label for="nome">Ficha de Treino</label>
+	                        <input type="text" class="form-control" id="nome"
+	                               placeholder="Nome Do Treino" autofocus="autofocus" th:field="*{nome}">
+	                    </div>
+	                      <div class="form-group col-md-6">
+	                        <label for="nome">Descrição</label>
+	                        <input type="text" class="form-control" id="nome"
+	                               placeholder="Descrição" autofocus="autofocus" th:field="*{nome}">
+	                    </div>
+	                <input type="hidden" id="id" name="id" value=""/>
+	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+	            </form>
+	        </div>
+	    </section>
+	
+	</div>
+	
+
+</body>
+</html>
