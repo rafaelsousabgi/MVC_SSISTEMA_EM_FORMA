@@ -1,7 +1,9 @@
 package com.academia.em_forma.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -18,41 +20,49 @@ public class AvaliacaoFisica implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private LocalDate dataAvaliacao;
-	private Double peso;
-	private Double altura;
-	private Double peito;
-	private Double cintura;
-	private Double panturrilhaDireita;
-	private Double panturrilhaEsquerda;
-	private Double coxaDireita;
-	private Double coxaEsqueda;
-	private Double bracoEsquedo;
-	private Double bracoDireito;
-	private Double antebracoEsquedo;
-	private Double antebracoDireito;
-	private Double gluteo;
-	private Double imc;
+	
+	private BigDecimal peso;
+	private BigDecimal altura;
+	private BigDecimal peito;
+	private BigDecimal cintura;
+	private BigDecimal panturrilhaDireita;
+	private BigDecimal panturrilhaEsquerda;
+	private BigDecimal coxaDireita;
+	private BigDecimal coxaEsqueda;
+	private BigDecimal bracoEsquedo;
+	private BigDecimal bracoDireito;
+	private BigDecimal antebracoEsquedo;
+	private BigDecimal antebracoDireito;
+	private BigDecimal gluteo;
+	private BigDecimal imc;
+	
+	@Column(name = "data_inicio", nullable = false, columnDefinition = "DATE")
+	private LocalDate dataInicio;
+	@Column(name = "data_fim", columnDefinition = "DATE")
+	private LocalDate dataFim;
 	
 	@ManyToOne
 	@JoinColumn(name="id_aluno")
 	private Aluno aluno;
 	
 	@ManyToOne
-	@JoinColumn(name="instrutor_id")
+	@JoinColumn(name="id_instrutor")
 	private Instrutor instrutor;
 
+	@OneToMany(mappedBy = "avaliacao")
+	private List<FichaTreino> fichaTreino;
+	
 	public AvaliacaoFisica() {
 		
 	}
 
-	public AvaliacaoFisica(Long id, LocalDate dataAvaliacao, Double peso, Double altura, Double peito, Double cintura,
-			Double panturrilhaDireita, Double panturrilhaEsquerda, Double coxaDireita, Double coxaEsqueda,
-			Double bracoEsquedo, Double bracoDireito, Double antebracoEsquedo, Double antebracoDireito, Double gluteo,
-			Double imc, Aluno aluno) {
+	public AvaliacaoFisica(Long id, BigDecimal peso, BigDecimal altura, BigDecimal peito, BigDecimal cintura,
+			BigDecimal panturrilhaDireita, BigDecimal panturrilhaEsquerda, BigDecimal coxaDireita, BigDecimal coxaEsqueda,
+			BigDecimal bracoEsquedo, BigDecimal bracoDireito, BigDecimal antebracoEsquedo, BigDecimal antebracoDireito, BigDecimal gluteo,
+			BigDecimal imc, LocalDate dataInicio, LocalDate dataFim, Aluno aluno, Instrutor instrutor,
+			List<FichaTreino> fichaTreino) {
 		super();
 		this.id = id;
-		this.dataAvaliacao = dataAvaliacao;
 		this.peso = peso;
 		this.altura = altura;
 		this.peito = peito;
@@ -67,7 +77,29 @@ public class AvaliacaoFisica implements Serializable {
 		this.antebracoDireito = antebracoDireito;
 		this.gluteo = gluteo;
 		this.imc = imc;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
 		this.aluno = aluno;
+		this.instrutor = instrutor;
+		this.fichaTreino = fichaTreino;
+	}
+	
+	
+
+	public LocalDate getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(LocalDate dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public LocalDate getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(LocalDate dataFim) {
+		this.dataFim = dataFim;
 	}
 
 	public Instrutor getInstrutor() {
@@ -86,123 +118,115 @@ public class AvaliacaoFisica implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDate getDataAvaliacao() {
-		return dataAvaliacao;
-	}
-
-	public void setDataAvaliacao(LocalDate dataAvaliacao) {
-		this.dataAvaliacao = dataAvaliacao;
-	}
-
-	public Double getPeso() {
+	public BigDecimal getPeso() {
 		return peso;
 	}
 
-	public void setPeso(Double peso) {
+	public void setPeso(BigDecimal peso) {
 		this.peso = peso;
 	}
 
-	public Double getAltura() {
+	public BigDecimal getAltura() {
 		return altura;
 	}
 
-	public void setAltura(Double altura) {
+	public void setAltura(BigDecimal altura) {
 		this.altura = altura;
 	}
 
-	public Double getPeito() {
+	public BigDecimal getPeito() {
 		return peito;
 	}
 
-	public void setPeito(Double peito) {
+	public void setPeito(BigDecimal peito) {
 		this.peito = peito;
 	}
 
-	public Double getCintura() {
+	public BigDecimal getCintura() {
 		return cintura;
 	}
 
-	public void setCintura(Double cintura) {
+	public void setCintura(BigDecimal cintura) {
 		this.cintura = cintura;
 	}
 
-	public Double getPanturrilhaDireita() {
+	public BigDecimal getPanturrilhaDireita() {
 		return panturrilhaDireita;
 	}
 
-	public void setPanturrilhaDireita(Double panturrilhaDireita) {
+	public void setPanturrilhaDireita(BigDecimal panturrilhaDireita) {
 		this.panturrilhaDireita = panturrilhaDireita;
 	}
 
-	public Double getPanturrilhaEsquerda() {
+	public BigDecimal getPanturrilhaEsquerda() {
 		return panturrilhaEsquerda;
 	}
 
-	public void setPanturrilhaEsquerda(Double panturrilhaEsquerda) {
+	public void setPanturrilhaEsquerda(BigDecimal panturrilhaEsquerda) {
 		this.panturrilhaEsquerda = panturrilhaEsquerda;
 	}
 
-	public Double getCoxaDireita() {
+	public BigDecimal getCoxaDireita() {
 		return coxaDireita;
 	}
 
-	public void setCoxaDireita(Double coxaDireita) {
+	public void setCoxaDireita(BigDecimal coxaDireita) {
 		this.coxaDireita = coxaDireita;
 	}
 
-	public Double getCoxaEsqueda() {
+	public BigDecimal getCoxaEsqueda() {
 		return coxaEsqueda;
 	}
 
-	public void setCoxaEsqueda(Double coxaEsqueda) {
+	public void setCoxaEsqueda(BigDecimal coxaEsqueda) {
 		this.coxaEsqueda = coxaEsqueda;
 	}
 
-	public Double getBracoEsquedo() {
+	public BigDecimal getBracoEsquedo() {
 		return bracoEsquedo;
 	}
 
-	public void setBracoEsquedo(Double bracoEsquedo) {
+	public void setBracoEsquedo(BigDecimal bracoEsquedo) {
 		this.bracoEsquedo = bracoEsquedo;
 	}
 
-	public Double getBracoDireito() {
+	public BigDecimal getBracoDireito() {
 		return bracoDireito;
 	}
 
-	public void setBracoDireito(Double bracoDireito) {
+	public void setBracoDireito(BigDecimal bracoDireito) {
 		this.bracoDireito = bracoDireito;
 	}
 
-	public Double getAntebracoEsquedo() {
+	public BigDecimal getAntebracoEsquedo() {
 		return antebracoEsquedo;
 	}
 
-	public void setAntebracoEsquedo(Double antebracoEsquedo) {
+	public void setAntebracoEsquedo(BigDecimal antebracoEsquedo) {
 		this.antebracoEsquedo = antebracoEsquedo;
 	}
 
-	public Double getAntebracoDireito() {
+	public BigDecimal getAntebracoDireito() {
 		return antebracoDireito;
 	}
 
-	public void setAntebracoDireito(Double antebracoDireito) {
+	public void setAntebracoDireito(BigDecimal antebracoDireito) {
 		this.antebracoDireito = antebracoDireito;
 	}
 
-	public Double getGluteo() {
+	public BigDecimal getGluteo() {
 		return gluteo;
 	}
 
-	public void setGluteo(Double gluteo) {
+	public void setGluteo(BigDecimal gluteo) {
 		this.gluteo = gluteo;
 	}
 
-	public Double getImc() {
+	public BigDecimal getImc() {
 		return imc;
 	}
 
-	public void setImc(Double imc) {
+	public void setImc(BigDecimal imc) {
 		this.imc = imc;
 	}
 

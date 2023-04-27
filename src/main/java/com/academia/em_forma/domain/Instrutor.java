@@ -19,10 +19,16 @@ public class Instrutor extends Pessoa<Long> {
 	@JsonIgnore
 	@OneToMany(mappedBy = "instrutor")
 	private List<AvaliacaoFisica> avaliacao = new ArrayList<>();
-	
+
+	public Instrutor() {
+		
+		
+	}
+
+
 
 	public Instrutor(Long id, String nome, String sexo, String estadoCivil, String rg, String cpf, String email,
-			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida, String cref) {
+			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida) {
 		super(id, nome, sexo, estadoCivil, rg, cpf, email, telefone, profissao, dataEntrada, dataSaida);
 		this.cref = cref;
 	}

@@ -8,7 +8,10 @@ import org.hibernate.mapping.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,6 +34,10 @@ public class Exercicio implements Serializable{
 	private int serie;
 	private int repeticao;
 	
+	@Column(nullable = false, length = 3)
+	@Enumerated(EnumType.STRING)
+	private DIA dia;
+	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "exercicios")
 	private List<FichaTreino> fichaTreinos;
@@ -44,6 +51,7 @@ public class Exercicio implements Serializable{
 	public Exercicio() {
 		
 	}
+	
 	public Exercicio(Long id, String nomeEquipamento, int serie, int repeticao) {
 		super();
 		this.id = id;
@@ -51,15 +59,11 @@ public class Exercicio implements Serializable{
 		this.serie = serie;
 		this.repeticao = repeticao;
 	}
+	
 	public Long getId() {
 		return id;
 	}
-	public void setFichaTreinos(List<FichaTreino> fichaTreinos) {
-		this.fichaTreinos = fichaTreinos;
-	}
-	public void setGrupoMuscular(List<GrupoMuscular> grupoMuscular) {
-		this.grupoMuscular = grupoMuscular;
-	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -80,8 +84,16 @@ public class Exercicio implements Serializable{
 	}
 	public void setRepeticao(int repeticao) {
 		this.repeticao = repeticao;
-	}
+	}	
 	
+	public DIA getDia() {
+		return dia;
+	}
+
+	public void setDia(DIA dia) {
+		this.dia = dia;
+	}
+
 	public List<FichaTreino> getFichaTreinos() {
 		return fichaTreinos;
 	}
@@ -89,6 +101,14 @@ public class Exercicio implements Serializable{
 	public List<GrupoMuscular> getGrupoMuscular() {
 		return grupoMuscular;
 	}
+	
+	public void setFichaTreinos(List<FichaTreino> fichaTreinos) {
+		this.fichaTreinos = fichaTreinos;
+	}
+	public void setGrupoMuscular(List<GrupoMuscular> grupoMuscular) {
+		this.grupoMuscular = grupoMuscular;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

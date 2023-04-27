@@ -35,9 +35,7 @@ public class FichaTreino implements Serializable {
 	private String nome;
 	private String descricao;
 	
-	@Column(nullable = false, length = 3)
-	@Enumerated(EnumType.STRING)
-	private DIA dia;          
+	          
 	
 	@ManyToMany
 	@JoinTable(name = "TB_TREINO_EXERCICIOS",
@@ -70,16 +68,6 @@ public class FichaTreino implements Serializable {
 	}
 
 	
-
-	public DIA getDia() {
-		return dia;
-	}
-
-
-
-	public void setDia(DIA dia) {
-		this.dia = dia;
-	}
 
 
 
