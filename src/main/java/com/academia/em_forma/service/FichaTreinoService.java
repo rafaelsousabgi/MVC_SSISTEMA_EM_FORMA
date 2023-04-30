@@ -11,4 +11,5 @@ public interface FichaTreinoService {
 	void excluir(Long id);
 	FichaTreino buscarPorId(Long id);
 	List<FichaTreino> buscarTodos();
+	boolean temexercicios(Long id);
 }

@@ -50,7 +50,7 @@ public class AvaliacaoFisica implements Serializable {
 	private Instrutor instrutor;
 
 	@OneToMany(mappedBy = "avaliacao")
-	private List<FichaTreino> fichaTreino;
+	private List<FichaTreino> fichaTreinos;
 	
 	public AvaliacaoFisica() {
 		
@@ -81,10 +81,18 @@ public class AvaliacaoFisica implements Serializable {
 		this.dataFim = dataFim;
 		this.aluno = aluno;
 		this.instrutor = instrutor;
-		this.fichaTreino = fichaTreino;
+		
 	}
 	
 	
+
+	public List<FichaTreino> getFichaTreinos() {
+		return fichaTreinos;
+	}
+
+	public void setFichaTreinos(List<FichaTreino> fichaTreinos) {
+		this.fichaTreinos = fichaTreinos;
+	}
 
 	public LocalDate getDataInicio() {
 		return dataInicio;

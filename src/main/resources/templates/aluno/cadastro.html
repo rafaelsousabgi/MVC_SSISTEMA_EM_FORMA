@@ -23,12 +23,12 @@
 	        </div>
 	
 	        <div class="container" id="cadastro">
-	            <form action="/alunos/salvar" method="POST">
+	            <form th:action="@{/alunos/salvar}" th:object="aluno" method="POST">
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="nome">Nome do Aluno</label>
 	                        <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-	                               autofocus="autofocus" name="nome" value=""/>
+	                               autofocus="autofocus" th:field="*{nome}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -37,7 +37,7 @@
 	                    <div class="form-group col-md-6">
 	                        <label for="objetivo">Objetivo</label>
 	                        <input type="text" class="form-control" id="objetivo" placeholder="objetivo"
-	                               autofocus="autofocus" name="objetivo" value=""/>
+	                               autofocus="autofocus" th:field="*{objetivo}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -46,15 +46,15 @@
 	                  </div>  
 	                  <div class="form-row">
 	                    <div class="form-group col-md-4">
-	                        <label for="bairro">Sexo</label>
-	                        <input type="text" class="form-control" id="sexo" name="sexo" value=""/>
+	                        <label for="sexo">Sexo</label>
+	                        <input type="text" class="form-control" id="sexo" th:field="*{sexo}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-4">
-	                        <label for="bairro">Estado Civil</label>
-	                        <input type="text" class="form-control" id="estadocivil" name="estadocivil" value=""/>
+	                        <label for="estadoCivil">Estado Civil</label>
+	                        <input type="text" class="form-control" id="estadocivil" th:field="*{estadoCivil}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>

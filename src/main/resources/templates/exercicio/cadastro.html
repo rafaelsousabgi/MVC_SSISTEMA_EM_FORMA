@@ -17,66 +17,57 @@
 	                    </li>
 	                </ul>
 	            </div>
-	            <a class="btn btn-primary btn-md" href="/cargos/listar" role="button">
+	            <a class="btn btn-primary btn-md" href="/exercicios/listar" role="button">
 	                <span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
 	                <span>Listar Exercicios</span>
 	            </a>
 	        </nav>
 	
 	        <div class="container" id="cadastro">
-	            <form action="/cargos/salvar" method="POST">
+	        
+	        	<div th:replace="~{fragments/alert}"></div>
+	        	
+	            <form th:action="@{/exercicios/salvar}" th:object="${exercicio}" method="POST">
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="nomeEquipamento">Nome do Equipamento</label>
-	                        <input type="text" class="form-control" id="nomeequipamento" placeholder="Nome do equiapamento" autofocus="autofocus"
-	                               name="nomeequipamento" value=""/>
+	                        <input type="text" class="form-control" id="nomeequipamento" placeholder="Nome do equiapamento" 
+	                        autofocus="autofocus" th:field="*{nomeEquipamento}"   th/>
 	                    </div>
 	                    <div class="form-group col-md-6">
 	                        <label for="serie">Serie</label>
 	                        <input type="number" class="form-control" id="serie" placeholder="serie" autofocus="autofocus"
-	                               name="serie" value=""/>
+	                               th:field="*{serie}"/>
 	                    </div>
 	                    <div class="form-group col-md-6">
 	                        <label for="repeticao">Repetição</label>
 	                        <input type="number" class="form-control" id="serie" placeholder="serie" autofocus="autofocus"
-	                               name="serie" value=""/>
+	                               th:field="*{repeticao}"/>
 	                    </div>
 	                    <div class="form-group col-md-4">
 	                        <label for="dia">Dia</label>
-	                        <select id="dia" class="form-control" name="exercicio.dia">
+	                        <select id="dia" class="form-control" th:field="*{dia}">
 	                            <option value="">Selecione...</option>
-	                            <option value="AC">AC</option>
-	                            <option value="AL">AL</option>
-	                            <option value="AM">AM</option>
-	                            <option value="BA">BA</option>
-	                            <option value="CE">CE</option>
-	                            <option value="DF">DF</option>
-	                            <option value="ES">ES</option>
-	                            <option value="GO">GO</option>
-	                            <option value="MA">MA</option>
-	                            <option value="MT">MT</option>
-	                            <option value="MS">MS</option>
-	                            <option value="MG">MG</option>
-	                            <option value="PA">PA</option>
-	                            <option value="PB">PB</option>
-	                            <option value="PR">PR</option>
-	                            <option value="PE">PE</option>
-	                            <option value="PI">PI</option>
-	                            <option value="RJ">RJ</option>
-	                            <option value="RN">RN</option>
-	                            <option value="RS">RS</option>
-	                            <option value="RO">RO</option>
-	                            <option value="RR">RR</option>
-	                            <option value="SC">SC</option>
-	                            <option value="SP">SP</option>
-	                            <option value="SE">SE</option>
-	                            <option value="TO">TO</option>
+	                            <option th:each="dia : ${dias}"
+	                             th:value="${dia}" th:text="${dia.sigla}"></option>
+	                            
+	                            
 	                        </select>
 	                        <div class="invalid-feedback">
 	
 	                      </div>
 	                      </div>
-	                      </div>
+	                      
+	                      <div class="form-group col-md-4">
+	                        <label for="fichaTreino">Ficha de Treino</label>
+	                        <select id="fichaTreino" class="form-control" th:field="*{fichaTreino}">
+	                            <option value="">Selecione</option>
+	                            <option th:each="f : ${fichasTreinos}" th:value="${f.id}" th:text="${f.nome}"></option>
+	                            
+	                        </select>
+	                        <div class="invalid-feedback"></div>
+	                    </div>
+	                    </div>
 	                    
 	                <input type="hidden" id="id" name="id" value=""/>
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>

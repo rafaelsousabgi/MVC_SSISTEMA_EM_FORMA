@@ -29,7 +29,7 @@ public class GrupoMuscular implements Serializable{
 	private String nome;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "grupoMuscular")
+	@ManyToMany(mappedBy = "gruposMusculares")
 	private List<Exercicio> exercicios;
 	
 	public GrupoMuscular() {

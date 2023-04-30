@@ -1,10 +1,12 @@
 package com.academia.em_forma.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-import org.hibernate.mapping.Set;
+import java.util.Set;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,23 +32,27 @@ public class Exercicio implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String nomeEquipamento;
-	private int serie;
+	private int serie;	
 	private int repeticao;
 	
 	@Column(nullable = false, length = 3)
 	@Enumerated(EnumType.STRING)
 	private DIA dia;
 	
-	@JsonIgnore
-	@ManyToMany(mappedBy = "exercicios")
+	
+	@ManyToMany
+	@JoinTable(name = "TB_TREINO_EXERCICIOS",
+	joinColumns = @JoinColumn(name="EXERCICIO_ID"),
+	inverseJoinColumns = @JoinColumn(name="FICHATREINO_ID"))
 	private List<FichaTreino> fichaTreinos;
 	
 	@ManyToMany
 	@JoinTable(name = "TB_EXERCICIOS_GRUPOMUSCULAR",
 			joinColumns = @JoinColumn(name="EXERCICIO_ID"),
 			inverseJoinColumns = @JoinColumn(name="GRUPOMUSCULAR_ID"))
-	private List<GrupoMuscular> grupoMuscular;
+	private List<GrupoMuscular> gruposMusculares;
 	
 	public Exercicio() {
 		
@@ -58,6 +64,9 @@ public class Exercicio implements Serializable{
 		this.nomeEquipamento = nomeEquipamento;
 		this.serie = serie;
 		this.repeticao = repeticao;
+		
+		
+		
 	}
 	
 	public Long getId() {
@@ -94,19 +103,21 @@ public class Exercicio implements Serializable{
 		this.dia = dia;
 	}
 
-	public List<FichaTreino> getFichaTreinos() {
+	public List<FichaTreino> getFichaTreino() {
 		return fichaTreinos;
 	}
 	
-	public List<GrupoMuscular> getGrupoMuscular() {
-		return grupoMuscular;
-	}
-	
-	public void setFichaTreinos(List<FichaTreino> fichaTreinos) {
+	public void setFichaTreino(List<FichaTreino> fichaTreinos) {
 		this.fichaTreinos = fichaTreinos;
 	}
-	public void setGrupoMuscular(List<GrupoMuscular> grupoMuscular) {
-		this.grupoMuscular = grupoMuscular;
+	
+	public List<GrupoMuscular> getGrupoMuscular() {
+		return gruposMusculares;
+	}
+	
+	
+	public void setGrupoMuscular(List<GrupoMuscular> gruposMusculares) {
+		this.gruposMusculares = gruposMusculares;
 	}
 	
 	@Override

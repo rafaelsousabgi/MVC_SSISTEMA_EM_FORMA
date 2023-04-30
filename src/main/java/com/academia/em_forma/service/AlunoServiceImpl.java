@@ -10,6 +10,7 @@ import com.academia.em_forma.dao.AlunoDao;
 import com.academia.em_forma.domain.Aluno;
 
 @Service
+@Transactional
 public class AlunoServiceImpl implements AlunoService{
 
 	@Autowired
@@ -45,6 +46,12 @@ public class AlunoServiceImpl implements AlunoService{
 	public List<Aluno> buscarTodos() {
 		
 		return dao.findAll();
+	}
+
+	@Override
+	public boolean temAvaliacoes(Long id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

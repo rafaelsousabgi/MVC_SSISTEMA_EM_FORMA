@@ -1,8 +1,10 @@
 package com.academia.em_forma.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,22 +35,18 @@ public class FichaTreino implements Serializable {
 	private Long id;
 	
 	private String nome;
-	private String descricao;
-	
-	          
-	
-	@ManyToMany
-	@JoinTable(name = "TB_TREINO_EXERCICIOS",
-	joinColumns = @JoinColumn(name="FICHATREINO_ID"),
-	inverseJoinColumns = @JoinColumn(name="EXERCICIO_ID"))
-	private List<Exercicio> exercicios;
+	private String descricao;	          
 	
 	@JsonIgnore
+	@ManyToMany(mappedBy = "fichaTreinos")
+	private List<Exercicio> exercicios;
+	
+
 	@ManyToOne
 	@JoinColumn(name="Avaliacao_id")
 	private AvaliacaoFisica avaliacao;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="Aluno_id")
 	private Aluno aluno;
@@ -65,14 +63,6 @@ public class FichaTreino implements Serializable {
 		this.descricao = descricao;
 		this.avaliacao = avaliacao;
 		this.aluno = aluno;
-	}
-
-	
-
-
-
-	public void setExercicios(List<Exercicio> exercicios) {
-		this.exercicios = exercicios;
 	}
 
 
@@ -130,11 +120,15 @@ public class FichaTreino implements Serializable {
 		this.descricao = descricao;
 	}
 	
-	public List<Exercicio> getExercicios() {
+
+
+	public List<Exercicio> getExercicio() {
 		return exercicios;
 	}
-
-
+	
+	public void setExercicio(List<Exercicio> exercicios) {
+		this.exercicios = exercicios;
+	}
 
 	@Override
 	public int hashCode() {

@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.academia.em_forma.dao.ExercicioDao;
+import com.academia.em_forma.domain.DIA;
 import com.academia.em_forma.domain.Exercicio;
 
 @Service
+@Transactional
 public class ExercicioServiceImpl implements ExercicioService{
 
 	@Autowired
@@ -37,7 +40,7 @@ public class ExercicioServiceImpl implements ExercicioService{
 	@Override
 	@Transactional(readOnly = true)
 	public Exercicio buscarPorId(Long id) {
-		// TODO Auto-generated method stub
+		
 		return dao.findById(id);
 	}
 
@@ -47,5 +50,7 @@ public class ExercicioServiceImpl implements ExercicioService{
 		
 		return dao.findAll();
 	}
+	
+	
 
 }

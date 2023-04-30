@@ -10,6 +10,7 @@ import com.academia.em_forma.dao.FichaTreinoDao;
 import com.academia.em_forma.domain.FichaTreino;
 
 @Service
+@Transactional
 public class FichaTreinoServiceImpl implements FichaTreinoService {
 
 	@Autowired
@@ -45,6 +46,14 @@ public class FichaTreinoServiceImpl implements FichaTreinoService {
 	public List<FichaTreino> buscarTodos() {
 		
 		return dao.findAll();
+	}
+
+	@Override
+	public boolean temexercicios(Long id) {
+		if (buscarPorId(id).getExercicio().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 }

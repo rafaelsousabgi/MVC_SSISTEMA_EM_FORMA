@@ -17,28 +17,32 @@
 	                    </li>
 	                </ul>
 	            </div>
-	            <a class="btn btn-primary btn-md" href="/fricastreinos/listar" role="button">
+	            <a class="btn btn-primary btn-md" href="/fichastreinos/listar" role="button">
 	                <span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
 	                <span>Listar Treino</span>
 	            </a>
 	        </nav>
 	
 	        <div class="container" id="cadastro">
-	            <form action="/cargos/salvar" method="POST">
+	        
+	        	<div th:replace="~{fragments/alert}"></div>
+	        	
+	            <form th:action="${fichaTreino.id == null} ? @{/fichastreinos/salvar} : @{/fichastreinos/editar}"
+	             th:object= " ${fichaTreino}" method="POST">
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="nome">Nome do Treino</label>
-	                        <input type="text" class="form-control" id="nome" placeholder="Nome Cargo" autofocus="autofocus"
-	                               name="nome" value=""/>
+	                        <input type="text" class="form-control" id="nome" placeholder="Nome Do Treino" autofocus="autofocus"
+	                               th:field="*{nome}"/>
 	                    </div>
 	                    <div class="form-group col-md-6">
-	                        <label for="nome">Descrição</label>
+	                        <label for="descricao">Descrição</label>
 	                        <input type="text" class="form-control" id="descricao" placeholder="Descrição do treino" autofocus="autofocus"
-	                               name="descricao" value=""/>
+	                               th:field="*{descricao}"/>
 	                    </div>
 	                    
 	                </div>
-	                <input type="hidden" id="id" name="id" value=""/>
+	                <input type="hidden" id="id" th:field="*{id}"/>
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 	            </form>
 	        </div>

@@ -10,6 +10,7 @@ import com.academia.em_forma.dao.GrupoMuscularDao;
 import com.academia.em_forma.domain.GrupoMuscular;
 
 @Service
+@Transactional
 public class GrupoMuscularServiceImpl implements GrupoMuscularService{
 
 	@Autowired

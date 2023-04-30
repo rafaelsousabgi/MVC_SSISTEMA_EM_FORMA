@@ -11,6 +11,7 @@ public interface AlunoService {
 	void excluir(Long id);
 	Aluno buscarPorId(Long id);
 	List<Aluno> buscarTodos();
+	boolean temAvaliacoes(Long id);
 
 
 }

@@ -10,6 +10,7 @@ import com.academia.em_forma.dao.InstrutorDao;
 import com.academia.em_forma.domain.Instrutor;
 
 @Service
+@Transactional
 public class InstrutorServiceImpl implements InstrutorService {
 
 	@Autowired
