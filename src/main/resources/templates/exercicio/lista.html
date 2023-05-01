@@ -45,7 +45,7 @@
 	                        <td th:text="${e.serie}"></td>
 	                        <td th:text="${e.repeticao}">Contabilidade</td>
 	                        <td th:text="${e.dia}"></td>
-	                       <td th:each="e : ${fichaTreino}" th:text="{c.fichatreino.nome}"></td >                      
+	                       <td th:each="e : ${fichaTreino}" th:text="{e.fichatreino.nome}"></td >                      
 	                       
 	                        <td colspan="2">
 	                            <a class="btn btn-info btn-sm" href="/exercicios/editar/1" role="button">

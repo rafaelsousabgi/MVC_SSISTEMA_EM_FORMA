@@ -14,8 +14,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.AvaliacaoFisica;
+import com.academia.em_forma.domain.DIA;
+import com.academia.em_forma.domain.FichaTreino;
+import com.academia.em_forma.domain.TIPOFISICO;
+import com.academia.em_forma.domain.UF;
 import com.academia.em_forma.service.AlunoService;
 import com.academia.em_forma.service.AvaliacaoFisicaService;
+import com.academia.em_forma.service.FichaTreinoService;
 
 @Controller
 @RequestMapping("/alunos")
@@ -26,6 +31,8 @@ public class AlunoController {
 	
 	@Autowired
 	private AvaliacaoFisicaService avaliacaoFisicaService;
+	
+	@Autowired FichaTreinoService fichaTreinoService;
 
 	@GetMapping("/cadastrar")
 	public String Cadastrar(Aluno aluno) {
@@ -33,7 +40,8 @@ public class AlunoController {
 	}
 	
 	@GetMapping("/listar")
-	public String listar() {
+	public String listar(ModelMap model) {
+			model.addAttribute("alunos", alunoService.buscarTodos());
 		return "/aluno/lista";
 	}
 	
@@ -75,4 +83,21 @@ public class AlunoController {
 	public List<AvaliacaoFisica> listaDeAvaliacoes(){
 		return avaliacaoFisicaService.buscarTodos();
 	}
-}
+	
+	@ModelAttribute("fichastreino")
+	public List<FichaTreino> listaFichasTreinos(){
+		return fichaTreinoService.buscarTodos();
+	};
+	
+	@ModelAttribute("tipofisicos")
+	public TIPOFISICO[] geTipofisicos(){
+		return TIPOFISICO.values();
+	}
+	
+	@ModelAttribute("ufs")
+	public UF[] getUfs() {
+		return UF.values();
+	}
+	
+	}
+

@@ -50,7 +50,7 @@ public class AvaliacaoController {
 		avaliacaoFisicaService.salvar(avaliacaoFisica);
 		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
 		
-		return "redirect:/avaliacao/cadastrar";
+		return "redirect:/avaliacoes/cadastrar";
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -59,13 +59,14 @@ public class AvaliacaoController {
 		return "/avaliacao/cadastro";
 	}
 	
+	/**
 	@PostMapping("/editar")
 	public String editar(AvaliacaoFisica avaliacaoFisica, RedirectAttributes attr) {
 		avaliacaoFisicaService.editar(avaliacaoFisica);
 		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
 		return "redirect:/fichastreinos/cadastrar";
 	}
-	 /**
+	 
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
 		if (service.temexercicios(id)) {
@@ -82,8 +83,8 @@ public class AvaliacaoController {
 	
 	
 	**/
-	@ModelAttribute("Alunos")
-	public List<Aluno> listaDeExercicio(){
+	@ModelAttribute("alunos")
+	public List<Aluno> listaDeAlunos(){
 		return alunoService.buscarTodos();
 	}
 }

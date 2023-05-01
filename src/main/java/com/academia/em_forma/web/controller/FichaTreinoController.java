@@ -72,9 +72,9 @@ public class FichaTreinoController {
 		
 		return listar(model);
 	}
-	
-	@ModelAttribute("Exercicio")
-	public List<Exercicio> listaDeExercicio(){
+	/**listaDeExercicio**/
+	@ModelAttribute("Exercicios")
+	public List<Exercicio> getExercicios(){
 		return exercicioService.buscarTodos();
 	}
 }

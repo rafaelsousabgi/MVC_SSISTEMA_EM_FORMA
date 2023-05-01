@@ -1,6 +1,7 @@
 package com.academia.em_forma.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.*;
 
@@ -32,6 +33,26 @@ public class Endereco implements Serializable{
 	private Integer numero;
 	
 	private String complemento;
+	
+	
+	
+
+	public Endereco() {
+		
+	}
+
+	public Endereco(Long id, String logradouro, String bairro, String cidade, UF uf, String cep, Integer numero,
+			String complemento) {
+		super();
+		this.id = id;
+		this.logradouro = logradouro;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.uf = uf;
+		this.cep = cep;
+		this.numero = numero;
+		this.complemento = complemento;
+	}
 
 	public String getLogradouro() {
 		return logradouro;
@@ -87,6 +108,23 @@ public class Endereco implements Serializable{
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		return Objects.equals(id, other.id);
 	}
 	
 	

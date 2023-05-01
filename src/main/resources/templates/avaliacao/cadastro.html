@@ -27,13 +27,13 @@
 	
 	        <div class="container" id="cadastro">
 	        	
-	        	<div th:replace="fragments/alert"></div>
+	        	<div th:replace="~{fragments/alert}"></div>
 	        	
 	            <form th:action="@{/avaliacoes/salvar}" th:object="${avaliacaoFisica}" method="POST">
 	             <div class="form-row">
 	                <div class="form-group col-md-3">
 	                        <label for="altura">Altura</label>
-	                        <input type="text" class="form-control" id="altura" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="altura" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{altura}"/>
 	                        <div class="invalid-feedback">
 	
@@ -42,7 +42,7 @@
 	                    
 	                    <div class="form-group col-md-3">
 	                        <label for="peito">Peitoral</label>
-	                        <input type="text" class="form-control" id="peito" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="peito" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{peito}"/>
 	                        <div class="invalid-feedback">
 	
@@ -50,7 +50,7 @@
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                        <label for="peso">Peso</label>
-	                        <input type="text" class="form-control" id="peso" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="peso" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{peso}"/>
 	                        <div class="invalid-feedback">
 	
@@ -58,7 +58,7 @@
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                        <label for="cintura">Cintura</label>
-	                        <input type="text" class="form-control" id="cintura" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="cintura" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{cintura}"/>
 	                        <div class="invalid-feedback">
 	
@@ -66,7 +66,7 @@
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                        <label for="panturrilhaDireita">Panturrilha Direita</label>
-	                        <input type="text" class="form-control" id="panturrilhaDireita" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="panturrilhaDireita" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{panturrilhaDireita}"/>
 	                        <div class="invalid-feedback">
 	
@@ -74,24 +74,34 @@
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                        <label for="panturrilhaEsquerda">Panturrilha Esquerda</label>
-	                        <input type="text" class="form-control" id="panturrilhaEsquerda" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="panturrilhaEsquerda" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{panturrilhaEsquerda}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-3">
+	                        <label for="coxaDireita">Coxa Direita</label>
+	                        <input type="text" class="form-control" id="coxaDireita" data-mask="#.##0,00"
+	                               data-mask-reverse="true" th:field="*{coxaDireita}"/>
+	                        <div class="invalid-feedback">
+	
+	                        </div>
+	                    </div>
+	                    <div class="form-group col-md-3">
 	                        <label for="coxaEsqueda">Coxa Esquerda</label>
-	                        <input type="text" class="form-control" id="coxaEsqueda" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="coxaEsqueda" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{coxaEsqueda}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    
+	                    
+	                    
 	                    <div class="form-group col-md-3">
 	                        <label for="bracoEsquedo">Braço Esquerdo</label>
-	                        <input type="text" class="form-control" id="bracoEsquedo" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="bracoEsquedo" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{bracoEsquedo}"/>
 	                        <div class="invalid-feedback">
 	
@@ -100,7 +110,7 @@
 	                    
 	                    <div class="form-group col-md-3">
 	                        <label for="bracoDireito">Braco Direito</label>
-	                        <input type="text" class="form-control" id="bracoDireito" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="bracoDireito" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{bracoDireito}"/>
 	                        <div class="invalid-feedback">
 	
@@ -108,7 +118,7 @@
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                        <label for="antebracoEsquedo">Antebraco Esquedo</label>
-	                        <input type="text" class="form-control" id="antebracoEsquedo" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="antebracoEsquedo" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{antebracoEsquedo}"/>
 	                        <div class="invalid-feedback">
 	
@@ -116,7 +126,7 @@
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                        <label for="antebracoDireito">Antebraco Direito</label>
-	                        <input type="text" class="form-control" id="antebracoDireito" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="antebracoDireito" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{antebracoDireito}"/>
 	                        <div class="invalid-feedback">
 	
@@ -124,7 +134,7 @@
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                        <label for="gluteo">Gluteo</label>
-	                        <input type="text" class="form-control" id="gluteo" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="gluteo" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{gluteo}"/>
 	                        <div class="invalid-feedback">
 	
@@ -132,7 +142,7 @@
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                        <label for="imc">IMC</label>
-	                        <input type="text" class="form-control" id="imc" data-mask="#.##00,00 cm"
+	                        <input type="text" class="form-control" id="imc" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{imc}"/>
 	                        <div class="invalid-feedback">
 	

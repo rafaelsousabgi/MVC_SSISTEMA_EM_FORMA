@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
@@ -29,8 +32,10 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	protected  String telefone;	
 	protected  String profissao;
 	
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataEntrada;
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_saida", columnDefinition = "DATE")
 	private LocalDate dataSaida;
 	
@@ -55,8 +60,9 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 		super();
 	}
 	
+
 	public Pessoa(ID id, String nome, String sexo, String estadoCivil, String rg, String cpf, String email,
-			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida) {
+			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida, Endereco endereco) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -69,7 +75,9 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 		this.profissao = profissao;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
+		this.endereco = endereco;
 	}
+
 	public ID getId() {
 		return id;
 	}

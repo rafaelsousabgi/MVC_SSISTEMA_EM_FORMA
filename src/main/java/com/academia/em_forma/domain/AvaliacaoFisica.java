@@ -5,6 +5,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.format.annotation.NumberFormat;
+
+import org.springframework.format.annotation.NumberFormat.Style;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,24 +25,55 @@ public class AvaliacaoFisica implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal peso;
+	
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal altura;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal peito;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal cintura;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal panturrilhaDireita;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal panturrilhaEsquerda;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal coxaDireita;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal coxaEsqueda;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal bracoEsquedo;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal bracoDireito;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal antebracoEsquedo;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal antebracoDireito;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal gluteo;
+	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal imc;
 	
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_inicio", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataInicio;
+	
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_fim", columnDefinition = "DATE")
 	private LocalDate dataFim;
 	

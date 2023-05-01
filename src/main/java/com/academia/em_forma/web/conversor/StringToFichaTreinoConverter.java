@@ -1,4 +1,4 @@
-package com.academia.em_forma.web.controller.conversor;
+package com.academia.em_forma.web.conversor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;

@@ -46,7 +46,7 @@ public class FichaTreino implements Serializable {
 	@JoinColumn(name="Avaliacao_id")
 	private AvaliacaoFisica avaliacao;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="Aluno_id")
 	private Aluno aluno;
