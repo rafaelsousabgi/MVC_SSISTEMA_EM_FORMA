@@ -37,16 +37,16 @@ public class FichaTreino implements Serializable {
 	private String nome;
 	private String descricao;	          
 	
-	@JsonIgnore
+	
 	@ManyToMany(mappedBy = "fichaTreinos")
 	private List<Exercicio> exercicios;
 	
 
 	@ManyToOne
 	@JoinColumn(name="Avaliacao_id")
-	private AvaliacaoFisica avaliacao;
+	private AvaliacaoFisica avaliacaoFisica;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="Aluno_id")
 	private Aluno aluno;
@@ -56,13 +56,12 @@ public class FichaTreino implements Serializable {
 		
 	}
 
-	public FichaTreino(Long id, String nome, String descricao,AvaliacaoFisica avaliacao,Aluno aluno) {
+	public FichaTreino(Long id, String nome, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.descricao = descricao;
-		this.avaliacao = avaliacao;
-		this.aluno = aluno;
+		this.descricao = descricao;	
+		
 	}
 
 
@@ -77,19 +76,23 @@ public class FichaTreino implements Serializable {
 		this.aluno = aluno;
 	}
 
-
-
-	public AvaliacaoFisica getAvaliacao() {
-		return avaliacao;
+	public List<Exercicio> getExercicios() {
+		return exercicios;
 	}
 
-
-
-	public void setAvaliacao(AvaliacaoFisica avaliacao) {
-		this.avaliacao = avaliacao;
+	public void setExercicios(List<Exercicio> exercicios) {
+		this.exercicios = exercicios;
 	}
 
+	
+	
+	public AvaliacaoFisica getAvaliacaoFisica() {
+		return avaliacaoFisica;
+	}
 
+	public void setAvaliacaoFisica(AvaliacaoFisica avaliacaoFisica) {
+		this.avaliacaoFisica = avaliacaoFisica;
+	}
 
 	public Long getId() {
 		return id;

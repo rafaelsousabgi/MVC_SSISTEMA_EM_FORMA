@@ -39,14 +39,17 @@
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                    <tr th:each= "e : ${exercicios}">
+	                    <tr th:each= "e : ${exercicios}">	                    
+	                     <span th:each= "ef : ${e.fichaTreino}">
 	                   		 <td th:text="${e.id}">1</td> 
 	                        <td th:text="${e.nomeEquipamento}">Auxiliar Contábil</td>
 	                        <td th:text="${e.serie}"></td>
 	                        <td th:text="${e.repeticao}">Contabilidade</td>
-	                        <td th:text="${e.dia}"></td>
-	                       <td th:each="e : ${fichaTreino}" th:text="{e.fichatreino.nome}"></td >                      
+	                        <td th:text="${e.dia}"></td>	                       
+                            <td th:text="${ef.nome}"></td>                                         
 	                       
+	                        
+	                        
 	                        <td colspan="2">
 	                            <a class="btn btn-info btn-sm" href="/exercicios/editar/1" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
@@ -55,7 +58,10 @@
 	                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
 	                            </button>
 	                        </td>
+	                        </span>
 	                    </tr>
+	                    
+	                    
 	                   
 	                    </tbody>
 	                </table>

@@ -48,7 +48,7 @@ public class AlunoController {
 	@PostMapping("/salvar")
 	public String salva(Aluno aluno, RedirectAttributes attr) {
 		alunoService.salvar(aluno);
-		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
+		attr.addFlashAttribute("success","Ficha de Treino salva com sucesso.");
 		
 		return "redirect:/fichastreinos/cadastrar";
 	}

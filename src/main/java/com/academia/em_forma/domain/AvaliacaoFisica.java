@@ -85,7 +85,7 @@ public class AvaliacaoFisica implements Serializable {
 	@JoinColumn(name="id_instrutor")
 	private Instrutor instrutor;
 
-	@OneToMany(mappedBy = "avaliacao")
+	@OneToMany(mappedBy = "avaliacaoFisica")
 	private List<FichaTreino> fichaTreinos;
 	
 	public AvaliacaoFisica() {
@@ -95,8 +95,7 @@ public class AvaliacaoFisica implements Serializable {
 	public AvaliacaoFisica(Long id, BigDecimal peso, BigDecimal altura, BigDecimal peito, BigDecimal cintura,
 			BigDecimal panturrilhaDireita, BigDecimal panturrilhaEsquerda, BigDecimal coxaDireita, BigDecimal coxaEsqueda,
 			BigDecimal bracoEsquedo, BigDecimal bracoDireito, BigDecimal antebracoEsquedo, BigDecimal antebracoDireito, BigDecimal gluteo,
-			BigDecimal imc, LocalDate dataInicio, LocalDate dataFim, Aluno aluno, Instrutor instrutor,
-			List<FichaTreino> fichaTreino) {
+			BigDecimal imc, LocalDate dataInicio, LocalDate dataFim) {
 		super();
 		this.id = id;
 		this.peso = peso;
@@ -114,12 +113,16 @@ public class AvaliacaoFisica implements Serializable {
 		this.gluteo = gluteo;
 		this.imc = imc;
 		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
-		this.aluno = aluno;
-		this.instrutor = instrutor;
+		this.dataFim = dataFim;	
+		
 		
 	}
 	
+	
+	
+	
+
+
 	
 
 	public List<FichaTreino> getFichaTreinos() {

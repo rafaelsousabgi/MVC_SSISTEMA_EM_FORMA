@@ -23,63 +23,67 @@
 	        </div>
 	
 	        <div class="container" id="cadastro">
-	            <form action="/instrutores/salvar" method="POST">
+	        
+	        <div th:replace="~{fragments/alert}"></div>
+	        
+	            <form th:action=" @{/instrutores/salvar}" th:object="${instrutor}" method="POST">
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
-	                        <label for="nome">Nome do Aluno</label>
+	                        <label for="nome">Nome do Instrutor</label>
 	                        <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-	                               autofocus="autofocus" name="nome" value=""/>
+	                               autofocus="autofocus" th:field="*{nome}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                        </div>
 	                 	                 
 	                  <div class="form-group col-md-6">
-	                        <label for="bairro">Email</label>
-	                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="name@exemplo.com"/>
+	                        <label for="email">Email</label>
+	                        <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="name@exemplo.com"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                   
-	                    </div>
-	                  </div>  
-	                  <div class="form-row">
+	             </div>
+	          
+	                   
+	             <div class="form-row">
 	                    <div class="form-group col-md-4">
-	                        <label for="bairro">Sexo</label>
-	                        <input type="text" class="form-control" id="sexo" name="sexo" value=""/>
+	                        <label for="sexo">Sexo</label>
+	                        <input type="text" class="form-control" id="sexo" th:field="*{sexo}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-4">
-	                        <label for="bairro">Estado Civil</label>
-	                        <input type="text" class="form-control" id="estadocivil" name="estadocivil" value=""/>
+	                        <label for="estadoCivil">Estado Civil</label>
+	                        <input type="text" class="form-control" id="estadocivil" th:field="*{estadoCivil}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
-	                   </div>
+	              </div>
 	                   
 	                   <div class="form-row">
 	                    <div class="form-group col-md-4">
-	                        <label for="bairro">RG</label>
-	                        <input type="text" class="form-control" id="rg" name="rg" value=""/>
+	                        <label for="rg">RG</label>
+	                        <input type="text" class="form-control" id="rg" th:field="*{rg}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-4">
-	                        <label for="bairro">CPF</label>
-	                        <input type="text" class="form-control" id="cpf" name="cpf" value="" />
+	                        <label for="cpf">CPF</label>
+	                        <input type="text" class="form-control" id="cpf" th:field="*{cpf}" />
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-4">
-	                        <label for="objetivo">Cref</label>
+	                        <label for="cref">Cref</label>
 	                        <input type="text" class="form-control" id="cref" placeholder="CREF 000002-G/RJ"
-	                               autofocus="autofocus" name="cref" value=""/>
+	                               autofocus="autofocus" th:field="*{cref}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -90,9 +94,9 @@
 	                
 	                <div class="form-row">	                     
 	                    <div class="form-group col-md-4">
-	                        <label for="objetivo">Telefone</label>
+	                        <label for="telefone">Telefone</label>
 	                        <input type="text" class="form-control" id="telefone" placeholder="18-1234-12345"
-	                               autofocus="autofocus" name="telefone" value=""/>
+	                               autofocus="autofocus" th:field="*{telefone}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -100,9 +104,9 @@
 	                
 	                 
 	                    <div class="form-group col-md-4">
-	                        <label for="objetivo">Profissão</label>
+	                        <label for="profissao">Profissão</label>
 	                        <input type="text" class="form-control" id="profissao" 
-	                               autofocus="autofocus" name="profissao" value=""/>
+	                               autofocus="autofocus" th:field="*{profissao}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -113,7 +117,7 @@
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="dataEntrada">Data de Entrada</label>
-	                        <input type="date" class="form-control" id="dataEntrada" name="dataEntrada" value=""/>
+	                        <input type="date" class="form-control" id="dataEntrada" th:field="*{dataEntrada}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -121,17 +125,17 @@
 	                    
 	                    <div class="form-group col-md-6">
 	                        <label for="dataSaida">Data de Saída</label>
-	                        <input type="date" class="form-control" id="dataSaida" name="dataSaida" value=""/>
+	                        <input type="date" class="form-control" id="dataSaida" th:field="*{dataSaida}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    </div>
-	             
-	                <div class="form-row">
+	                    
+	                    <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="cidade">Cidade</label>
-	                        <input type="text" class="form-control" id="cidade" name="endereco.cidade" value=""/>
+	                        <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -139,7 +143,7 @@
 	                    <div class="form-group col-md-6">
 	                        <label for="logradouro">Logradouro</label>
 	                        <input type="text" class="form-control" id="logradouro" placeholder="logradouro sem número"
-	                               name="endereco.logradouro" value=""/>
+	                               th:field="*{endereco.logradouro}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -148,7 +152,7 @@
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="numero">Número</label>
-	                        <input type="text" class="form-control" id="numero" name="endereco.numero" value=""/>
+	                        <input type="text" class="form-control" id="numero" th:field="*{endereco.numero}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -156,50 +160,27 @@
 	                    <div class="form-group col-md-6">
 	                        <label for="complemento">Complemento</label>
 	                        <input type="text" class="form-control" id="complemento" placeholder="fundos, casa, AP. 102, .."
-	                               name="endereco.complemento" value=""/>
+	                               th:field="*{endereco.complemento}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
-	                </div>
+	                
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="bairro">Bairro</label>
-	                        <input type="text" class="form-control" id="bairro" name="endereco.bairro" value=""/>
+	                        <input type="text" class="form-control" id="bairro" th:field="*{endereco.bairro}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-4">
 	                        <label for="uf">UF</label>
-	                        <select id="uf" class="form-control" name="endereco.uf">
+	                        <select id="uf" class="form-control" th:field="*{endereco.uf}">
 	                            <option value="">Selecione...</option>
-	                            <option value="AC">AC</option>
-	                            <option value="AL">AL</option>
-	                            <option value="AM">AM</option>
-	                            <option value="BA">BA</option>
-	                            <option value="CE">CE</option>
-	                            <option value="DF">DF</option>
-	                            <option value="ES">ES</option>
-	                            <option value="GO">GO</option>
-	                            <option value="MA">MA</option>
-	                            <option value="MT">MT</option>
-	                            <option value="MS">MS</option>
-	                            <option value="MG">MG</option>
-	                            <option value="PA">PA</option>
-	                            <option value="PB">PB</option>
-	                            <option value="PR">PR</option>
-	                            <option value="PE">PE</option>
-	                            <option value="PI">PI</option>
-	                            <option value="RJ">RJ</option>
-	                            <option value="RN">RN</option>
-	                            <option value="RS">RS</option>
-	                            <option value="RO">RO</option>
-	                            <option value="RR">RR</option>
-	                            <option value="SC">SC</option>
-	                            <option value="SP">SP</option>
-	                            <option value="SE">SE</option>
-	                            <option value="TO">TO</option>
+	                            <option th:each="uf : ${ufs}" th:value="${uf.sigla} " th:text="${uf.sigla}" ></option>
+	                            
+	                            
 	                        </select>
 	                        <div class="invalid-feedback">
 	
@@ -207,15 +188,18 @@
 	                    </div>
 	                    <div class="form-group col-md-2">
 	                        <label for="cep">Cep</label>
-	                        <input type="text" class="form-control" id="cep" data-mask="00000-000" name="endereco.cep"
-	                               value=""/>
+	                        <input type="text" class="form-control" id="cep" data-mask="00000-000" th:field="*{endereco.cep}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
-	                </div>
+	             
+	                
+	                
 	                <input type="hidden" id="id" name="id" value=""/>
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+	                </div>
+	                
 	            </form>
 	        </div>
 	    </section>

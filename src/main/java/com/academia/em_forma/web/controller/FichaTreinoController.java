@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.academia.em_forma.domain.Aluno;
+import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Exercicio;
 import com.academia.em_forma.domain.FichaTreino;
+import com.academia.em_forma.domain.Instrutor;
+import com.academia.em_forma.service.AlunoService;
+import com.academia.em_forma.service.AvaliacaoFisicaService;
 import com.academia.em_forma.service.ExercicioService;
 import com.academia.em_forma.service.FichaTreinoService;
+import com.academia.em_forma.service.InstrutorService;
 
 @Controller
 @RequestMapping("/fichastreinos")
@@ -27,6 +33,12 @@ public class FichaTreinoController {
 	
 	@Autowired
 	private ExercicioService exercicioService;
+	
+	@Autowired
+	private AlunoService alunoService;
+	
+	@Autowired
+	private AvaliacaoFisicaService avaliacaoFisicaService;
 
 	@GetMapping("/cadastrar")
 	public String Cadastrar(FichaTreino fichaTreino) {
@@ -35,7 +47,7 @@ public class FichaTreinoController {
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model ) {
-		model.addAttribute("fichasTreinos", service.buscarTodos());
+		model.addAttribute("fichaTreino", service.buscarTodos());
 		return "/fichatreino/lista";
 	}
 	
@@ -72,9 +84,20 @@ public class FichaTreinoController {
 		
 		return listar(model);
 	}
+	
 	/**listaDeExercicio**/
-	@ModelAttribute("Exercicios")
-	public List<Exercicio> getExercicios(){
+	@ModelAttribute("exercicios")
+	public List<Exercicio> geExercicios(){
 		return exercicioService.buscarTodos();
+	}
+	
+	@ModelAttribute("alunos")
+	public List<Aluno> listaDeAlunos(){
+		return alunoService.buscarTodos();
+	}
+	
+	@ModelAttribute("avaliacoes")
+	public List<AvaliacaoFisica> listaDeAvaliacoes(){
+		return avaliacaoFisicaService.buscarTodos();
 	}
 }

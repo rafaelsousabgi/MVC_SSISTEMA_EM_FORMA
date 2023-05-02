@@ -16,6 +16,7 @@ import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Exercicio;
 import com.academia.em_forma.domain.FichaTreino;
+import com.academia.em_forma.domain.Instrutor;
 import com.academia.em_forma.service.AlunoService;
 import com.academia.em_forma.service.AvaliacaoFisicaService;
 import com.academia.em_forma.service.InstrutorService;
@@ -31,7 +32,7 @@ public class AvaliacaoController {
 	private AlunoService alunoService;
 	
 	@Autowired
-	private InstrutorService instrutor;
+	private InstrutorService instrutorService;
 	
 	
 	
@@ -86,5 +87,10 @@ public class AvaliacaoController {
 	@ModelAttribute("alunos")
 	public List<Aluno> listaDeAlunos(){
 		return alunoService.buscarTodos();
+	}
+	
+	@ModelAttribute("instrutores")
+	public List<Instrutor> listaDeInstrutores(){
+		return instrutorService.buscarTodos();
 	}
 }
