@@ -50,6 +50,14 @@ public class ExercicioServiceImpl implements ExercicioService{
 		
 		return dao.findAll();
 	}
+
+	@Override
+	public boolean exerciciosTemtreino(Long id) {
+		if(!buscarPorId(id).getFichaTreino().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 

@@ -41,16 +41,18 @@
 	                    </tr>
 	                    </thead>
 	                    <tbody  >
-		                    <tr th:each=" d : ${fichaTreino}">
-		                      <span th:each="ft : ${d.exercicio}" > 
-		                        <td th:text="${d.id}" >3</td>
-		                        <td th:text="${d.nome}">Administração</td>
+		                    <tr text-align:center th:each=" d: ${exercicios}" >
+		                      <span th:each="  ft: ${d.fichaTreino}" > 
+		                       <td th:text="${ft.id}" >3</td>
+		                        <td th:text="${ft.nome}">Administração</td>
+		                        <td  th:text="${ft.descricao}"></td>
+		                        
 		                                                               
 		            	                                        
-		                         <td  th:text="${ft.nomeEquipamento}">
-		                         <td th:text="${ft.serie}"></td>
-	                             <td th:text="${ft.repeticao}">Contabilidade</td>
-		                         </td> 
+		                         <td  th:text="${d.nomeEquipamento}">
+		                         <td text-align:center th:text="${d.serie}"></td>
+	                             <td text-align:center th:text="${d.repeticao}">Contabilidade</td>
+		                         
 		                         
 		                    
 		                         
@@ -66,7 +68,7 @@
 		                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
 		                            </button>
 		                        </td>
-		                        
+		                       
 		                        </span>
 		                    </tr>                                 
 

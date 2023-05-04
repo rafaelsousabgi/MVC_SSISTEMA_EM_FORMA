@@ -40,34 +40,38 @@
 	                    </thead>
 	                    <tbody>
 	                    <tr th:each= "e : ${exercicios}">	                    
-	                     <span th:each= "ef : ${e.fichaTreino}">
+	                     
 	                   		 <td th:text="${e.id}">1</td> 
 	                        <td th:text="${e.nomeEquipamento}">Auxiliar Contábil</td>
 	                        <td th:text="${e.serie}"></td>
 	                        <td th:text="${e.repeticao}">Contabilidade</td>
-	                        <td th:text="${e.dia}"></td>	                       
-                            <td th:text="${ef.nome}"></td>                                         
+	                        <td th:text="${e.dia}"></td>
+	                        
+	                          <span th:each= "ef : ${e.fichaTreino}">	                       
+                            <td th:text="${ef.nome}"></td>                                
+	                       </span>  
 	                       
 	                        
-	                        
 	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/exercicios/editar/1" role="button">
+	                            <a class="btn btn-info btn-sm" th:href="@{/exercicios/editar/{id} (id=${e.id})}" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 	                            </a>
-	                            <button type="button" class="btn btn-danger btn-sm" >
+	                            <button th:id="${'btn_exercicio/excluir/'+ e.id}" type="button"
+	                             class="btn btn-danger btn-sm" data-toggle="modal" data-target="#MyModal" >
 	                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
 	                            </button>
 	                        </td>
-	                        </span>
+	                       
+	                        
 	                    </tr>
-	                    
+	                     
 	                    
 	                   
 	                    </tbody>
 	                </table>
 	            </div>
 	        </div>
-	        
+	        <div th:replace="~{fragments/modal ::modal}"></div>
 	    </section>
 
 </body>
