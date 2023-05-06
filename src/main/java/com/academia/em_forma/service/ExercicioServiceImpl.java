@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.academia.em_forma.dao.ExercicioDao;
-import com.academia.em_forma.domain.DIA;
 import com.academia.em_forma.domain.Exercicio;
 
 @Service
@@ -51,14 +49,17 @@ public class ExercicioServiceImpl implements ExercicioService{
 		return dao.findAll();
 	}
 
+	
+
+	/**
 	@Override
 	public boolean exerciciosTemtreino(Long id) {
-		if(!buscarPorId(id).getFichaTreino().isEmpty()) {
+		if(buscarPorId(id).getFichaTreino().i) {
 			return false;
 		}
 		return true;
 	}
-	
+	**/
 	
 
 }

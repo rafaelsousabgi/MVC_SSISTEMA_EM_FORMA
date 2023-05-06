@@ -27,7 +27,7 @@
 	        
 	        	<div th:replace="~{fragments/alert}"></div>
 	        	
-	            <form th:action=" ${exercicio.id==null} ? @{/exercicios/salvar} :@{/exercicios/editar}" 
+	            <form th:action=" ${exercicio.id==null} ? @{/exercicios/salvar} : @{/exercicios/editar}" 
 	            th:object="${exercicio}" method="POST">
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">

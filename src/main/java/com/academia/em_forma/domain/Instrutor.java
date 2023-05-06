@@ -16,9 +16,9 @@ public class Instrutor extends Pessoa<Long> {
 	
 	private String cref;
 
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "instrutor")
-	private List<AvaliacaoFisica> avaliacao = new ArrayList<>();
+	private List<AvaliacaoFisica> avaliacoes;
 
 	public Instrutor() {
 		
@@ -51,6 +51,26 @@ public class Instrutor extends Pessoa<Long> {
 
 	public void setCref(String cref) {
 		this.cref = cref;
+	}
+
+
+
+
+
+
+
+	public List<AvaliacaoFisica> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+
+
+
+
+
+
+	public void setAvaliacoes(List<AvaliacaoFisica> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
 	
 	

@@ -50,7 +50,7 @@ public class FichaTreinoServiceImpl implements FichaTreinoService {
 
 	@Override
 	public boolean temexercicios(Long id) {
-		if (buscarPorId(id).getExercicio().isEmpty()) {
+		if (buscarPorId(id).getExercicios().isEmpty()) {
 			return false;
 		}
 		return true;

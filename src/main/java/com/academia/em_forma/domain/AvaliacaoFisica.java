@@ -78,11 +78,11 @@ public class AvaliacaoFisica implements Serializable {
 	private LocalDate dataFim;
 	
 	@ManyToOne
-	@JoinColumn(name="id_aluno")
+	@JoinColumn(name="id_aluno_fk")
 	private Aluno aluno;
 	
 	@ManyToOne
-	@JoinColumn(name="id_instrutor")
+	@JoinColumn(name="id_instrutor_fk")
 	private Instrutor instrutor;
 
 	@OneToMany(mappedBy = "avaliacaoFisica")

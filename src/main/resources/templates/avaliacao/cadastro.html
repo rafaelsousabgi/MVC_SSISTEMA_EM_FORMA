@@ -29,7 +29,8 @@
 	        	
 	        	<div th:replace="~{fragments/alert}"></div>
 	        	
-	            <form th:action="@{/avaliacoes/salvar}" th:object="${avaliacaoFisica}" method="POST">
+	            <form th:action= "${avaliacaoFisica.id == null} ? @{/avaliacoes/salvar} : @{/avaliacoes/editar}" 
+	            th:object="${avaliacaoFisica}" method="POST">
 	             <div class="form-row">
 	                <div class="form-group col-md-3">
 	                        <label for="altura">Altura</label>
@@ -190,8 +191,8 @@
 	                    
 	                </div>
 	                
-	                </div>
-	                <input type="hidden" id="id" name="id" value=""/>
+	               
+	                <input type="hidden" id="id" th:field="*{id}"/>
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 	            </form>
 	        </div>

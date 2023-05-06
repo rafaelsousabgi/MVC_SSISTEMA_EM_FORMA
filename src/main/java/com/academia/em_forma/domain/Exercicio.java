@@ -20,6 +20,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,17 +37,22 @@ public class Exercicio implements Serializable{
 	private String nomeEquipamento;
 	private int serie;	
 	private int repeticao;
+	private String nomeGrupoMuscular;
 	
+
 	@Column(nullable = false, length = 3)
 	@Enumerated(EnumType.STRING)
 	private DIA dia;
 	
 	
-	@ManyToMany
+	/**@ManyToMany
 	@JoinTable(name = "TB_TREINO_EXERCICIOS",
 	joinColumns = @JoinColumn(name="EXERCICIO_ID"),
-	inverseJoinColumns = @JoinColumn(name="FICHATREINO_ID"))
-	private List<FichaTreino> fichaTreinos;
+	inverseJoinColumns = @JoinColumn(name="FICHATREINO_ID"))**/
+	
+	@ManyToOne
+	@JoinColumn(name="id_fichaTreino_fk")
+	private FichaTreino fichaTreinos;
 	
 	@ManyToMany
 	@JoinTable(name = "TB_EXERCICIOS_GRUPOMUSCULAR",
@@ -58,13 +64,13 @@ public class Exercicio implements Serializable{
 		
 	}
 	
-	public Exercicio(Long id, String nomeEquipamento, int serie, int repeticao) {
+	public Exercicio(Long id, String nomeEquipamento, int serie, int repeticao, String nomeGrupoMuscular) {
 		super();
 		this.id = id;
 		this.nomeEquipamento = nomeEquipamento;
 		this.serie = serie;
 		this.repeticao = repeticao;
-		
+		this.nomeGrupoMuscular= nomeGrupoMuscular;
 		
 		
 	}
@@ -103,11 +109,11 @@ public class Exercicio implements Serializable{
 		this.dia = dia;
 	}
 
-	public List<FichaTreino> getFichaTreino() {
+	public FichaTreino getFichaTreino() {
 		return fichaTreinos;
 	}
 	
-	public void setFichaTreino(List<FichaTreino> fichaTreinos) {
+	public void setFichaTreino(FichaTreino fichaTreinos) {
 		this.fichaTreinos = fichaTreinos;
 	}
 	
@@ -118,6 +124,14 @@ public class Exercicio implements Serializable{
 	
 	public void setGrupoMuscular(List<GrupoMuscular> gruposMusculares) {
 		this.gruposMusculares = gruposMusculares;
+	}
+	
+	public String getNomeGrupoMuscular() {
+		return nomeGrupoMuscular;
+	}
+
+	public void setNomeGrupoMuscular(String nomeGrupoMuscular) {
+		this.nomeGrupoMuscular = nomeGrupoMuscular;
 	}
 	
 	@Override

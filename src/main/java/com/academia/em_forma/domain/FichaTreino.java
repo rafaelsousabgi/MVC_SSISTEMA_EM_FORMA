@@ -19,6 +19,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -38,7 +39,14 @@ public class FichaTreino implements Serializable {
 	private String descricao;	          
 	
 	
-	@ManyToMany(mappedBy = "fichaTreinos")
+	/**@ManyToMany(mappedBy = "fichaTreinos")
+	
+	@ManyToMany
+	@JoinTable(name = "TB_TREINO_EXERCICIOS",
+	joinColumns = @JoinColumn(name="EXERCICIO_ID"),
+	inverseJoinColumns = @JoinColumn(name="FICHATREINO_ID"))**/
+	
+	@OneToMany(mappedBy = "fichaTreinos")	
 	private List<Exercicio> exercicios;
 	
 
@@ -80,7 +88,7 @@ public class FichaTreino implements Serializable {
 		return exercicios;
 	}
 
-	public void setExercicios(List<Exercicio> exercicios) {
+	public void setExercicios (List<Exercicio> exercicios) {
 		this.exercicios = exercicios;
 	}
 
@@ -123,15 +131,6 @@ public class FichaTreino implements Serializable {
 		this.descricao = descricao;
 	}
 	
-
-
-	public List<Exercicio> getExercicio() {
-		return exercicios;
-	}
-	
-	public void setExercicio(List<Exercicio> exercicios) {
-		this.exercicios = exercicios;
-	}
 
 	@Override
 	public int hashCode() {

@@ -42,7 +42,8 @@ public class AvaliacaoController {
 	}
 	
 	@GetMapping("/listar")
-	public String listar() {
+	public String listar(ModelMap model) {
+		model.addAttribute("avaliacoesFisicas", avaliacaoFisicaService.buscarTodos());
 		return "/avaliacao/lista";
 	}
 	
@@ -60,30 +61,41 @@ public class AvaliacaoController {
 		return "/avaliacao/cadastro";
 	}
 	
-	/**
+	
+
 	@PostMapping("/editar")
-	public String editar(AvaliacaoFisica avaliacaoFisica, RedirectAttributes attr) {
+	public String editar(AvaliacaoFisica avaliacaoFisica /**, RedirectAttributes attr**/) {
 		avaliacaoFisicaService.editar(avaliacaoFisica);
-		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
-		return "redirect:/fichastreinos/cadastrar";
+		/**attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");**/
+		return "redirect:/avaliacoes/cadastrar";
 	}
 	 
+	/**
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		if (service.temexercicios(id)) {
+		if (avaliacaoFisicaService.AvaliacaoTemFichaTreino(id)) {
 			model.addAttribute("fail","Ficha de Treino não removida. Possui Exercicios(s) vinculado(s)");
 		}else {
 			
-			service.excluir(id);
+			avaliacaoFisicaService.excluir(id);
 			model.addAttribute("success","Ficha de Treino removida com sucesso.");
 		}
 		
 		return listar(model);
 	}
 	
-	
-	
 	**/
+	
+	
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable ("id")  Long id, ModelMap model) {
+		if(!avaliacaoFisicaService.avaliacaoTemFichaTreino(id)) {
+			avaliacaoFisicaService.excluir(id);
+		}
+		return listar(model);
+	}
+	
+	
 	@ModelAttribute("alunos")
 	public List<Aluno> listaDeAlunos(){
 		return alunoService.buscarTodos();

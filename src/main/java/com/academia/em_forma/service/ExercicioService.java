@@ -11,6 +11,7 @@ public interface ExercicioService {
 	void excluir(Long id);
 	Exercicio buscarPorId(Long id);
 	List<Exercicio> buscarTodos();
-	boolean exerciciosTemtreino(Long id);
+	
+	/**boolean exerciciosTemtreino(Long id);**/
 
 }

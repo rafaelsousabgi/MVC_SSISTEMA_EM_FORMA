@@ -11,5 +11,8 @@ public interface AvaliacaoFisicaService {
 	void excluir(Long id);
 	AvaliacaoFisica buscarPorId(Long id);
 	List<AvaliacaoFisica> buscarTodos();
+	
+	
+	boolean avaliacaoTemFichaTreino(Long id);
 
 }

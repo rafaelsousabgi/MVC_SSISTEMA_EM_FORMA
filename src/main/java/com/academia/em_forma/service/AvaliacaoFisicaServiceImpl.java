@@ -48,4 +48,14 @@ public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService{
 		return dao.findAll();
 	}
 
+	@Override
+	public boolean avaliacaoTemFichaTreino(Long id) {
+		if(buscarPorId(id).getFichaTreinos().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
+	
+
 }
