@@ -48,9 +48,11 @@ public class FichaTreinoServiceImpl implements FichaTreinoService {
 		return dao.findAll();
 	}
 
+	
+
 	@Override
-	public boolean temexercicios(Long id) {
-		if (buscarPorId(id).getExercicios().isEmpty()) {
+	public boolean fichaTemExercicios(Long id) {
+		if(buscarPorId(id).getExercicios().isEmpty()) {
 			return false;
 		}
 		return true;

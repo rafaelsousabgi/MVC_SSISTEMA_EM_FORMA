@@ -29,7 +29,7 @@ import com.academia.em_forma.service.InstrutorService;
 public class FichaTreinoController {
 	
 	@Autowired
-	private FichaTreinoService service;
+	private FichaTreinoService fichaTreinoService;
 	
 	@Autowired
 	private ExercicioService exercicioService;
@@ -47,13 +47,13 @@ public class FichaTreinoController {
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model ) {
-		model.addAttribute("fichaTreino", service.buscarTodos());
+		model.addAttribute("fichasTreinos", fichaTreinoService.buscarTodos());
 		return "/fichatreino/lista";
 	}
 	
 	@PostMapping("/salvar")
 	public String salva(FichaTreino fichaTreino, RedirectAttributes attr) {
-		service.salvar(fichaTreino);
+		fichaTreinoService.salvar(fichaTreino);
 		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
 		
 		return "redirect:/fichastreinos/cadastrar";
@@ -61,17 +61,17 @@ public class FichaTreinoController {
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("fichaTreino", service.buscarPorId(id));
+		model.addAttribute("fichaTreino", fichaTreinoService.buscarPorId(id));
 		return "/fichatreino/cadastro";
 	}
 	
 	@PostMapping("/editar")
 	public String editar(FichaTreino fichaTreino, RedirectAttributes attr) {
-		service.editar(fichaTreino);
+		fichaTreinoService.editar(fichaTreino);
 		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
 		return "redirect:/fichastreinos/cadastrar";
 	}
-	 
+	 /**
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
 		if (service.temexercicios(id)) {
@@ -83,7 +83,17 @@ public class FichaTreinoController {
 		}
 		
 		return listar(model);
+	} **/
+	
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+		if(!fichaTreinoService.fichaTemExercicios(id)) {
+			fichaTreinoService.excluir(id);
+		}
+		return listar(model);
 	}
+	
+	
 	
 	/**listaDeExercicio**/
 	@ModelAttribute("exercicios")

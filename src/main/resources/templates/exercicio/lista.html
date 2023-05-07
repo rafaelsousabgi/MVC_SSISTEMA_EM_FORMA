@@ -33,7 +33,8 @@
 	                        <th>Equipamento</th>
 	                        <th>Serie</th>
 	                        <th>Repetições</th>	                        
-	                        <th>Dia</th>
+	                        <th>Dia</th>	                        
+	                        <th>Grupo Muscular/Musculo</th>
 	                        <th>Treino</th>
 	                        <th>Ação</th>
 	                    </tr>
@@ -42,11 +43,12 @@
 	                    <tr th:each= "e : ${exercicios}">	                    
 	                     
 	                   		 <td th:text="${e.id}">1</td> 
-	                        <td th:text="${e.nomeEquipamento}">Auxiliar Contábil</td>
+	                        <td th:text="${e.nomeEquipamento}"></td>
 	                        <td th:text="${e.serie}"></td>
-	                        <td th:text="${e.repeticao}">Contabilidade</td>
+	                        <td th:text="${e.repeticao}"></td>
 	                        <td th:text="${e.dia}"></td>
-	                        <td th:text="${e.fichaTreino}"></td>
+	                        <td th:text="${e.nomeGrupoMuscular}"></td>
+	                        <td th:text="${e.fichaTreino.nome}"></td>
 	                        
 	                       
 	                       
@@ -55,15 +57,14 @@
 	                            <a class="btn btn-info btn-sm" th:href="@{/exercicios/editar/{id} (id=${e.id})}" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 	                            </a>
-	                            <button th:id="${#strings.concat('btn_ exercicios/excluir/')}" type="button"
-	                            		class="btn btn-danger btn-sm" data-toggle="modal" data-target="#MyModal" >
+	                            <button th:id="${'btn_exercicios/excluir/'+ e.id}" type="button"
+	                            		class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" >
 	                             <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
 	                            </button>
 	                        </td>
 	                       
 	                        
-	                    </tr>
-	                     
+	                    </tr>                    
 	                    
 	                   
 	                    </tbody>

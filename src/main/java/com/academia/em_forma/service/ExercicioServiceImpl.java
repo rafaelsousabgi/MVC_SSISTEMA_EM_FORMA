@@ -49,6 +49,14 @@ public class ExercicioServiceImpl implements ExercicioService{
 		return dao.findAll();
 	}
 
+	@Override
+	public boolean exercicioTemFichaTreino(Long id) {
+		if(buscarPorId(id).getFichaTreino()==null) {
+			return false;
+		}
+		return true;
+	}
+
 	
 
 	/**

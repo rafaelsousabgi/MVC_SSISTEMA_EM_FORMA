@@ -34,36 +34,28 @@
 	                        <th >#</th>
 	                        <th >Nome</th>
 	                        <th>Descrição</th>
-	                        <th>Equipamento</th>
-	                        <th>Serie</th>
-	                        <th>Repetição</th>
+	                        <th>Avaliação</th>
 	                        <th>Ação</th>
+	                        
 	                    </tr>
 	                    </thead>
 	                    <tbody  >
-		                    <tr text-align:center th:each=" d: ${exercicios}" >
-		                      <span th:each="  ft: ${d.fichaTreino}" > 
-		                       <td th:text="${ft.id}" >3</td>
+		                    <tr  th:each=" ft: ${fichasTreinos}" >                      
+                    
+		                        <td th:text="${ft.id}" >3</td>
 		                        <td th:text="${ft.nome}">Administração</td>
 		                        <td  th:text="${ft.descricao}"></td>
-		                        
-		                                                               
-		            	                                        
-		                         <td  th:text="${d.nomeEquipamento}">
-		                         <td text-align:center th:text="${d.serie}"></td>
-	                             <td text-align:center th:text="${d.repeticao}">Contabilidade</td>
+		                        <td th:text="${ft.avaliacaoFisica.aluno.nome}"></td>
+		                                        
 		                         
-		                         
-		                    
-		                         
-		                     
+		                
 		                      
 		                        <td colspan="2">
-		                            <a class="btn btn-info btn-sm" th:href="@{/fichastreinos/editar/{id} (id=${d.id})}" role="button">
+		                            <a class="btn btn-info btn-sm" th:href="@{/fichastreinos/editar/{id} (id=${ft.id})}" role="button">
 		                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 		                            </a>
 		                            <!--#trabalhando com o javascript para abrir a janela de confirmação de exclusão-->
-		                            <button th:id="${'btn_fichastreinos/excluir/ ' + d.id}" type="button" class="btn btn-danger btn-sm"
+		                            <button th:id="${'btn_fichastreinos/excluir/ ' + ft.id}" type="button" class="btn btn-danger btn-sm"
 		                            data-toggle="modal" data-target="#myModal">
 		                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
 		                            </button>

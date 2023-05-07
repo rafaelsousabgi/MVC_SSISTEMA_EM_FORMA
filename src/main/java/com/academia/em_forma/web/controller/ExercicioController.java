@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,20 +60,22 @@ public class ExercicioController {
 		return "redirect:/exercicios/cadastrar";
 	}
 	
-	/**
+
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id,ModelMap model ) {
-		if (exercicioService.get(id)) {
-			model.addAttribute("fail", " O Exercicio tem treino vinculado. Não removido");
-		} else {
-			exercicioService.excluir(id);		
-			model.addAttribute("success", "Exercicio excluido com sucesso");
-		}
-	return listar(model);
+		if(exercicioService.exercicioTemFichaTreino(id)) {			
+			
+			exercicioService.excluir(id);
+			}
+	
+		
+		return listar(model);
+		
 	}
 	
 	
-	getFichaTreinos **/
+	
+	/**getFichaTreinos **/
 	
 	@ModelAttribute("fichasTreinos")
 	public List<FichaTreino> listaDeFichaTreino(){
