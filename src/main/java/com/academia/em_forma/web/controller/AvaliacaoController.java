@@ -50,7 +50,7 @@ public class AvaliacaoController {
 	@PostMapping("/salvar")
 	public String salva(AvaliacaoFisica avaliacaoFisica, RedirectAttributes attr) {
 		avaliacaoFisicaService.salvar(avaliacaoFisica);
-		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
+		attr.addFlashAttribute("success","Ficha de Treino salva com sucesso.");
 		
 		return "redirect:/avaliacoes/cadastrar";
 	}
@@ -64,9 +64,9 @@ public class AvaliacaoController {
 	
 
 	@PostMapping("/editar")
-	public String editar(AvaliacaoFisica avaliacaoFisica /**, RedirectAttributes attr**/) {
+	public String editar(AvaliacaoFisica avaliacaoFisica , RedirectAttributes attr) {
 		avaliacaoFisicaService.editar(avaliacaoFisica);
-		/**attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");**/
+		attr.addFlashAttribute("success","Avaliação Editada com sucesso.");
 		return "redirect:/avaliacoes/cadastrar";
 	}
 	 
@@ -89,9 +89,14 @@ public class AvaliacaoController {
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable ("id")  Long id, ModelMap model) {
-		if(!avaliacaoFisicaService.avaliacaoTemFichaTreino(id)) {
+		if(avaliacaoFisicaService.avaliacaoTemFichaTreino(id)) {
+			model.addAttribute("fail", "Avaliação fisica não excluida, possui ficha de treinos cadastrada");
+		}else {
 			avaliacaoFisicaService.excluir(id);
+			model.addAttribute("success", "Avaliação excluida com sucesso");
 		}
+		
+		
 		return listar(model);
 	}
 	

@@ -50,8 +50,10 @@ public class AlunoServiceImpl implements AlunoService{
 
 	@Override
 	public boolean temAvaliacoes(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		if(buscarPorId(id).getAvaliacaoFisica().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 }

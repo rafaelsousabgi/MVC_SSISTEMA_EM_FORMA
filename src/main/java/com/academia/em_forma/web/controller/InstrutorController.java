@@ -30,14 +30,15 @@ public class InstrutorController {
 	}
 	
 	@GetMapping("/listar")
-	public String listar() {
+	public String listar(ModelMap model) {
+		model.addAttribute("instrutores", instrutorservice.buscarTodos());
 		return "/instrutor/lista";
 	}
 	
 	@PostMapping("/salvar")
 	public String salva(Instrutor instrutor, RedirectAttributes attr) {
 		instrutorservice.salvar(instrutor);
-		attr.addFlashAttribute("success","Ficha de Treino salva com sucesso.");
+		attr.addFlashAttribute("success","Instrutor salvo com sucesso.");
 		
 		return "redirect:/instrutores/cadastrar";
 	}
@@ -51,8 +52,21 @@ public class InstrutorController {
 	@PostMapping("/editar")
 	public String editar(Instrutor instrutor, RedirectAttributes attr) {
 		instrutorservice.editar(instrutor);
-		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
-		return "redirect:/fichastreinos/cadastrar";
+		attr.addFlashAttribute("success","Instrutor Editado com sucesso.");
+		return "redirect:/instrutores/cadastrar";
+	}
+	
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+		if (instrutorservice.temAvaliacoes(id)) {
+			model.addAttribute("fail","Instrutor não removido. Possui Avaliação(s) Fisica vinculado(s)");
+		}else {
+			
+			instrutorservice.excluir(id);
+			model.addAttribute("success","Instrutor removida com sucesso.");
+		}
+		
+		return listar(model);
 	}
 	
 	@ModelAttribute("ufs")

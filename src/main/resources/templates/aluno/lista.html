@@ -59,16 +59,7 @@
 	                                <select class="form-control mr-sm-2" name="cargo" aria-label="Search">
 	                                    <option value="">Cargo</option>
 	                                    <option value="1">Auxiliar Contábil</option>
-	                                    <option value="2">Auxiliar Administrativo</option>
-	                                    <option value="3">Contador</option>
-	                                    <option value="4">Adminitrador</option>
-	                                    <option value="5">Programado PHP</option>
-	                                    <option value="6">Desenvolvedor Java Jr.</option>
-	                                    <option value="7">Desenvolvedor Java Pleno</option>
-	                                    <option value="8">Desenvolvedor Java Senior</option>
-	                                    <option value="9">Auxiliar de RH</option>
-	                                    <option value="10">Coordenador de RH</option>
-	                                    <option value="11">Psicologo</option>
+	                                    
 	                                </select>
 	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
 	                            </form>
@@ -96,61 +87,76 @@
 	            </div>
 	
 	
-	            <div class="table-responsive">
+	         <div class="table-responsive">
+	            
+	            	<div th:replace="~{fragments/alert}"></div>
+	            	
 	                <table class="table table-striped table-hover table-sm">
 	                    <thead>
 	                    <tr>
 	                        <th>#</th>
-	                        <th>Altura</th>
-	                        <th>Peitoral</th>
-	                        <th>Peso</th>
-	                        <th>Cintura</th>
-	                        <th>Panturrilha Direita</th>
-	                        <th>Panturrilha Esquerda</th>
-	                        <th>Coxa Direita</th>
-	                        <th>Coxa Esquerda</th>
-	                        <th>Braço Esquerdo</th>
-	                        <th>Braco Direito</th>
-	                        <th>Antebraco Esquedo</th>
-	                        <th>Antebraco Direito</th>
-	                        <th>Gluteo</th>
-	                        <th>IMC</th>
+	                        <th>Nome</th>
+	                        <th>Objetivo</th>
+	                        <th>Sexo</th>
+	                        <th>Estado Cívil</th>
+	                        <th>RG</th>
+	                        <th>CPF</th>
+	                        <th>E-mail</th>
+	                        <th>Telefone</th>
+	                        <th>Profissão</th>
+	                        <th>Endereco</th>
+	                        <th>Data de Entrada</th>
+	                        <th>Data de Saida</th>	                        
+	                        <th>Ação</th>
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                    <tr th:each="A : ${AvaliacaoFisica }">
-		                        <td th:text="${a.id}"></td>
-		                        <td th:text="${a.altura}"></td>
-		                        <td th:text="${a.peito}"></td>
-		                        <td th:text="${a.cintura}"></td>
-		                        <td th:text="${a.panturrilhaDireita}"></td>
-		                        <td th:text="${a.panturrilhaEsquerda}"></td>
-		                        <td th:text="${a.coxaDireita}"></td>
-		                        <td th:text="${a.coxaEsqueda}"></td>
-		                        <td th:text="${a.bracoEsquedo}"></td>
-		                        <td th:text="${a.bracoDireito}"></td>
-		                        <td th:text="${a.antebracoEsquedo}"></td>
-		                        <td th:text="${a.antebracoDireito}"></td>
-		                        <td th:text="${a.gluteo}"></td>
-		                        
+		                    <tr th:each="a : ${alunos}">
+		                        <td th:text="${a.id}">2</td>
+		                        <td th:text="${a.nome}"></td>
+		                        <td th:text="${a.objetivo}"></td>
+		                        <td th:text="${a.sexo}"></td>
+		                        <td th:text="${a.estadoCivil}"></td>
+		                        <td th:text="${a.rg}"></td>
+		                        <td th:text="${a.cpf}"></td>
+		                        <td th:text="${a.email}"></td>
+		                        <td th:text="${a.telefone}"></td>
+		                        <td th:text="${a.profissao}"></td>
+		                        <td>
+		                            <button type="button" class="btn btn-secondary btn-sm" data-container="body"
+		                                    data-toggle="popover" data-placement="top"
+		                                    th:attr="data-content= ${#strings.concat(
+			                                    a.endereco.logradouro, ', ', 
+			                                    a.endereco.numero, ' ', 
+			                                    a.endereco.complemento, ' - ', 
+			                                    a.endereco.bairro, ', ',
+			                                    a.endereco.cidade, ' - ', 
+			                                    a.endereco.uf.sigla, ' - ',
+			                                    a.endereco.cep
+		                                    )}">
+		                                
+		                                <span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
+		                            </button>
+		                        </td>
 		                        <td th:text="${#temporals.format(a.dataEntrada, 'dd/MM/yyyy')}">2017/08/14</td>
 		                        <td th:text="${#temporals.format(a.dataSaida, 'dd/MM/yyyy')}">02/03/2015</td>
-		                        
 		                        <td colspan="2">
-		                            <a class="btn btn-info btn-sm" th:href="@{/avaliacoes/editar/{id} (id=${a.id}) }" role="button">
+		                            <a class="btn btn-info btn-sm" th:href="@{/alunos/editar/{id} (id=${a.id}) }" role="button">
 		                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 		                            </a>
-		                            <button th:id="${#strings.concat('btn_avaliacoes/excluir/', a.id) }" type="button" class="btn btn-danger btn-sm"
+		                            <button th:id="${#strings.concat('btn_alunos/excluir/', a.id) }" type="button" class="btn btn-danger btn-sm"
 		                                    data-toggle="modal" data-target="#myModal">
 		                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
 		                            </button>
 		                        </td>
-		                    </tr>
-	                   
+		                    </tr>    
 	                    </tbody>
 	                </table>
 	            </div>
 	        </div>
+	        
+	        <div th:replace="~{fragments/modal :: modal}"></div>
+	        
 	    </section>
 </body>
 </html>		

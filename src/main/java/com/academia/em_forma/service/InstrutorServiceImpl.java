@@ -47,4 +47,12 @@ public class InstrutorServiceImpl implements InstrutorService {
 		return dao.findAll();
 	}
 
+	@Override
+	public boolean temAvaliacoes(Long id) {
+		if(buscarPorId(id).getAvaliacoes().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
 }

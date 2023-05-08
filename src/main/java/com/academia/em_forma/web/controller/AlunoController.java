@@ -48,37 +48,37 @@ public class AlunoController {
 	@PostMapping("/salvar")
 	public String salva(Aluno aluno, RedirectAttributes attr) {
 		alunoService.salvar(aluno);
-		attr.addFlashAttribute("success","Ficha de Treino salva com sucesso.");
+		attr.addFlashAttribute("success","Aluno salvo com sucesso.");
 		
-		return "redirect:/fichastreinos/cadastrar";
+		return "redirect:/alunos/cadastrar";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("aluno", alunoService.buscarPorId(id));
-		return "/fichatreino/cadastro";
+		return "/aluno/cadastro";
 	}
 	
 	@PostMapping("/editar")
 	public String editar(Aluno aluno, RedirectAttributes attr) {
 		alunoService.editar(aluno);
-		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
-		return "redirect:/fichastreinos/cadastrar";
+		attr.addFlashAttribute("success","Aluno Editado com sucesso.");
+		return "redirect:/alunos/cadastrar";
 	}
-	 /**
+	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
 		if (alunoService.temAvaliacoes(id)) {
-			model.addAttribute("fail","Ficha de Treino não removida. Possui Exercicios(s) vinculado(s)");
+			model.addAttribute("fail","Aluno não removido. Possui Ficha de Treino vinculado(s)");
 		}else {
 			
 			alunoService.excluir(id);
-			model.addAttribute("success","Ficha de Treino removida com sucesso.");
+			model.addAttribute("success","Aluno removido com sucesso.");
 		}
 		
 		return listar(model);
 	}
-	**/
+	
 	@ModelAttribute("Avaliacoes")
 	public List<AvaliacaoFisica> listaDeAvaliacoes(){
 		return avaliacaoFisicaService.buscarTodos();

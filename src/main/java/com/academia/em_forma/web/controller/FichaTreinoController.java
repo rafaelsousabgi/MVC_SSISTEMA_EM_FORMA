@@ -54,7 +54,7 @@ public class FichaTreinoController {
 	@PostMapping("/salvar")
 	public String salva(FichaTreino fichaTreino, RedirectAttributes attr) {
 		fichaTreinoService.salvar(fichaTreino);
-		attr.addFlashAttribute("success","Ficha de Treino Editada com sucesso.");
+		attr.addFlashAttribute("success","Ficha de Treino salva com sucesso.");
 		
 		return "redirect:/fichastreinos/cadastrar";
 	}
@@ -87,8 +87,11 @@ public class FichaTreinoController {
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		if(!fichaTreinoService.fichaTemExercicios(id)) {
+		if(fichaTreinoService.fichaTemExercicios(id)) {
+			model.addAttribute("fail","Ficha de Treino não removida. Possui Exercicios(s) vinculado(s)");
+		}else {
 			fichaTreinoService.excluir(id);
+			model.addAttribute("success","Ficha de Treino excluido com sucesso.");
 		}
 		return listar(model);
 	}

@@ -11,4 +11,5 @@ public interface InstrutorService {
 	void excluir(Long id);
 	Instrutor buscarPorId(Long id);
 	List<Instrutor> buscarTodos();
+	boolean temAvaliacoes(Long id);
 }

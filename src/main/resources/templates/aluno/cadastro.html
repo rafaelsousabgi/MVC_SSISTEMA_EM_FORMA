@@ -23,9 +23,14 @@
 	        </div>
 	
 	        <div class="container" id="cadastro">
-	            <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="POST">
+	        
+	        	<div th:replace="~{fragments/alert}"></div>
+	        
+	            <form th:action="${aluno.id ==null} ? @{/alunos/salvar} : @{/alunos/editar}" 
+	            th:object="${aluno}" method="POST">
 	            
 	                <div class="form-row">
+	                
 	                    <div class="form-group col-md-6">
 	                        <label for="nome">Nome do Aluno</label>
 	                        <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
@@ -201,7 +206,7 @@
 	                        </div>
 	                    </div>
 	                
-	                <input type="hidden" id="id" name="id" value=""/>
+	                <input type="hidden" id="id" th:field="*{id}"/>
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 	            </form>
 	        </div>

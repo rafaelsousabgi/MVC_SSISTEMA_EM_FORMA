@@ -64,8 +64,11 @@ public class ExercicioController {
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id,ModelMap model ) {
 		if(exercicioService.exercicioTemFichaTreino(id)) {			
+			model.addAttribute("fail","Exercicio não removido, Possui Ficha detreino vinculado");
 			
-			exercicioService.excluir(id);
+			}else {
+				exercicioService.excluir(id);
+				model.addAttribute("success", "Exercicio Excluido com sucesso");
 			}
 	
 		
