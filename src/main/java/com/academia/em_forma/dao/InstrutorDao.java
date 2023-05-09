@@ -1,5 +1,6 @@
 package com.academia.em_forma.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.academia.em_forma.domain.Instrutor;
@@ -15,5 +16,13 @@ void save(Instrutor instrutor);
 	Instrutor findById(Long id);
 	
 	List<Instrutor> findAll();
+
+	List<Instrutor> finByNome(String nome);
+
+	List<Instrutor> findByDataSaida(LocalDate saida);
+
+	List<Instrutor> findByDataEntrada(LocalDate entrada);
+
+	List<Instrutor> findByDataEntradaDataSaida(LocalDate entrada, LocalDate saida);
 
 }

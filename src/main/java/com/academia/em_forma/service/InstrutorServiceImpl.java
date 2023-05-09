@@ -1,5 +1,7 @@
 package com.academia.em_forma.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +56,25 @@ public class InstrutorServiceImpl implements InstrutorService {
 		}
 		return true;
 	}
+
+	@Override
+	public List<Instrutor> buscarPorNome(String nome) {
+		
+		return dao.finByNome(nome) ;
+	}
+
+	@Override
+	public List<Instrutor> buscarPorDatas(LocalDate entrada, LocalDate saida) {
+		
+		 if (entrada != null && saida != null) {	    	
+	            return dao.findByDataEntradaDataSaida(entrada, saida);
+	        } else if (entrada != null) {        	
+		        return dao.findByDataEntrada(entrada);
+	        } else if (saida != null) {        	
+		        return dao.findByDataSaida(saida);
+	        } else {
+	        	return new ArrayList<Instrutor>();
+	        }
+	    }
 
 }

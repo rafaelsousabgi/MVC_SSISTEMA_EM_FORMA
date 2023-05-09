@@ -1,5 +1,7 @@
 package com.academia.em_forma.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.academia.em_forma.dao.AlunoDao;
 import com.academia.em_forma.domain.Aluno;
+import com.academia.em_forma.domain.Endereco;
 
 @Service
 @Transactional
@@ -25,6 +28,7 @@ public class AlunoServiceImpl implements AlunoService{
 	@Override
 	public void editar(Aluno aluno) {
 		dao.update(aluno);
+		
 		
 	}
 
@@ -56,4 +60,27 @@ public class AlunoServiceImpl implements AlunoService{
 		return true;
 	}
 
-}
+	@Override
+	@Transactional(readOnly = true)
+	public List<Aluno> buscarPorNome(String nome) {
+		
+		return dao.finByNome(nome) ;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Aluno> buscarPorDatas(LocalDate entrada, LocalDate saida) {
+		
+		if (entrada != null && saida != null) {	    	
+            return dao.findByDataEntradaDataSaida(entrada, saida);
+        } else if (entrada != null) {        	
+	        return dao.findByDataEntrada(entrada);
+        } else if (saida != null) {        	
+	        return dao.findByDataSaida(saida);
+        } else {
+        	return new ArrayList<Aluno>();
+        }
+    }
+	}
+
+

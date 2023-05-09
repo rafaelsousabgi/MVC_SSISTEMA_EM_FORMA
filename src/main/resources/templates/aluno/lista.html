@@ -28,9 +28,7 @@
 	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
 	                        aria-controls="collapseNome">Nome
 	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
-	                        aria-controls="collapseCargo">Cargo
-	                </button>
+	                
 	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseData"
 	                        aria-controls="collapseData">Datas
 	                </button>
@@ -40,9 +38,9 @@
 	                    <div class="collapse" id="collapseNome">
 	
 	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/avaliacoes/buscar/nome">
+	                            <form class="form-inline" method="GET" th:action="@{/alunos/buscar/nome}">
 	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-	                                       name="nome" />
+	                                       th:name="nome" />
 	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
 	                            </form>
 	                        </nav>
@@ -50,34 +48,17 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseCargo">
-	
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" th:action="@{/alunos/buscar/cargo}">
-	                                <select class="form-control mr-sm-2" name="cargo" aria-label="Search">
-	                                    <option value="">Cargo</option>
-	                                    <option value="1">Auxiliar Contábil</option>
-	                                    
-	                                </select>
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-	
-	                    </div>
-	                </div>
-	            </div>
+	           
 	            <div class="row">
 	                <div class="col">
 	                    <div class="collapse" id="collapseData">
 	
 	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/alunos/buscar/data">
+	                            <form class="form-inline" method="GET" th:action="@{/alunos/buscar/data}">
 	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
-	                                       name="entrada" />
+	                                       th:name="entrada" />
 	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
-	                                       name="saida" />
+	                                       th:name="saida" />
 	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
 	                            </form>
 	                        </nav>

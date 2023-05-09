@@ -1,8 +1,10 @@
 package com.academia.em_forma.web.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.academia.em_forma.domain.Aluno;
@@ -32,7 +35,8 @@ public class AlunoController {
 	@Autowired
 	private AvaliacaoFisicaService avaliacaoFisicaService;
 	
-	@Autowired FichaTreinoService fichaTreinoService;
+	@Autowired 
+	FichaTreinoService fichaTreinoService;
 
 	@GetMapping("/cadastrar")
 	public String Cadastrar(Aluno aluno) {
@@ -48,6 +52,7 @@ public class AlunoController {
 	@PostMapping("/salvar")
 	public String salva(Aluno aluno, RedirectAttributes attr) {
 		alunoService.salvar(aluno);
+		
 		attr.addFlashAttribute("success","Aluno salvo com sucesso.");
 		
 		return "redirect:/alunos/cadastrar";
@@ -56,6 +61,7 @@ public class AlunoController {
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("aluno", alunoService.buscarPorId(id));
+		
 		return "/aluno/cadastro";
 	}
 	
@@ -78,6 +84,21 @@ public class AlunoController {
 		
 		return listar(model);
 	}
+	
+	@GetMapping("/buscar/nome")
+	public String getPorNome(@RequestParam("nome") String nome, ModelMap model) {		
+		model.addAttribute("alunos", alunoService.buscarPorNome(nome));
+		return "/aluno/lista";
+	}
+	
+	@GetMapping("/buscar/data")
+    public String getPorDatas(@RequestParam(name="entrada", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate entrada,
+                              @RequestParam(name="saida", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate saida,
+                              ModelMap model) {
+
+        model.addAttribute("alunos", alunoService.buscarPorDatas(entrada, saida));
+        return "/aluno/lista";
+    }
 	
 	@ModelAttribute("Avaliacoes")
 	public List<AvaliacaoFisica> listaDeAvaliacoes(){

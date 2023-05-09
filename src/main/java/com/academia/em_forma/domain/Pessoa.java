@@ -48,13 +48,7 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	
 	
 	
-	public Endereco getEndereco() {
-		return endereco;
-	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
 
 	public Pessoa() {
 		super();
@@ -62,7 +56,7 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	
 
 	public Pessoa(ID id, String nome, String sexo, String estadoCivil, String rg, String cpf, String email,
-			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida, Endereco endereco) {
+			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida,Endereco endereco  ) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -76,7 +70,11 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
 		this.endereco = endereco;
+		
 	}
+	
+	
+	
 
 	public ID getId() {
 		return id;
@@ -84,6 +82,14 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	public void setId(ID id) {
 		this.id = id;
 	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -135,7 +141,6 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	}
 	
 	
-	
 	public LocalDate getDataEntrada() {
 		return dataEntrada;
 	}
@@ -148,6 +153,8 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	public void setDataSaida(LocalDate dataSaida) {
 		this.dataSaida = dataSaida;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -167,7 +174,7 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", estadoCivil=" + estadoCivil + ", rg=" + rg
 				+ ", cpf=" + cpf + ", email=" + email + ", telefone=" + telefone + ", profissao=" + profissao
-				+ ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + ", endereco=" + endereco + "]";
+				+ ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida /** + ", endereco=" endereco  "**/;
 	}
 	
 	

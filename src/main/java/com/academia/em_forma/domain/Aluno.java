@@ -33,14 +33,14 @@ public class Aluno extends Pessoa<Long>{
 
 	
 	public Aluno(Long id, String nome, String sexo, String estadoCivil, String rg, String cpf, String email,
-			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida, Endereco endereco) {
-		super(id, nome, sexo, estadoCivil, rg, cpf, email, telefone, profissao, dataEntrada, dataSaida, endereco);
+			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida , Endereco endereco) {
+		super(id, nome, sexo, estadoCivil, rg, cpf, email, telefone, profissao, dataEntrada , dataSaida ,endereco);
 		this.objetivo = objetivo;
 	}
 
 
 
-
+	
 
 
 	public TIPOFISICO getTipofisico() {

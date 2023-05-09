@@ -1,6 +1,9 @@
 package com.academia.em_forma.web.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -68,6 +72,21 @@ public class InstrutorController {
 		
 		return listar(model);
 	}
+	
+	@GetMapping("/buscar/nome")
+	public String getPorNome(@RequestParam("nome") String nome, ModelMap model) {		
+		model.addAttribute("instrutores", instrutorservice.buscarPorNome(nome));
+		return "/instrutor/lista";
+	}
+	
+	@GetMapping("/buscar/data")
+    public String getPorDatas(@RequestParam(name="entrada", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate entrada,
+                              @RequestParam(name="saida", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate saida,
+                              ModelMap model) {
+
+        model.addAttribute("instrutores", instrutorservice.buscarPorDatas(entrada, saida));
+        return "/instrutor/lista";
+    }
 	
 	@ModelAttribute("ufs")
 	public UF[] getUfs() {

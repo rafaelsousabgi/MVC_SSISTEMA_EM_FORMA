@@ -22,12 +22,7 @@ public class Instrutor extends Pessoa<Long> {
 
 	public Instrutor() {
 		
-		
-	}
-
-
-
-	
+		}
 
 
 
