@@ -10,9 +10,7 @@ public interface AvaliacaoFisicaService {
 	void editar(AvaliacaoFisica avaliacaoFisica);
 	void excluir(Long id);
 	AvaliacaoFisica buscarPorId(Long id);
-	List<AvaliacaoFisica> buscarTodos();
-	
-	
+	List<AvaliacaoFisica> buscarTodos();	
 	boolean avaliacaoTemFichaTreino(Long id);
 
 }

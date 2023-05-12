@@ -10,6 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
 
 import org.springframework.format.annotation.NumberFormat.Style;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -24,6 +27,18 @@ public class AvaliacaoFisica implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name="aluno_id")
+	private Aluno aluno;
+	
+	@ManyToOne
+	@JoinColumn(name="instrutor_id")
+	private Instrutor instrutor;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "avaliacaoFisica")
+	private List<FichaTreino> fichaTreinos;
 	
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
@@ -77,16 +92,7 @@ public class AvaliacaoFisica implements Serializable {
 	@Column(name = "data_fim", columnDefinition = "DATE")
 	private LocalDate dataFim;
 	
-	@ManyToOne
-	@JoinColumn(name="id_aluno_fk")
-	private Aluno aluno;
 	
-	@ManyToOne
-	@JoinColumn(name="id_instrutor_fk")
-	private Instrutor instrutor;
-
-	@OneToMany(mappedBy = "avaliacaoFisica")
-	private List<FichaTreino> fichaTreinos;
 	
 	public AvaliacaoFisica() {
 		

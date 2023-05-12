@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.AvaliacaoFisica;
-import com.academia.em_forma.domain.DIA;
 import com.academia.em_forma.domain.FichaTreino;
 import com.academia.em_forma.domain.TIPOFISICO;
 import com.academia.em_forma.domain.UF;

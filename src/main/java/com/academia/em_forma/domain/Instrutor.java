@@ -1,12 +1,12 @@
 package com.academia.em_forma.domain;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,7 +16,7 @@ public class Instrutor extends Pessoa<Long> {
 	
 	private String cref;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "instrutor")
 	private List<AvaliacaoFisica> avaliacoes;
 

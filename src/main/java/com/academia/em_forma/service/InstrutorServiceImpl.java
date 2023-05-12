@@ -38,14 +38,14 @@ public class InstrutorServiceImpl implements InstrutorService {
 	@Override
 	@Transactional(readOnly = true)
 	public Instrutor buscarPorId(Long id) {
-		// TODO Auto-generated method stub
+		
 		return dao.findById(id);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Instrutor> buscarTodos() {
-		// TODO Auto-generated method stub
+		
 		return dao.findAll();
 	}
 
@@ -58,12 +58,14 @@ public class InstrutorServiceImpl implements InstrutorService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Instrutor> buscarPorNome(String nome) {
 		
 		return dao.finByNome(nome) ;
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Instrutor> buscarPorDatas(LocalDate entrada, LocalDate saida) {
 		
 		 if (entrada != null && saida != null) {	    	

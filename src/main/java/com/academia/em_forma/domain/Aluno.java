@@ -3,6 +3,8 @@ package com.academia.em_forma.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -21,9 +23,11 @@ public class Aluno extends Pessoa<Long>{
 	@Enumerated(EnumType.STRING)
 	private TIPOFISICO tipofisico;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="aluno" )
 	private List<AvaliacaoFisica> avaliacaoFisica;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "aluno")
 	private List<FichaTreino> fichaTreinos;
 

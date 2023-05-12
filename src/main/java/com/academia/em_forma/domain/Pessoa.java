@@ -90,6 +90,7 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 		this.endereco = endereco;
 	}
 	
+	
 	public String getNome() {
 		return nome;
 	}

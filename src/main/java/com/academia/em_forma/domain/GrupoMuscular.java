@@ -1,11 +1,8 @@
 package com.academia.em_forma.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-
-import org.hibernate.mapping.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

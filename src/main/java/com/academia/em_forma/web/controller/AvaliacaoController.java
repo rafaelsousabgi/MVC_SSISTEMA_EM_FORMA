@@ -70,21 +70,6 @@ public class AvaliacaoController {
 		return "redirect:/avaliacoes/cadastrar";
 	}
 	 
-	/**
-	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		if (avaliacaoFisicaService.AvaliacaoTemFichaTreino(id)) {
-			model.addAttribute("fail","Ficha de Treino não removida. Possui Exercicios(s) vinculado(s)");
-		}else {
-			
-			avaliacaoFisicaService.excluir(id);
-			model.addAttribute("success","Ficha de Treino removida com sucesso.");
-		}
-		
-		return listar(model);
-	}
-	
-	**/
 	
 	
 	@GetMapping("/excluir/{id}")
