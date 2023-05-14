@@ -13,6 +13,9 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import jakarta.persistence.*;
 
 @Entity
@@ -28,10 +31,18 @@ public class AvaliacaoFisica implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	
+	@Column(nullable = false ,length = 100)
+	private String identificacao;
+	
+	
+
+	@NotNull(message = "Informe o Aluno que foi avaliado")
 	@ManyToOne
 	@JoinColumn(name="aluno_id")
 	private Aluno aluno;
 	
+	@NotNull(message = "Informe o Instrutor que realizou a avaliação")
 	@ManyToOne
 	@JoinColumn(name="instrutor_id")
 	private Instrutor instrutor;
@@ -101,7 +112,7 @@ public class AvaliacaoFisica implements Serializable {
 	public AvaliacaoFisica(Long id, BigDecimal peso, BigDecimal altura, BigDecimal peito, BigDecimal cintura,
 			BigDecimal panturrilhaDireita, BigDecimal panturrilhaEsquerda, BigDecimal coxaDireita, BigDecimal coxaEsqueda,
 			BigDecimal bracoEsquedo, BigDecimal bracoDireito, BigDecimal antebracoEsquedo, BigDecimal antebracoDireito, BigDecimal gluteo,
-			BigDecimal imc, LocalDate dataInicio, LocalDate dataFim) {
+			BigDecimal imc,String identificacao, LocalDate dataInicio, LocalDate dataFim) {
 		super();
 		this.id = id;
 		this.peso = peso;
@@ -120,15 +131,10 @@ public class AvaliacaoFisica implements Serializable {
 		this.imc = imc;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;	
-		
+		this.identificacao = identificacao;
 		
 	}
 	
-	
-	
-	
-
-
 	
 
 	public List<FichaTreino> getFichaTreinos() {
@@ -169,6 +175,15 @@ public class AvaliacaoFisica implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public String getIdentificacao() {
+		return identificacao;
+	}
+
+	public void setIdentificacao(String identificacao) {
+		this.identificacao = identificacao;
 	}
 
 	public BigDecimal getPeso() {

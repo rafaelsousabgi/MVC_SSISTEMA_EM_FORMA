@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,8 @@ import com.academia.em_forma.domain.Instrutor;
 import com.academia.em_forma.service.AlunoService;
 import com.academia.em_forma.service.AvaliacaoFisicaService;
 import com.academia.em_forma.service.InstrutorService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/avaliacoes")
@@ -48,7 +51,11 @@ public class AvaliacaoController {
 	}
 	
 	@PostMapping("/salvar")
-	public String salva(AvaliacaoFisica avaliacaoFisica, RedirectAttributes attr) {
+	public String salva(@Valid AvaliacaoFisica avaliacaoFisica,BindingResult result ,RedirectAttributes attr) {
+		if(result.hasErrors()) {
+			return "/avaliacao/cadastro";
+		}
+		
 		avaliacaoFisicaService.salvar(avaliacaoFisica);
 		attr.addFlashAttribute("success","Ficha de Treino salva com sucesso.");
 		

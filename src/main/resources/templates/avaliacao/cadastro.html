@@ -31,6 +31,19 @@
 	        	
 	            <form th:action= "${avaliacaoFisica.id == null} ? @{/avaliacoes/salvar} : @{/avaliacoes/editar}" 
 	            th:object="${avaliacaoFisica}" method="POST">
+	           
+	           <div th:replace="~{/fragments/validacao :: validacao }"></div>
+	           		
+	           		<div class="form-row">	           		
+	                <div class="form-group col-md-6">
+	                        <label for="identificacao">Identificação</label>
+	                        <input type="text" class="form-control" id="identificacao" placeholder="Identificação da avaliação" autofocus="autofocus"
+	                               th:field="*{identificacao}"/>
+	                           <div class="invalid-feedback">
+	                    </div>
+	           		
+	           		</div>
+	           
 	             <div class="form-row">
 	                <div class="form-group col-md-3">
 	                        <label for="altura">Altura</label>
@@ -191,9 +204,8 @@
 	                    
 	                </div>
 	                
-	               
-	                <input type="hidden" id="id" th:field="*{id}"/>
-	                
+	              
+	                <input type="hidden" id="id" th:field="*{id}"/>                
 	               
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 	            </form>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.academia.em_forma.dao.AvaliacaoFisicaDao;
+import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.AvaliacaoFisica;
 
 @Service
@@ -49,6 +50,7 @@ public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService{
 	}
 
 	@Override
+	
 	public boolean avaliacaoTemFichaTreino(Long id) {
 		if(buscarPorId(id).getFichaTreinos().isEmpty()) {
 			return false;
@@ -56,6 +58,8 @@ public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService{
 		return true;
 	}
 
+
+	 
 	
 
 }

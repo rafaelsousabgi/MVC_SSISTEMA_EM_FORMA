@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "FICHAS_TREINO")
@@ -26,7 +30,11 @@ public class FichaTreino implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	
+	@Column( nullable = false , unique = true,length = 100)
 	private String nome;
+	
+	@Column(nullable = false, length = 200)
 	private String descricao;	          
 	
 	
@@ -37,15 +45,16 @@ public class FichaTreino implements Serializable {
 	joinColumns = @JoinColumn(name="EXERCICIO_ID"),
 	inverseJoinColumns = @JoinColumn(name="FICHATREINO_ID"))**/
 	
+	
 	@OneToMany(mappedBy = "fichaTreinos")	
 	private List<Exercicio> exercicios;
 	
-
+	@NotNull(message = "Informe a avaliação Fisica referente a esse treino")
 	@ManyToOne
 	@JoinColumn(name="Avaliacao_id")
 	private AvaliacaoFisica avaliacaoFisica;
 	
-	
+	@NotNull(message = "Informe o Aluno referente a esse treino")
 	@ManyToOne
 	@JoinColumn(name="Aluno_id")
 	private Aluno aluno;

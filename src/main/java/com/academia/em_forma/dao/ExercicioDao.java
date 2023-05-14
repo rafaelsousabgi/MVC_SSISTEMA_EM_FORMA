@@ -7,7 +7,7 @@ import com.academia.em_forma.domain.Exercicio;
 public interface ExercicioDao {
 	
 	
-void save(Exercicio exercicio);
+    void save(Exercicio exercicio);
 	
 	void update(Exercicio exercicio);
 	

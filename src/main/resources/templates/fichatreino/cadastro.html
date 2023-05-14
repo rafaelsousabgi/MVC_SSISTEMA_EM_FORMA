@@ -29,6 +29,9 @@
 	        	
 	            <form th:action="${fichaTreino.id == null} ? @{/fichastreinos/salvar} : @{/fichastreinos/editar}"
 	             th:object= " ${fichaTreino}" method="POST">
+	             
+	                <div th:replace="~{/fragments/validacao :: validacao }"></div>
+	                
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="nome">Nome do Treino</label>
@@ -57,7 +60,7 @@
 	                        <label for="avaliacaoFisica">Avaliação Fisica</label>
 	                        <select id="avaliacaoFisica" class="form-control" th:field="*{avaliacaoFisica}">
 	                            <option value="">Selecione...</option>
-	                            <option th:each="a : ${avaliacoes}" th:value="${a.id}" th:text="${a.aluno.nome}"></option>	                   
+	                            <option th:each="a : ${avaliacoes}" th:value="${a.id}" th:text="${a.identificacao}"></option>	                   
 	                        </select>
 	                        <div class="invalid-feedback">
 	
