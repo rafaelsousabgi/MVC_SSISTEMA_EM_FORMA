@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<!DOCTYPE html >
+<html  xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+layout:decorate="~{layout}">
 <head>
 	
 	<meta charset="UTF-8"/>
@@ -112,6 +113,7 @@
 		</div>
 		
 	</section>		
-	
+	<script th:src="~{}" th:fragment="js"></script>
+	<script th:inline="javascript" th:fragment="inlinescript"></script>
 </body>
 </html>

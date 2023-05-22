@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.academia.em_forma.domain.Usuario;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -39,6 +44,10 @@ public class AbstractDao <T, PK extends Serializable> {
 	public T findById(PK id) {
 		
 		return entityManager.find(entityClass, id);
+	}
+	
+	public T findByEmail(PK email) {
+		return entityManager.find(entityClass, email);
 	}
 	
 	public List<T> findAll() {

@@ -5,11 +5,14 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +33,14 @@ public class Aluno extends Pessoa<Long>{
 	@JsonIgnore
 	@OneToMany(mappedBy = "aluno")
 	private List<FichaTreino> fichaTreinos;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "aluno")
+	private List<Agendamento> agendamentos;
+	
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
 
 	public Aluno() {
 		
@@ -81,6 +92,26 @@ public class Aluno extends Pessoa<Long>{
 
 	public void setFichaTreinos(List<FichaTreino> fichaTreinos) {
 		this.fichaTreinos = fichaTreinos;
+	}
+
+
+	public List<Agendamento> getAgendamentos() {
+		return agendamentos;
+	}
+
+
+	public void setAgendamentos(List<Agendamento> agendamentos) {
+		this.agendamentos = agendamentos;
+	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	

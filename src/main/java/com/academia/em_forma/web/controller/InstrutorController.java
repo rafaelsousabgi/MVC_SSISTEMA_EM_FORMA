@@ -22,7 +22,7 @@ import com.academia.em_forma.service.InstrutorService;
 
 
 @Controller
-@RequestMapping("/instrutores")
+@RequestMapping("instrutores")
 public class InstrutorController {
 	
 	@Autowired
@@ -30,7 +30,7 @@ public class InstrutorController {
 	
 	@GetMapping("/cadastrar")
 	public String Cadastrar(Instrutor instrutor) {
-		return "/instrutor/cadastro";
+		return "instrutor/cadastro";
 	}
 	
 	@GetMapping("/listar")

@@ -82,6 +82,15 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	public void setId(ID id) {
 		this.id = id;
 	}
+	
+	public boolean hasNotId() {
+		return id == null;
+	}
+	
+	public boolean hasId() {
+		return id == null;
+	}
+	
 	public Endereco getEndereco() {
 		return endereco;
 	}
