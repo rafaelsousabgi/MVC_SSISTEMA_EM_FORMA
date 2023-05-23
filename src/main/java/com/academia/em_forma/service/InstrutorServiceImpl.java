@@ -3,6 +3,7 @@ package com.academia.em_forma.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.academia.em_forma.dao.InstrutorDao;
 import com.academia.em_forma.domain.Instrutor;
+import com.academia.em_forma.repository.InstrutorRepository;
 
 @Service
 @Transactional
@@ -17,6 +19,9 @@ public class InstrutorServiceImpl implements InstrutorService {
 
 	@Autowired
 	public InstrutorDao dao;
+	
+	@Autowired
+	private InstrutorRepository instrutorRepository;
 	
 	@Override
 	public void salvar(Instrutor instrutor) {
@@ -26,6 +31,9 @@ public class InstrutorServiceImpl implements InstrutorService {
 
 	@Override
 	public void editar(Instrutor instrutor) {
+		
+		
+		
 		dao.update(instrutor);
 	}
 
@@ -79,4 +87,15 @@ public class InstrutorServiceImpl implements InstrutorService {
 	        }
 	    }
 
+	@Transactional(readOnly = true)
+	public Instrutor buscarPorUsuarioId(Long id) {
+		return 	instrutorRepository.findByUsuarioId(id).orElse(new Instrutor());
+	}
+
+	
+	@Transactional(readOnly = true)
+	public Instrutor buscarPorEmail(String email) {
+		
+		return instrutorRepository.findByUsuarioEmail(email).orElse(new Instrutor());
+	}
 }

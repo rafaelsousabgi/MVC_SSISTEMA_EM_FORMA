@@ -2,6 +2,7 @@ package com.academia.em_forma.dao;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import com.academia.em_forma.domain.Instrutor;
 
@@ -13,7 +14,9 @@ void save(Instrutor instrutor);
 	
 	void delete(Long id);
 	
-	Instrutor findById(Long id);
+	Instrutor  findById(Long id);
+	
+	Optional<Instrutor> findByUsuarioId(Long id);
 	
 	List<Instrutor> findAll();
 

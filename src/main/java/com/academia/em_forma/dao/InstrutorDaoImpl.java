@@ -2,10 +2,14 @@ package com.academia.em_forma.dao;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
 import com.academia.em_forma.domain.Instrutor;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 @Repository
 public class InstrutorDaoImpl extends AbstractDao<Instrutor,Long> implements InstrutorDao {
@@ -43,6 +47,11 @@ public class InstrutorDaoImpl extends AbstractDao<Instrutor,Long> implements Ins
 				.append("order by i.dataEntrada asc")
 				.toString();
 		return createQuery(jpql, saida);
-	}	
+	}
+
+
+
+	
+	
 
 }

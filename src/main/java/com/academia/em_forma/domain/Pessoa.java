@@ -180,12 +180,15 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 		Pessoa<?> other = (Pessoa<?>) obj;
 		return Objects.equals(id, other.id);
 	}
+
+
 	@Override
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", estadoCivil=" + estadoCivil + ", rg=" + rg
 				+ ", cpf=" + cpf + ", email=" + email + ", telefone=" + telefone + ", profissao=" + profissao
-				+ ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida /** + ", endereco=" endereco  "**/;
+				+ ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + ", endereco=" + endereco + "]";
 	}
+	
 	
 	
 

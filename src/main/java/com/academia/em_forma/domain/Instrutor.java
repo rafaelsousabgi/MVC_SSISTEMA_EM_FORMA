@@ -42,13 +42,28 @@ public class Instrutor extends Pessoa<Long> {
 	public Instrutor(Long id, String nome, String sexo, String estadoCivil, String rg, String cpf, String email,
 			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida, Endereco endereco) {
 		super(id, nome, sexo, estadoCivil, rg, cpf, email, telefone, profissao, dataEntrada, dataSaida, endereco);
-		this.cref= cref;
-		this.usuario = usuario;
+		
+		
 		
 	}
 
 
 
+
+
+	public Instrutor( String cref) {
+		super();
+		
+		this.cref= cref;
+	}
+
+	public Instrutor(Long id) {
+		super.setId(id);
+	}
+	
+	public Instrutor(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 
 	public String getCref() {

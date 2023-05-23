@@ -2,8 +2,10 @@ package com.academia.em_forma.web.controller;
 
 import java.time.LocalDate;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.academia.em_forma.domain.Instrutor;
 import com.academia.em_forma.domain.UF;
+import com.academia.em_forma.domain.Usuario;
 import com.academia.em_forma.service.InstrutorService;
+import com.academia.em_forma.service.InstrutorServiceImpl;
+import com.academia.em_forma.service.UsuarioServiceImpl;
 
 
 
@@ -27,6 +32,23 @@ public class InstrutorController {
 	
 	@Autowired
 	private InstrutorService instrutorservice;
+	
+	//@Autowired
+	//InstrutorServiceImpl instrutorServiceImpl;
+	
+	@Autowired
+	private UsuarioServiceImpl usuarioServiceImpl;
+	
+	// abrir pagina de dados pessoais de medicos pelo MEDICO
+		@GetMapping({"/dados"})
+		public String abrirPorInstrutor(Instrutor instrutor , ModelMap model, @AuthenticationPrincipal User user) {
+			if (instrutor.hasNotId()) {
+				instrutor = instrutorservice.buscarPorEmail(user.getUsername());
+				model.addAttribute("instrutor", instrutor);
+			}
+			return "instrutor/cadastro";
+		}
+	
 	
 	@GetMapping("/cadastrar")
 	public String Cadastrar(Instrutor instrutor) {
@@ -40,11 +62,19 @@ public class InstrutorController {
 	}
 	
 	@PostMapping("/salvar")
-	public String salva(Instrutor instrutor, RedirectAttributes attr) {
-		instrutorservice.salvar(instrutor);
-		attr.addFlashAttribute("success","Instrutor salvo com sucesso.");
+	public String salva(Instrutor instrutor, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		
-		return "redirect:/instrutores/cadastrar";
+		if(instrutor.hasNotId() && instrutor.getUsuario().hasNotId()){
+			Usuario usuario = usuarioServiceImpl.buscarPorEmail(user.getUsername());
+			instrutor.setUsuario(usuario);
+		}
+		
+		
+		instrutorservice.salvar(instrutor);
+		attr.addFlashAttribute("sucesso","Instrutor salvo com sucesso.");
+		attr.addFlashAttribute("instrutor",instrutor);
+		
+		return "redirect:/instrutores/dados";
 	}
 	
 	@GetMapping("/editar/{id}")

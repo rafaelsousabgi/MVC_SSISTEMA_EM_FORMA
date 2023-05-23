@@ -3,6 +3,7 @@ package com.academia.em_forma.dao;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -44,6 +45,18 @@ public class AbstractDao <T, PK extends Serializable> {
 	public T findById(PK id) {
 		
 		return entityManager.find(entityClass, id);
+	}
+	
+	public Optional<T> findByUsuarioId(PK id) {
+	    String jpql = "SELECT t FROM " + entityClass.getSimpleName() + " t WHERE t.usuario.id = :id";
+	    TypedQuery<T> query = entityManager.createQuery(jpql, entityClass);
+	    query.setParameter("id", id);
+	    List<T> resultList = query.getResultList();
+	    if (resultList.isEmpty()) {
+	        return Optional.empty();
+	    } else {
+	        return Optional.of(resultList.get(0));
+	    }
 	}
 	
 	public T findByEmail(PK email) {

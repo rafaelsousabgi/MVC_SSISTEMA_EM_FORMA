@@ -92,4 +92,17 @@ System.out.println(dataTables);
 				.orElseThrow(() -> new UsernameNotFoundException("usuário inexistente"));
 	}
 
+	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
+		
+		return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
+	}
+
+	@Transactional(readOnly = false)
+	public void alterarSenha(Usuario usuario, String senha) {
+		usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
+		repository.save(usuario);
+		
+		
+	}
+
 }
