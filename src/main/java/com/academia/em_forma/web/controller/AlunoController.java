@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +22,13 @@ import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.FichaTreino;
 import com.academia.em_forma.domain.TIPOFISICO;
 import com.academia.em_forma.domain.UF;
+import com.academia.em_forma.domain.Usuario;
 import com.academia.em_forma.service.AlunoService;
 import com.academia.em_forma.service.AvaliacaoFisicaService;
 import com.academia.em_forma.service.FichaTreinoService;
+import com.academia.em_forma.service.UsuarioServiceImpl;
+
+
 
 @Controller
 @RequestMapping("/alunos")
@@ -32,13 +38,24 @@ public class AlunoController {
 	private AlunoService alunoService;
 	
 	@Autowired
+	private UsuarioServiceImpl usuarioServiceImpl;
+	
+	@Autowired
 	private AvaliacaoFisicaService avaliacaoFisicaService;
 	
 	@Autowired 
 	FichaTreinoService fichaTreinoService;
 
 	@GetMapping("/cadastrar")
-	public String Cadastrar(Aluno aluno) {
+	public String Cadastrar(Aluno aluno, ModelMap model, @AuthenticationPrincipal User user) {
+		
+		aluno = alunoService.buscarPorUsuarioEmail(user.getUsername());
+		
+		if (aluno.hasNotId()) {
+			aluno.setUsuario(new Usuario(user.getUsername()));
+		}		
+		model.addAttribute("aluno",aluno);
+				
 		return "/aluno/cadastro";
 	}
 	
@@ -48,14 +65,32 @@ public class AlunoController {
 		return "/aluno/lista";
 	}
 	
-	@PostMapping("/salvar")
+	/**salvar o form de dados pessoais do aluno com verificação de senha**/
+	 
+	 @PostMapping("/salvar")
+	public String salva(Aluno aluno, ModelMap model, @AuthenticationPrincipal User user) {
+		
+		 Usuario u = usuarioServiceImpl.buscarPorEmail(user.getUsername());
+		 if(UsuarioServiceImpl.isSenhaCorreta(aluno.getUsuario().getSenha(), u.getSenha())) {
+			 aluno.setUsuario(u);
+			 alunoService.salvar(aluno);
+			 model.addAttribute("sucesso","Seus dados foram inseridos com sucesso.");
+		 }else {
+			 model.addAttribute("falha", "Sua senha não confere, tente novamente.");
+		 } 
+						
+		
+		return "aluno/cadastro";
+	}
+	/**
+	//**@PostMapping("/salvar")
 	public String salva(Aluno aluno, RedirectAttributes attr) {
 		alunoService.salvar(aluno);
 		
 		attr.addFlashAttribute("success","Aluno salvo com sucesso.");
 		
 		return "redirect:/alunos/cadastrar";
-	}
+	} **/
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.academia.em_forma.dao.AlunoDao;
 import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.Endereco;
+import com.academia.em_forma.repository.AlunoRepository;
 
 @Service
 @Transactional
@@ -18,6 +19,9 @@ public class AlunoServiceImpl implements AlunoService{
 
 	@Autowired
 	public AlunoDao dao;
+	
+	@Autowired
+	private AlunoRepository repository;
 	
 	@Override
 	public void salvar(Aluno aluno) {
@@ -81,6 +85,11 @@ public class AlunoServiceImpl implements AlunoService{
         	return new ArrayList<Aluno>();
         }
     }
+	@Transactional(readOnly = true)
+	public Aluno buscarPorUsuarioEmail(String email) {
+		return repository.findByUsuarioEmail(email).orElse(new Aluno());
+	}
+	
 	}
 
 

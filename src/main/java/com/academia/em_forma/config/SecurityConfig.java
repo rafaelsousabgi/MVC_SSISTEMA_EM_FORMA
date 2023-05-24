@@ -40,13 +40,13 @@ public class SecurityConfig  {
 			**/
 			
 			// acessos privados admin
-			.requestMatchers("/u/editar/senha","/u/confirmar/senha").hasAuthority(INSTRUTOR)
+			.requestMatchers("/u/editar/senha","/u/confirmar/senha").hasAnyAuthority(INSTRUTOR,ALUNO)
 			.requestMatchers("/u/**").hasAuthority(ADMIN)
 			
 			//ACESSOS PRIVADOS iNSTRUTOR
 			.requestMatchers("/instrutores/cadastrar","/instrutores/salvar", "/instrutores/editar","/instrutores/listar","/instrutores/cadastrar","/instrutores/editar/{id}","/instrutores/excluir/{id}" ).hasAnyAuthority(INSTRUTOR,ADMIN)
 			.requestMatchers("/instrutores/**").hasAnyAuthority(INSTRUTOR )
-			.requestMatchers("/fichastreinos/**","/exercicios/**","/avaliacoes/**").hasAuthority(ADMIN)
+			.requestMatchers("/fichastreinos/**","/exercicios/**","/avaliacoes/**").hasAuthority(INSTRUTOR)
 			
 			//ACESSOS PRIVADOS Aluno
 			.requestMatchers("/alunos/**").hasAuthority(ALUNO)

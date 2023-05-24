@@ -54,7 +54,13 @@ public class Aluno extends Pessoa<Long>{
 	}
 
 
-
+	public Aluno(Long id) {
+		super.setId(id);
+	}
+	
+	public Aluno(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 
 
