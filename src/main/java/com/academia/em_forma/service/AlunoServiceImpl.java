@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.academia.em_forma.dao.AlunoDao;
 import com.academia.em_forma.domain.Aluno;
+import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Endereco;
 import com.academia.em_forma.repository.AlunoRepository;
 
@@ -89,6 +90,8 @@ public class AlunoServiceImpl implements AlunoService{
 	public Aluno buscarPorUsuarioEmail(String email) {
 		return repository.findByUsuarioEmail(email).orElse(new Aluno());
 	}
+
+
 	
 	}
 

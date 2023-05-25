@@ -9,12 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.academia.em_forma.dao.FichaTreinoDao;
 import com.academia.em_forma.domain.FichaTreino;
 
+
 @Service
 @Transactional
 public class FichaTreinoServiceImpl implements FichaTreinoService {
 
 	@Autowired
 	public FichaTreinoDao dao;
+	
+	
 	
 	@Override
 	public void salvar(FichaTreino fichaTreino) {
@@ -57,5 +60,9 @@ public class FichaTreinoServiceImpl implements FichaTreinoService {
 		}
 		return true;
 	}
+
+	
+
+	
 
 }

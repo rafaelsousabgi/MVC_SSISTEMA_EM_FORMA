@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.academia.em_forma.domain.Aluno;
+import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Endereco;
 import com.academia.em_forma.domain.Instrutor;
 
@@ -18,6 +19,7 @@ public interface AlunoService {
    List<Aluno> buscarPorNome(String nome);
    List<Aluno> buscarPorDatas(LocalDate entrada, LocalDate saida);
    Aluno buscarPorUsuarioEmail(String email);
+
 
 
 }

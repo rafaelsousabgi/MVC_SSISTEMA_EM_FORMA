@@ -13,4 +13,8 @@ public interface FichaTreinoService {
 	List<FichaTreino> buscarTodos();
 	
 	boolean fichaTemExercicios(Long id);
+	//List<FichaTreino> getFichasTreinoByAlunoemail();
+	//List<FichaTreino> getFichasTreinoByAlunoemail(String email);
+	//FichaTreino findBySessionId(Long sessionId);
+	//List<FichaTreino> buscarAlunoId(Long alunoId);
 }

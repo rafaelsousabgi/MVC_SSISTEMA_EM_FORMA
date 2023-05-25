@@ -1,11 +1,15 @@
 package com.academia.em_forma.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +22,11 @@ import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Exercicio;
 import com.academia.em_forma.domain.FichaTreino;
 import com.academia.em_forma.domain.Instrutor;
+import com.academia.em_forma.domain.Usuario;
 import com.academia.em_forma.service.AlunoService;
 import com.academia.em_forma.service.AvaliacaoFisicaService;
 import com.academia.em_forma.service.InstrutorService;
+import com.academia.em_forma.service.UsuarioServiceImpl;
 
 import jakarta.validation.Valid;
 
@@ -37,16 +43,21 @@ public class AvaliacaoController {
 	@Autowired
 	private InstrutorService instrutorService;
 	
+	@Autowired
+	private UsuarioServiceImpl usuarioServiceImpl;
+	
 	
 	
 	@GetMapping("/cadastrar")
 	public String Cadastrar(AvaliacaoFisica avaliacaoFisica) {
 		return "/avaliacao/cadastro";
 	}
+		
 	
 	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-		model.addAttribute("avaliacoesFisicas", avaliacaoFisicaService.buscarTodos());
+	public String listar(@PathVariable("id")Long id,ModelMap model) {
+		
+		model.addAttribute("avaliacoesFisicas", avaliacaoFisicaService.buscarPorId(id));
 		return "/avaliacao/lista";
 	}
 	
@@ -89,7 +100,7 @@ public class AvaliacaoController {
 		}
 		
 		
-		return listar(model);
+		return "/dadosavaliacoes/{id}";
 	}
 	
 	
@@ -102,4 +113,19 @@ public class AvaliacaoController {
 	public List<Instrutor> listaDeInstrutores(){
 		return instrutorService.buscarTodos();
 	}
+	
+	@GetMapping("/dadosavaliacoes/{id}")
+    public String  getAvaliacoesFisicasByUserId(@PathVariable("id") Long id, ModelMap model,
+    																			@AuthenticationPrincipal User user) {
+		
+		
+		//AvaliacaoFisica avaliacaoFisica = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoId(id, user.getUsername());
+		List<AvaliacaoFisica> avaliacoesFisicas = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoId(id , user.getUsername());/**", user.getUsername()/avaliacoes/lista"**/
+       model.addAttribute("avaliacoesFisicas", avaliacoesFisicas);
+
+        
+
+        return "/avaliacao/lista" ;
+    }
+
 }

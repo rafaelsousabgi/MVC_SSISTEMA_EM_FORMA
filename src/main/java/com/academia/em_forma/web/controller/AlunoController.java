@@ -1,6 +1,7 @@
 package com.academia.em_forma.web.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.AvaliacaoFisica;
+import com.academia.em_forma.domain.Exercicio;
 import com.academia.em_forma.domain.FichaTreino;
 import com.academia.em_forma.domain.TIPOFISICO;
 import com.academia.em_forma.domain.UF;
 import com.academia.em_forma.domain.Usuario;
 import com.academia.em_forma.service.AlunoService;
 import com.academia.em_forma.service.AvaliacaoFisicaService;
+import com.academia.em_forma.service.ExercicioService;
 import com.academia.em_forma.service.FichaTreinoService;
 import com.academia.em_forma.service.UsuarioServiceImpl;
+
+import ch.qos.logback.core.model.Model;
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -45,6 +51,9 @@ public class AlunoController {
 	
 	@Autowired 
 	FichaTreinoService fichaTreinoService;
+	
+	@Autowired
+	ExercicioService exercicioService;
 
 	@GetMapping("/cadastrar")
 	public String Cadastrar(Aluno aluno, ModelMap model, @AuthenticationPrincipal User user) {
@@ -153,6 +162,8 @@ public class AlunoController {
 	public UF[] getUfs() {
 		return UF.values();
 	}
+	
+	
 	
 	}
 

@@ -4,6 +4,9 @@ import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,6 +22,7 @@ import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Exercicio;
 import com.academia.em_forma.domain.FichaTreino;
 import com.academia.em_forma.domain.Instrutor;
+import com.academia.em_forma.domain.Usuario;
 import com.academia.em_forma.service.AlunoService;
 import com.academia.em_forma.service.AvaliacaoFisicaService;
 import com.academia.em_forma.service.ExercicioService;
@@ -46,6 +50,16 @@ public class FichaTreinoController {
 	@GetMapping("/cadastrar")
 	public String Cadastrar(FichaTreino fichaTreino) {
 		return "/fichatreino/cadastro";
+	}
+	
+	@GetMapping(value = "/listar/{id}")
+	public ResponseEntity<FichaTreino> findById(@AuthenticationPrincipal User user, @PathVariable Long id) {
+	    
+	   
+
+
+	    return ResponseEntity.ok(fichaTreinoService.buscarPorId(id));	
+	
 	}
 	
 	@GetMapping("/listar")

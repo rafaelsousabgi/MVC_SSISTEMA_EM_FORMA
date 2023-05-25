@@ -32,12 +32,7 @@ public class SecurityConfig  {
 			.requestMatchers("/webjars/**", "/css/**", "/image/**", "/js/**").permitAll()
 			/**preciso criar um index para direcionar para uma home limpa sem nada**/
 			.requestMatchers("/","home").permitAll()
-			/**
-			.requestMatchers("/u/novo/cadastro", "/u/cadastro/realizado", "/u/cadastro/paciente/salvar").permitAll()
-			.requestMatchers("/u/confirmacao/cadastro").permitAll()
-			.requestMatchers("/u/p/**").permitAll()
 			
-			**/
 			
 			// acessos privados admin
 			.requestMatchers("/u/editar/senha","/u/confirmar/senha").hasAnyAuthority(INSTRUTOR,ALUNO)
@@ -46,10 +41,15 @@ public class SecurityConfig  {
 			//ACESSOS PRIVADOS iNSTRUTOR
 			.requestMatchers("/instrutores/cadastrar","/instrutores/salvar", "/instrutores/editar","/instrutores/listar","/instrutores/cadastrar","/instrutores/editar/{id}","/instrutores/excluir/{id}" ).hasAnyAuthority(INSTRUTOR,ADMIN)
 			.requestMatchers("/instrutores/**").hasAnyAuthority(INSTRUTOR )
-			.requestMatchers("/fichastreinos/**","/exercicios/**","/avaliacoes/**").hasAuthority(INSTRUTOR)
+			
+			//.requestMatchers("/fichastreinos/listar","/exercicios/listar","/avaliacoes/listar").hasAuthority(ALUNO)
+			.requestMatchers("/fichastreinos/**","/exercicios/**","/avaliacoes/**").hasAnyAuthority(INSTRUTOR,ALUNO)
 			
 			//ACESSOS PRIVADOS Aluno
+			//.requestMatchers("/alunos/listar").hasAnyAuthority(ALUNO,INSTRUTOR)
+			//.requestMatchers("avaliacoes/dadosavaliacoes/{Id}").hasAuthority(ALUNO)
 			.requestMatchers("/alunos/**").hasAuthority(ALUNO)
+			
 			
 			.anyRequest().authenticated()
 			
