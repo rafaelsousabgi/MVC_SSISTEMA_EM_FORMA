@@ -87,6 +87,7 @@ public class InstrutorController {
 	public String editar(Instrutor instrutor, RedirectAttributes attr) {
 		instrutorservice.editar(instrutor);
 		attr.addFlashAttribute("success","Instrutor Editado com sucesso.");
+		
 		return "redirect:/instrutores/cadastrar";
 	}
 	

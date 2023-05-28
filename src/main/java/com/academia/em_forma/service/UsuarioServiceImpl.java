@@ -2,6 +2,7 @@ package com.academia.em_forma.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,7 +44,7 @@ public class UsuarioServiceImpl implements UserDetailsService{
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = buscarPorEmail(username);
+		Usuario usuario = buscarPorEmailEAtivo(username).orElseThrow(()->new UsernameNotFoundException("Usuario"+ username +"não encontrado"));
 		return new User(
 				usuario.getEmail(),
 				usuario.getSenha(),
@@ -103,6 +104,12 @@ System.out.println(dataTables);
 		repository.save(usuario);
 		
 		
+	}
+	
+	@Transactional(readOnly = true)
+	public Optional<Usuario> buscarPorEmailEAtivo(String email){
+		
+		return repository.findByEmailAndAtivo(email);
 	}
 
 }

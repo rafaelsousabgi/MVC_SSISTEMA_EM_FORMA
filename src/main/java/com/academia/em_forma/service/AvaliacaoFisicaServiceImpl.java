@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,8 @@ import com.academia.em_forma.dao.AvaliacaoFisicaDao;
 import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.repository.AvaliacaoFisicaRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 
 @Service
@@ -66,13 +69,28 @@ public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService{
 	}
 
 
+	/**
 	@Override
 	@Transactional(readOnly = true)
-	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(Long id  ,String email) {
+	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(Long id, String email) {
 		
-		return avaliacaoFisicaRepository.findAvaliacoesFisicasByAlunoId(id ,email);
-				/****/
+		return  avaliacaoFisicaRepository.findAvaliacoesFisicasByAlunoId(id, email);
+				
 		
+	}
+
+/****/
+	
+	@Transactional(readOnly = true)
+	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(String email) {
+		// TODO Auto-generated method stub
+		return avaliacaoFisicaRepository.findListaAvaliacoesByAlunoEmail(email);
+	}
+
+	@Transactional(readOnly = true)
+	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorId(String email) {
+		// TODO Auto-generated method stub
+		return avaliacaoFisicaRepository.findListaAvaliacoesByInstrutorEmail(email);
 	}
 	
 

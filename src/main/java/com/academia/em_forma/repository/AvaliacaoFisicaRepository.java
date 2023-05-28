@@ -20,19 +20,26 @@ public interface AvaliacaoFisicaRepository extends JpaRepository<AvaliacaoFisica
 			+ "where "
 			+ "	(a.id = :id and a.aluno.usuario.email like :email) "
 			)
-			
+			AND a.aluno.usuario.email LIKE :email  AND a.instrutor.usuario.email LIKE :email
 			*
 			*@Query("select af from AvaliacaoFisica af where af.aluno.id = :id and af.aluno.usuario.email like :email ")
-			**/
+			
 	
 	
 	
 	@Query("SELECT a FROM AvaliacaoFisica a "
 	        + "WHERE "
-	        + "    ((a.aluno.id = :id AND a.aluno.usuario.email LIKE :email) "
+	        + "    ((a.aluno.id = :id AND a.aluno.usuario.email like :email) "
 	        + "    OR "
-	        + "    (a.instrutor.id = :id AND a.instrutor.usuario.email LIKE :email))")
-	List<AvaliacaoFisica> findAvaliacoesFisicasByAlunoId( Long id,String email); /**,**/
+	        + "    (a.instrutor.id = :id AND a.instrutor.usuario.email like :email ))")
+	List<AvaliacaoFisica> findAvaliacoesFisicasByAlunoId(Long id, String email);
+**/
+	
+	@Query("select a from AvaliacaoFisica a where a.aluno.usuario.email like :email")
+	List<AvaliacaoFisica> findListaAvaliacoesByAlunoEmail(String email);
+			
+	@Query("select ai from AvaliacaoFisica ai where ai.instrutor.usuario.email like :email")
+	List<AvaliacaoFisica> findListaAvaliacoesByInstrutorEmail(String email);
 
 	
 }

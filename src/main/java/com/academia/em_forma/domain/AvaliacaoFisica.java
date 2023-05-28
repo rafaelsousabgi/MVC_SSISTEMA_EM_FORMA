@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -304,6 +305,34 @@ public class AvaliacaoFisica implements Serializable {
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AvaliacaoFisica other = (AvaliacaoFisica) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return "AvaliacaoFisica [id=" + id + ", identificacao=" + identificacao + ", aluno=" + aluno + ", instrutor="
+				+ instrutor + ", fichaTreinos=" + fichaTreinos + ", peso=" + peso + ", altura=" + altura + ", peito="
+				+ peito + ", cintura=" + cintura + ", panturrilhaDireita=" + panturrilhaDireita
+				+ ", panturrilhaEsquerda=" + panturrilhaEsquerda + ", coxaDireita=" + coxaDireita + ", coxaEsqueda="
+				+ coxaEsqueda + ", bracoEsquedo=" + bracoEsquedo + ", bracoDireito=" + bracoDireito
+				+ ", antebracoEsquedo=" + antebracoEsquedo + ", antebracoDireito=" + antebracoDireito + ", gluteo="
+				+ gluteo + ", imc=" + imc + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + "]";
 	}
 
 	

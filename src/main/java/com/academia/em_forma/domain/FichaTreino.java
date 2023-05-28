@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +46,7 @@ public class FichaTreino implements Serializable {
 	joinColumns = @JoinColumn(name="EXERCICIO_ID"),
 	inverseJoinColumns = @JoinColumn(name="FICHATREINO_ID"))**/
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "fichaTreinos")	
 	private List<Exercicio> exercicios;
 	

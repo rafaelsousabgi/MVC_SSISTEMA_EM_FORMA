@@ -177,3 +177,9 @@ footer p {
 .ui-autocomplete-loading {
   background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
 }
+
+.example-item {
+        width: 25%;
+        height: 150px;
+        display: inline; /* Adicionamos apenas essa linha */
+    }

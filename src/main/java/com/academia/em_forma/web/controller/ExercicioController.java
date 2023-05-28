@@ -3,6 +3,9 @@ package com.academia.em_forma.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.DIA;
 import com.academia.em_forma.domain.Exercicio;
 import com.academia.em_forma.domain.FichaTreino;
+import com.academia.em_forma.domain.PerfilTipo;
 import com.academia.em_forma.service.ExercicioService;
 import com.academia.em_forma.service.FichaTreinoService;
 
@@ -75,6 +80,38 @@ public class ExercicioController {
 		return listar(model);
 		
 	}
+	
+	@GetMapping("/listar/dadosexercicios")
+    public String  getAvaliacoesFisicasByUserId( ModelMap model,  @AuthenticationPrincipal User user) {			
+		if(user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {	
+		
+			List<Exercicio> exercicios = exercicioService.buscarExerciciosByAvaliacaoAlunoId(user.getUsername());
+		model.addAttribute("exercicios",exercicios);	
+		
+		}
+		
+		if(user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
+			
+			List<Exercicio> exercicios = exercicioService.buscarAvaliacoesFisicasByInstrutorId(user.getUsername());
+			model.addAttribute("exercicios",exercicios);	
+			
+			System.out.println(exercicios);
+		
+		}
+		     
+        return "exercicio/lista" ;
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

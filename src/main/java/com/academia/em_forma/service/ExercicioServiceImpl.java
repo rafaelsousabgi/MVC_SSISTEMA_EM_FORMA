@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.academia.em_forma.dao.ExercicioDao;
+import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Exercicio;
+import com.academia.em_forma.repository.ExercicioRepository;
 
 @Service
 @Transactional
@@ -15,6 +17,9 @@ public class ExercicioServiceImpl implements ExercicioService{
 
 	@Autowired
 	public ExercicioDao dao;
+	
+	@Autowired
+	public ExercicioRepository exercicioRepository;
 	
 	@Override
 	public void salvar(Exercicio exercicio) {
@@ -55,6 +60,18 @@ public class ExercicioServiceImpl implements ExercicioService{
 			return false;
 		}
 		return true;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Exercicio> buscarExerciciosByAvaliacaoAlunoId(String email) {
+		
+		return exercicioRepository.findByExercicioByAlunoEmail(email) ;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Exercicio> buscarAvaliacoesFisicasByInstrutorId(String email) {
+		
+		return exercicioRepository.findByExercicioByInstrutorEmail(email) ;
 	}
 
 	

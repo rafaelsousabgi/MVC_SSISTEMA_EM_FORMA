@@ -2,6 +2,7 @@ package com.academia.em_forma.service;
 
 import java.util.List;
 
+import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Exercicio;
 
 public interface ExercicioService {
@@ -12,6 +13,8 @@ public interface ExercicioService {
 	Exercicio buscarPorId(Long id);
 	List<Exercicio> buscarTodos();
 	boolean exercicioTemFichaTreino(Long id);
+	List<Exercicio> buscarExerciciosByAvaliacaoAlunoId(String email);
+	List<Exercicio> buscarAvaliacoesFisicasByInstrutorId(String email);
 	
 	/**boolean exerciciosTemtreino(Long id);**/
 

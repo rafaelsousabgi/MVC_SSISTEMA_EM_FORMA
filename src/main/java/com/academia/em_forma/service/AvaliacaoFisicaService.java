@@ -7,6 +7,8 @@ import com.academia.em_forma.dao.AvaliacaoFisicaDao;
 import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.AvaliacaoFisica;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 public interface AvaliacaoFisicaService {
 	
 	void salvar(AvaliacaoFisica avaliacaoFisica);
@@ -15,10 +17,8 @@ public interface AvaliacaoFisicaService {
 	AvaliacaoFisica buscarPorId(Long id);
 	List<AvaliacaoFisica> buscarTodos();	
 	boolean avaliacaoTemFichaTreino(Long id);
-	//List<AvaliacaoFisica> getAvaliacoesFisicasByAlunoId(Long alunoId);
-	//AvaliacaoFisica getAvaliacoesFisicasByAlunoId(Long id, String email);
-	List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(Long id , String email);
-	//List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(Long , String email);
+	List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(String email);
+	List<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorId(String email);
 	
 	
 	

@@ -86,11 +86,14 @@ public class AlunoServiceImpl implements AlunoService{
         	return new ArrayList<Aluno>();
         }
     }
+	
 	@Transactional(readOnly = true)
 	public Aluno buscarPorUsuarioEmail(String email) {
 		return repository.findByUsuarioEmail(email).orElse(new Aluno());
 	}
 
+	
+	
 
 	
 	}

@@ -39,11 +39,11 @@ public class SecurityConfig  {
 			.requestMatchers("/u/**").hasAuthority(ADMIN)
 			
 			//ACESSOS PRIVADOS iNSTRUTOR
-			.requestMatchers("/instrutores/cadastrar","/instrutores/salvar", "/instrutores/editar","/instrutores/listar","/instrutores/cadastrar","/instrutores/editar/{id}","/instrutores/excluir/{id}" ).hasAnyAuthority(INSTRUTOR,ADMIN)
-			.requestMatchers("/instrutores/**").hasAnyAuthority(INSTRUTOR )
+			.requestMatchers("/instrutores/cadastrar","/instrutores/salvar", "/instrutores/editar","/instrutores/editar/{id}","/instrutores/excluir/{id}","/instrutores/dados" ).hasAuthority(INSTRUTOR)
+			.requestMatchers("/instrutores/**").hasAnyAuthority(ADMIN,INSTRUTOR )
 			
-			//.requestMatchers("/fichastreinos/listar","/exercicios/listar","/avaliacoes/listar").hasAuthority(ALUNO)
-			.requestMatchers("/fichastreinos/**","/exercicios/**","/avaliacoes/**").hasAnyAuthority(INSTRUTOR,ALUNO)
+			.requestMatchers("/fichastreinos/listar","/exercicios/listar" ,"/exercicios/listar/dadosexercicios","/avaliacoes/listar","/avaliacoes/dadosavaliacoes").hasAnyAuthority(ALUNO,INSTRUTOR)
+			.requestMatchers("/fichastreinos/**","/exercicios/**","/avaliacoes/**").hasAuthority(INSTRUTOR)
 			
 			//ACESSOS PRIVADOS Aluno
 			//.requestMatchers("/alunos/listar").hasAnyAuthority(ALUNO,INSTRUTOR)
