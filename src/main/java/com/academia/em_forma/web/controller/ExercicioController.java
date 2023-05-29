@@ -1,6 +1,13 @@
 package com.academia.em_forma.web.controller;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -103,6 +110,54 @@ public class ExercicioController {
     }
 	
 	
+	
+	
+	
+	@GetMapping("/listar/dadosexercicios/individual")
+	public String getAvaliacoesFisicasByUserEmail(ModelMap model, @AuthenticationPrincipal User user) {
+	    List<Exercicio> exercicios = null;
+
+	    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {
+	        exercicios = exercicioService.buscarExerciciosByAvaliacaoAlunoId(user.getUsername());
+	    }
+
+	    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
+	        exercicios = exercicioService.buscarAvaliacoesFisicasByInstrutorId(user.getUsername());
+	    }
+
+	    List<List<Exercicio>> exerciciosPorFicha = groupExerciciosByFicha(exercicios);
+	    model.addAttribute("exerciciosPorFicha", exerciciosPorFicha);
+
+	    return "exercicio/lista-individual";
+	}
+
+	private List<List<Exercicio>> groupExerciciosByFicha(List<Exercicio> exercicios) {
+	    List<List<Exercicio>> exerciciosPorFicha = new ArrayList<>();
+
+	    // Cria um mapa para agrupar os exercícios por ficha de treino
+	    Map<FichaTreino, List<Exercicio>> mapaExerciciosPorFicha = new HashMap<>();
+	    for (Exercicio exercicio : exercicios) {
+	        FichaTreino fichaTreino = exercicio.getFichaTreino();
+	        if (!mapaExerciciosPorFicha.containsKey(fichaTreino)) {
+	            mapaExerciciosPorFicha.put(fichaTreino, new ArrayList<>());
+	        }
+	        mapaExerciciosPorFicha.get(fichaTreino).add(exercicio);
+	    }
+	    
+	 // Ordena as fichas de treino pelo ID em ordem decrescente (da maior para a menor)
+	    List<FichaTreino> fichasTreinoOrdenadas = new ArrayList<>(mapaExerciciosPorFicha.keySet());
+	    fichasTreinoOrdenadas.sort(Comparator.comparing(FichaTreino::getId).reversed());
+
+	    // Adiciona as listas de exercícios ao resultado final na ordem correta
+	    for (FichaTreino fichaTreino : fichasTreinoOrdenadas) {
+	        exerciciosPorFicha.add(mapaExerciciosPorFicha.get(fichaTreino));
+	    }
+
+
+	    
+
+	    return exerciciosPorFicha;
+	}
 	
 	
 	

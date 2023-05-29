@@ -1,6 +1,12 @@
 /*
  * Base structure
  */
+ 
+
+ #teste2 th{
+  text-align: center;
+};
+ 
 html, body {
 	height: 100%;
 }
