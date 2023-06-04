@@ -36,29 +36,33 @@
 							<a class="dropdown-item" th:href="@{/instrutores/dados}">Dados Cadastrais</a>
 							<a class="dropdown-item" th:href="@{/u/editar/senha}">Editar Senha</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" th:href="@{/exercicios/listar/dadosexercicios}">Histórico</a>
-							<a class="dropdown-item" th:href="@{avaliacoes/cadastrar}">Cadastrar Avaliacao Fisica</a>
-							<a class="dropdown-item" th:href="@{/avaliacoes/dadosavaliacoes }">Historico de avaliações</a>
-							<a class="dropdown-item" th:href="@{/agendamentos/historico/avaliacoes}">Avaliações agendadas</a>
+							<a class="dropdown-item" th:href="@{/exercicios/listar/dadosexercicios/individual }">Histórico</a>
+							<a class="dropdown-item" th:href="@{/avaliacoes/cadastrar}">Cadastrar Avaliaçao</a>
+							<a class="dropdown-item" th:href="@{/avaliacoes/dadosavaliacoes }">Avaliações Feitas por mim</a>					
+						</div>
+					</li>
+						<li class="nav-item dropdown" sec:authorize="hasAuthority('INSTRUTOR')"><a
+						class="btn btn-dark dropdown-toggle" href="#" id="dropdown02"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inf. Alunos</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown02">
+							<a class="dropdown-item" th:href="@{/alunos/listar}">Todos os Alunos</a>
+							<a class="dropdown-item" th:href="@{/u/editar/senha}">Editar Senha</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" th:href="@{/exercicios/listar/dadosexercicios/individual }">Fichas de Exercicios</a>
+							<a class="dropdown-item" th:href="@{/avaliacoes/cadastrar}">Cadastrar Avaliaçao</a>
+							<a class="dropdown-item" th:href="@{/avaliacoes/dadosavaliacoes }">Avaliações Feitas por mim</a>					
 						</div>
 					</li>
 					<li class="nav-item dropdown" sec:authorize="hasAuthority('ALUNO')" ><a
 						class="btn btn-dark dropdown-toggle" href="#" id="dropdown03"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aluno</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown03">
-						
+						<div class="dropdown-menu" aria-labelledby="dropdown03">						
 							<a class="dropdown-item" th:href="@{/alunos/cadastrar}">Cadastrar Dados</a>
-							
 							<a class="dropdown-item" th:href="@{/u/editar/senha}">Editar Senha</a>
-							<div class="dropdown-divider"></div>
-							
-							<a class="dropdown-item" th:href="@{/avaliacoes/dadosavaliacoes }">Historico de avaliações</a>
-							
-							<a class="dropdown-item" th:href="@{/exercicios/listar/dadosexercicios/individual }">individuas</a>
-							
-							
-							
-							<a class="dropdown-item" th:href="@{/exercicios/listar/dadosexercicios}">Histórico</a>
+							<div class="dropdown-divider"></div>							
+							<a class="dropdown-item" th:href="@{/avaliacoes/dadosavaliacoes }">Avaliações Fisicas</a>							
+							<a class="dropdown-item" th:href="@{/exercicios/listar/dadosexercicios/individual }">Fichas de Exercicios</a>
+				     		
 						</div>
 					</li>					
 				</ul>

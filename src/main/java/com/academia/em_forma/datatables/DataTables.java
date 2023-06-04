@@ -1,6 +1,7 @@
 package com.academia.em_forma.datatables;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+
+import com.academia.em_forma.domain.AvaliacaoFisica;
 
 @Component
 public class DataTables {
@@ -83,4 +86,6 @@ public class DataTables {
 	public Pageable getPageable() {
 		return PageRequest.of(getCurrentPage(), getLength(), getDirection(), getColumnName());
 	}
+
+	
 }

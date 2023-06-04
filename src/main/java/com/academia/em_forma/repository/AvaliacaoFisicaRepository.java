@@ -1,15 +1,15 @@
 package com.academia.em_forma.repository;
 
-import java.util.List;
-import java.util.Optional;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import com.academia.em_forma.domain.AvaliacaoFisica;
-import com.academia.em_forma.domain.Instrutor;
+import com.academia.em_forma.util.HistoricoAlunoAvaliacao;
 
 
 public interface AvaliacaoFisicaRepository extends JpaRepository<AvaliacaoFisica, Long >{
@@ -33,13 +33,67 @@ public interface AvaliacaoFisicaRepository extends JpaRepository<AvaliacaoFisica
 	        + "    OR "
 	        + "    (a.instrutor.id = :id AND a.instrutor.usuario.email like :email ))")
 	List<AvaliacaoFisica> findAvaliacoesFisicasByAlunoId(Long id, String email);
-**/
+	 * @param pageable 
+
 	
 	@Query("select a from AvaliacaoFisica a where a.aluno.usuario.email like :email")
-	List<AvaliacaoFisica> findListaAvaliacoesByAlunoEmail(String email);
+	List<AvaliacaoFisica> findListaAvaliacoesByAlunoEmail(String email, Pageable pageable);
 			
+	@Query("select ai from AvaliacaoFisica ai where ai.instrutor.usuario.email like :email")
+
+	
+	List<AvaliacaoFisica> findListaAvaliacoesByInstrutorEmail(String email, Pageable pageable);
+	
+	@Query("select a.id as id,"
+			+"a.aluno as aluno,"
+			+"CONCAT(a.dataInicio, '', a.dataFim) as datasAvaliacao"
+			+"a.instrutor as instrutor,"
+			+ "from AvaliacaoFisica a "
+			+ " a.aluno.usuario.email like :email")
+	@Query("select a.id as id,"
+			+"a.aluno as aluno,"
+			+"CONCAT(a.dataInicio, '', a.dataFim) as datasAvaliacao)"
+			+"a.instrutor as instrutor,"
+			+ "from AvaliacaoFisica a ,"
+			+ "where a.aluno.usuario.email like :email")
+	
+
+	@Query("select a from AvaliacaoFisica a where a.aluno.usuario.email like :email")
+	List<AvaliacaoFisica> findListaAvaliacoesByAlunoEmail(String email);
+
 	@Query("select ai from AvaliacaoFisica ai where ai.instrutor.usuario.email like :email")
 	List<AvaliacaoFisica> findListaAvaliacoesByInstrutorEmail(String email);
 
 	
+	
+	
+	@Query("select a.id as id, " +
+	        "a.identificacao as identificacao, " +
+	        "a.altura as altura, " +
+	        "a.peito as peito, " +
+	        "a.peso as peso, " +
+	        "a.cintura as cintura, " +
+	        "a.panturrilhaDireita as panturrilhaDireita, " +
+	        "a.panturrilhaEsquerda as panturrilhaEsquerda, " +
+	        "a.coxaDireita as coxaDireita, " +
+	        "a.coxaEsqueda as coxaEsquerda, " +
+	        "a.bracoEsquedo as bracoEsquedo, " +
+	        "a.bracoDireito as bracoDireito, " +
+	        "a.antebracoEsquedo as antebracoEsquedo, " +
+	        "a.antebracoDireito as antebracoDireito, " +
+	        "a.gluteo as gluteo, " +
+	        "a.imc as imc, " +
+	        "CONCAT(a.dataInicio, '', a.dataFim) as datasAvaliacao, " +
+	        "a.instrutor as instrutor " +
+	        "from AvaliacaoFisica a " +
+	        "where a.aluno.usuario.email like :email")	
+	Page<HistoricoAlunoAvaliacao> findHistoricoByAlunoEmail(String email, Pageable pageable);
+
+**/	
+
+	 @Query("select a from AvaliacaoFisica a where a.aluno.usuario.email like :email")
+	    Page<AvaliacaoFisica> findListaAvaliacoesByAlunoEmail(String email, Pageable pageable);
+
+	    @Query("select ai from AvaliacaoFisica ai where ai.instrutor.usuario.email like :email")
+	    Page<AvaliacaoFisica> findListaAvaliacoesByInstrutorEmail(String email, Pageable pageable);
 }

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ExceptionController {
-	
+	//captura de exceção de usuário não pode ser cadastrado com duplicidade
 	@ExceptionHandler(UsernameNotFoundException.class)
 	public ModelAndView usuarioNaoEncontradoException(UsernameNotFoundException ex) {
 		ModelAndView model = new ModelAndView("error");

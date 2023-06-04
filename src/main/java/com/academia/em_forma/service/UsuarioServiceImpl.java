@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.academia.em_forma.dao.UsuarioDao;
 import com.academia.em_forma.datatables.DataTables;
 import com.academia.em_forma.datatables.DatatablesColunas;
+import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Perfil;
 import com.academia.em_forma.domain.Usuario;
 import com.academia.em_forma.repository.UsuarioRepository;
@@ -87,7 +88,7 @@ System.out.println(dataTables);
 	}
 
 	@Transactional(readOnly = true)
-	public Usuario buscarPorIdEPerfis(Long usuarioId, Long perfisId) {
+	public Usuario buscarPorIdEPerfis(Long usuarioId, Long[] perfisId) {
 		
 		return repository.findByIdAndPerfis(usuarioId, perfisId)
 				.orElseThrow(() -> new UsernameNotFoundException("usuário inexistente"));
@@ -111,5 +112,8 @@ System.out.println(dataTables);
 		
 		return repository.findByEmailAndAtivo(email);
 	}
+
+	
+	
 
 }

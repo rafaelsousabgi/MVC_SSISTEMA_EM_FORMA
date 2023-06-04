@@ -14,7 +14,7 @@
 	                        <span>Lista Avaliações</span>
 	                    </li>
 	                </ul>
-	                <a class="btn btn-primary btn-md" href="/avaliacoes/cadastrar" role="button">
+	                <a class="btn btn-primary btn-md" th:href="@{/avaliacoes/cadastrar}" role="button">
 	                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 	                    <span>Cadastrar Avaliação</span>
 	                </a>
@@ -86,74 +86,82 @@
 	            </div>
 	
 	
-	            <div class="table-responsive">
-	            <div th:replace="~{fragments/alert}"></div>
-	                <table class="table table-striped table-hover table-sm">
-	                    <thead>
-	                    <tr>
-	                   
-	                       
-	                        <th>#</th> 
-	                        <th>Altura</th>
-	                        <th>Peitoral</th>
-	                        <th> Peso</th>
-	                        <th>Cintura</th>
-	                        <th>Panturrilha Direita</th>
-	                        <th>Panturrilha Esquerda</th>
-	                        <th>Coxa Direita</th>
-	                        <th>Coxa Esquerda</th>
-	                        <th>Braço Esquerdo</th>
-	                        <th>Braco Direito</th>
-	                        <th>Antebraco Esquedo</th>
-	                        <th>Antebraco Direito</th>
-	                        <th>Gluteo</th>
-	                        <th>IMC</th>
-	                        <th>Data de Inicio</th>
-	                        <th>Data fim da avaliação</th>
-	                        <th>Ação</th>
-	                    </tr>
-	                    
-	                    </thead>
-	                    <tbody>
-	                    <tr th:each="a : ${avaliacoesFisicas }">
-		                        <td th:text="${a.id}"></td>
-		                        <td th:text="${a.altura}"></td>
-		                        <td th:text="${a.peito}"></td>
-		                        <td th:text="${a.peso}"></td>		                        
-		                        <td th:text="${a.cintura}"></td>
-		                        <td th:text="${a.panturrilhaDireita}"></td>
-		                        <td th:text="${a.panturrilhaEsquerda}"></td>
-		                        <td th:text="${a.coxaEsqueda}"></td>		                        
-		                        <td th:text="${a.coxaDireita}"></td>
-		                        <td th:text="${a.bracoEsquedo}"></td>
-		                        <td th:text="${a.bracoDireito}"></td>
-		                        <td th:text="${a.antebracoEsquedo}"></td>
-		                        <td th:text="${a.antebracoDireito}"></td>
-		                        <td th:text="${a.gluteo}"></td>		 
-		                        <td th:text="${a.imc}"></td>                       
-		                        <td th:text="${#temporals.format(a.dataInicio, 'dd/MM/yyyy')}">2017/08/14</td>
-		                        <td th:text="${#temporals.format(a.dataFim, 'dd/MM/yyyy')}">02/03/2015</td>
-		                        
-		                        <td></td>
-		                        <td colspan="2">
-		                            <a class="btn btn-info btn-sm" th:href="@{/avaliacoes/editar/{id} (id=${a.id}) }" role="button">
-		                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-		                            </a>
-		                            <button th:id="${'btn_avaliacoes/excluir/' + a.id }" type="button" class="btn btn-danger btn-sm"
-		                                    data-toggle="modal" data-target="#myModal">
-		                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-		                            </button>
-		                        </td>
-		                    </tr>
-	                   
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	        <div th:replace="~{fragments/modal :: modal}"></div>
-	    </section>
-	    <script	th:src="~{}" th:fragment="js"></script>
-	<script th:inline="javascript" th:fragment="inlinescript"></script>
-	   
+	          <div class="table-responsive">
+    <div th:replace="~{fragments/alert}"></div>
+    <table class="table table-striped table-hover table-sm" id="teste" width="100%" border="1px" th:if="${avaliacoesPage}">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Altura</th>
+                <th>Peitoral</th>
+                <th>Peso</th>
+                <th>Cintura</th>
+                <th>Panturrilha Direita</th>
+                <th>Panturrilha Esquerda</th>
+                <th>Coxa Direita</th>
+                <th>Coxa Esquerda</th>
+                <th>Braço Esquerdo</th>
+                <th>Braco Direito</th>
+                <th>Antebraco Esquedo</th>
+                <th>Antebraco Direito</th>
+                <th>Gluteo</th>
+                <th>IMC</th>
+                <th>Data de Inicio</th>
+                <th>Data fim da avaliação</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="a : ${avaliacoesPage.content}">
+                <td th:text="${a.id}"></td>
+                <td th:text="${a.altura}"></td>
+                <td th:text="${a.peito}"></td>
+                <td th:text="${a.peso}"></td>
+                <td th:text="${a.cintura}"></td>
+                <td th:text="${a.panturrilhaDireita}"></td>
+                <td th:text="${a.panturrilhaEsquerda}"></td>
+                <td th:text="${a.coxaEsqueda}"></td>
+                <td th:text="${a.coxaDireita}"></td>
+                <td th:text="${a.bracoEsquedo}"></td>
+                <td th:text="${a.bracoDireito}"></td>
+                <td th:text="${a.antebracoEsquedo}"></td>
+                <td th:text="${a.antebracoDireito}"></td>
+                <td th:text="${a.gluteo}"></td>
+                <td th:text="${a.imc}"></td>
+                <td th:text="${#temporals.format(a.dataInicio, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#temporals.format(a.dataFim, 'dd/MM/yyyy')}"></td>
+                <td>
+                    <a class="btn btn-info btn-sm" th:href="@{/avaliacoes/editar/{id} (id=${a.id})}" role="button">
+                        <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+                    </a>
+                    <button th:id="${'btn_avaliacoes/excluir/' + a.id}" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+                        <span class="oi oi-trash" title="Excluir" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<nav th:if="${avaliacoesPage}">
+    <ul class="pagination">
+        <li class="page-item" th:classappend="${avaliacoesPage.first ? 'disabled' : ''}">
+            <a class="page-link" th:href="@{${request.requestURI}(page=1, size=${avaliacoesPage.size})}">Primeira</a>
+        </li>
+        <li class="page-item" th:classappend="${avaliacoesPage.first ? 'disabled' : ''}">        
+            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.number -1}, size=${avaliacoesPage.size})}">Anterior</a>
+        </li>
+        <li class="page-item" th:classappend="${avaliacoesPage.last ? 'disabled' : ''}">
+            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.number +1}, size=${avaliacoesPage.size})}">Próxima</a>
+        </li>
+        <li class="page-item" th:classappend="${avaliacoesPage.last ? 'disabled' : ''}">
+            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.totalPages}, size=${avaliacoesPage.size})}">Última</a>
+        </li>
+    </ul>
+</nav>
+    </div>
+    <div th:replace="~{fragments/modal :: modal}"></div>
+</section>
+<script th:src="~{}" th:fragment="js"></script>
+<script th:inline="javascript" th:fragment="inlinescript"></script>
 </body>
-</html>		
+</html>

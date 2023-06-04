@@ -3,8 +3,10 @@
  */
  
 
- #teste2 th{
+ #teste2 td,th{
   text-align: center;
+  width:  10%;
+   border: 1px;
 };
  
 html, body {

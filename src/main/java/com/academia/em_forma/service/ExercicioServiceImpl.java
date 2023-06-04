@@ -3,6 +3,9 @@ package com.academia.em_forma.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,7 +64,24 @@ public class ExercicioServiceImpl implements ExercicioService{
 		}
 		return true;
 	}
+	
+	
+	
+	@Transactional(readOnly = true)
+	public Page<Exercicio> buscarExerciciosByAvaliacaoAlunoIdPaginado(String email, int page, int size) {
+	    Pageable pageable = PageRequest.of(page -0, size);
+	    return exercicioRepository.findByExercicioByAlunoEmail(email, pageable);
+	}
 
+	@Transactional(readOnly = true)
+	public Page<Exercicio> buscarAvaliacoesFisicasByInstrutorIdPaginado( int page, int size) {
+	    Pageable pageable = PageRequest.of(page -0, size);
+	    return exercicioRepository.findAll(pageable);
+	}
+/**
+ * findByExercicioByInstrutorEmail( pageable);
+	}
+ * 
 	@Transactional(readOnly = true)
 	public List<Exercicio> buscarExerciciosByAvaliacaoAlunoId(String email) {
 		
@@ -76,7 +96,7 @@ public class ExercicioServiceImpl implements ExercicioService{
 
 	
 
-	/**
+	
 	@Override
 	public boolean exerciciosTemtreino(Long id) {
 		if(buscarPorId(id).getFichaTreino().i) {

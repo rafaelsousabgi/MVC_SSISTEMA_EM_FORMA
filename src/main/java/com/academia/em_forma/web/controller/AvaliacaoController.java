@@ -1,10 +1,18 @@
 package com.academia.em_forma.web.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -16,8 +24,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.academia.em_forma.dao.AvaliacaoFisicaIDaoImpl;
 import com.academia.em_forma.domain.Aluno;
 import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.domain.Exercicio;
@@ -25,7 +35,9 @@ import com.academia.em_forma.domain.FichaTreino;
 import com.academia.em_forma.domain.Instrutor;
 import com.academia.em_forma.domain.PerfilTipo;
 import com.academia.em_forma.domain.Usuario;
+import com.academia.em_forma.repository.AvaliacaoFisicaRepository;
 import com.academia.em_forma.service.AlunoService;
+import com.academia.em_forma.service.AvaliacaoDataTablesService;
 import com.academia.em_forma.service.AvaliacaoFisicaService;
 import com.academia.em_forma.service.InstrutorService;
 import com.academia.em_forma.service.UsuarioServiceImpl;
@@ -41,6 +53,9 @@ public class AvaliacaoController {
 	private AvaliacaoFisicaService avaliacaoFisicaService;
 	
 	@Autowired
+	private AvaliacaoFisicaIDaoImpl avaliacaoFisicaIDaoImpl;
+	
+	@Autowired
 	private AlunoService alunoService;
 	
 	@Autowired
@@ -48,6 +63,9 @@ public class AvaliacaoController {
 	
 	@Autowired
 	private UsuarioServiceImpl usuarioServiceImpl;
+	
+	@Autowired
+	AvaliacaoFisicaRepository avaliacaoFisicaRepository;
 	
 	
 	
@@ -58,9 +76,9 @@ public class AvaliacaoController {
 		
 	
 	@GetMapping("/listar")
-	public String listar(@PathVariable("id")Long id,ModelMap model) {
+	public String listar(ModelMap model) {
 		
-		model.addAttribute("avaliacoesFisicas22", avaliacaoFisicaService.buscarPorId(id));
+		model.addAttribute("avaliacoesFisicas", avaliacaoFisicaService.buscarTodos());
 		return "/avaliacao/lista";
 	}
 	
@@ -127,7 +145,29 @@ public class AvaliacaoController {
         return "avaliacao/lista" ;
     }
 
-**/
+
+	
+	
+	
+	
+	
+	@GetMapping("/dadosavaliacoes")
+	public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrincipal User user, Pageable pageable ) {
+	    Page<AvaliacaoFisica> avaliacoesFisicas;
+
+	    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {
+	        avaliacoesFisicas = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoId(user.getUsername());
+	    } else if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
+	        avaliacoesFisicas = avaliacaoFisicaService.buscarAvaliacoesFisicasByInstrutorId(user.getUsername());
+	    } else {
+	        avaliacoesFisicas = new PageImpl<>(Collections.emptyList()); // Página vazia caso o perfil não seja reconhecido
+	    }
+
+	    model.addAttribute("pageAvaliacoesFisicas", avaliacoesFisicas);
+  
+	    return "/avaliacao/lista";
+	}
+	
 	@GetMapping("/dadosavaliacoes")
     public String  getAvaliacoesFisicasByUserId( ModelMap model,  @AuthenticationPrincipal User user) {			
 		if(user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {	
@@ -146,4 +186,32 @@ public class AvaliacaoController {
         return "avaliacao/lista" ;
     }
 
+**/	@GetMapping("/dadosavaliacoes")
+public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrincipal User user,
+        @RequestParam("page") Optional<Integer> page,
+        @RequestParam("size") Optional<Integer> size,
+        HttpServletRequest request) {
+    
+    int currentPage = page.orElse(1);
+    int pageSize = size.orElse(3);
+    
+   
+
+    Page<AvaliacaoFisica> avaliacoesPage;
+
+    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {
+        avaliacoesPage = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoIdPaginado(user.getUsername(), currentPage , pageSize);
+    } else if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
+        avaliacoesPage = avaliacaoFisicaService.buscarAvaliacoesFisicasByInstrutorIdPaginado(user.getUsername(), currentPage , pageSize);
+    } else {
+        return "avaliacao/lista";
+    }
+
+    model.addAttribute("avaliacoesFisicas", avaliacoesPage.getContent());
+    model.addAttribute("avaliacoesPage", avaliacoesPage);
+    model.addAttribute("request", request);
+
+    return "avaliacao/lista";
+}
+	
 }

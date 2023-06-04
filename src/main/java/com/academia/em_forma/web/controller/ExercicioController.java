@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.academia.em_forma.domain.AvaliacaoFisica;
@@ -30,6 +33,8 @@ import com.academia.em_forma.domain.FichaTreino;
 import com.academia.em_forma.domain.PerfilTipo;
 import com.academia.em_forma.service.ExercicioService;
 import com.academia.em_forma.service.FichaTreinoService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/exercicios")
@@ -87,50 +92,40 @@ public class ExercicioController {
 		return listar(model);
 		
 	}
-	
-	@GetMapping("/listar/dadosexercicios")
-    public String  getAvaliacoesFisicasByUserId( ModelMap model,  @AuthenticationPrincipal User user) {			
-		if(user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {	
-		
-			List<Exercicio> exercicios = exercicioService.buscarExerciciosByAvaliacaoAlunoId(user.getUsername());
-		model.addAttribute("exercicios",exercicios);	
-		
-		}
-		
-		if(user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
-			
-			List<Exercicio> exercicios = exercicioService.buscarAvaliacoesFisicasByInstrutorId(user.getUsername());
-			model.addAttribute("exercicios",exercicios);	
-			
-			System.out.println(exercicios);
-		
-		}
-		     
-        return "exercicio/lista" ;
-    }
+
 	
 	
-	
-	
-	
+	/**Metodo para obter ficha de treino de acordo com perfil**/
 	@GetMapping("/listar/dadosexercicios/individual")
-	public String getAvaliacoesFisicasByUserEmail(ModelMap model, @AuthenticationPrincipal User user) {
-	    List<Exercicio> exercicios = null;
+	public String getAvaliacoesFisicasByUserEmail(ModelMap model, @AuthenticationPrincipal User user,
+	        @RequestParam("page") Optional<Integer> page,
+	        @RequestParam("size") Optional<Integer> size,
+	        HttpServletRequest request
+	        ) {
+
+	    int currentPage = page.orElse(1);
+	    int pageSize = size.orElse(3);	    
+	  
+
+	    List<Exercicio> exercicios = null ;
+	    Page<Exercicio> exerciciosPage= null ;
 
 	    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {
-	        exercicios = exercicioService.buscarExerciciosByAvaliacaoAlunoId(user.getUsername());
-	    }
-
-	    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
-	        exercicios = exercicioService.buscarAvaliacoesFisicasByInstrutorId(user.getUsername());
+	        exerciciosPage = exercicioService.buscarExerciciosByAvaliacaoAlunoIdPaginado(user.getUsername(), currentPage, pageSize);
+	        exercicios = exerciciosPage.getContent();
+	    } else if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
+	        exerciciosPage = exercicioService.buscarAvaliacoesFisicasByInstrutorIdPaginado(/**user.getUsername(),**/ currentPage, pageSize);
+	        exercicios = exerciciosPage.getContent();
 	    }
 
 	    List<List<Exercicio>> exerciciosPorFicha = groupExerciciosByFicha(exercicios);
+	    model.addAttribute("exerciciosPage", exerciciosPage);
 	    model.addAttribute("exerciciosPorFicha", exerciciosPorFicha);
-
-	    return "exercicio/lista-individual";
+	    model.addAttribute("request", request);
+	    
+	    return "/exercicio/lista-individual";
 	}
-
+	
 	private List<List<Exercicio>> groupExerciciosByFicha(List<Exercicio> exercicios) {
 	    List<List<Exercicio>> exerciciosPorFicha = new ArrayList<>();
 
@@ -151,26 +146,11 @@ public class ExercicioController {
 	    // Adiciona as listas de exercícios ao resultado final na ordem correta
 	    for (FichaTreino fichaTreino : fichasTreinoOrdenadas) {
 	        exerciciosPorFicha.add(mapaExerciciosPorFicha.get(fichaTreino));
-	    }
-
-
-	    
+	    }	    
 
 	    return exerciciosPorFicha;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/**getFichaTreinos **/
 	
 	@ModelAttribute("fichasTreinos")
 	public List<FichaTreino> listaDeFichaTreino(){

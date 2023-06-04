@@ -93,9 +93,10 @@
 
 	</section>
 	<script	th:src="~{}" th:fragment="js"></script>
+	<!-- recuperando os perfis marcados marcar os usuários do perfil o cadastro de usuário -->
 	<script th:inline="javascript" th:fragment="inlinescript">
 	$('#perfis').ready(function(){
-			var perfis = [[${usuario.perfis}]];
+				var perfis = [[${usuario.perfis}]];
 			$.each(perfis, function(k, v) {
 				$('#perfis option[value="'+ v.id +'"]').attr('selected', 'selected');
 			})

@@ -65,12 +65,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarioServiceImpl.buscarTodos(request)) ;
 	}
 	
-	 // salvar cadastro de usuarios por administrador
+	 // salvar cadastro de usuarios por administrador (Aluno não pode ser instrutor ou adm)
     @PostMapping("/cadastro/salvar")
     public String salvarUsuarios(Usuario usuario, RedirectAttributes attr) {
     	List<Perfil> perfis = usuario.getPerfis();
     	if (perfis.size() > 2 || 
-    			perfis.containsAll(Arrays.asList(new Perfil(3L),new Perfil(1L) )) ||
+    			perfis.containsAll(Arrays.asList(new Perfil(1L),new Perfil(3L) )) ||
     			perfis.containsAll(Arrays.asList(new Perfil(2L), new Perfil(3L)))) {
     		attr.addFlashAttribute("falha", "Aluno não pode ser Admin e/ou Instrutor.");
     		attr.addFlashAttribute("usuario", usuario);
@@ -95,7 +95,7 @@ public class UsuarioController {
   //pre edição de credenciais de usuários
   	@GetMapping("/editar/dados/usuario/{id}/perfis/{perfis}")
   	public ModelAndView preEditarCadastroDadosPessoais(@PathVariable("id") Long usuarioId,
-  													   @PathVariable("perfis") Long perfisId) {
+  													   @PathVariable("perfis") Long[] perfisId) {
   		Usuario us = usuarioServiceImpl.buscarPorIdEPerfis(usuarioId, perfisId);
   		
   		if (us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))&&

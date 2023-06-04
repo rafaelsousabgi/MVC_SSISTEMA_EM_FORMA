@@ -1,7 +1,7 @@
 package com.academia.em_forma.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -54,47 +54,47 @@ public class AvaliacaoFisica implements Serializable {
 	
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal peso;
+	private Double peso;
 	
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal altura;
+	private Double altura;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal peito;
+	private Double peito;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal cintura;
+	private Double cintura;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal panturrilhaDireita;
+	private Double panturrilhaDireita;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal panturrilhaEsquerda;
+	private Double panturrilhaEsquerda;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal coxaDireita;
+	private Double coxaDireita;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal coxaEsqueda;
+	private Double coxaEsqueda;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal bracoEsquedo;
+	private Double bracoEsquedo;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal bracoDireito;
+	private Double bracoDireito;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal antebracoEsquedo;
+	private Double antebracoEsquedo;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal antebracoDireito;
+	private Double antebracoDireito;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal gluteo;
+	private Double gluteo;
 	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal imc;
+	private Double imc;
 	
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_inicio", nullable = false, columnDefinition = "DATE")
@@ -110,10 +110,10 @@ public class AvaliacaoFisica implements Serializable {
 		
 	}
 
-	public AvaliacaoFisica(Long id, BigDecimal peso, BigDecimal altura, BigDecimal peito, BigDecimal cintura,
-			BigDecimal panturrilhaDireita, BigDecimal panturrilhaEsquerda, BigDecimal coxaDireita, BigDecimal coxaEsqueda,
-			BigDecimal bracoEsquedo, BigDecimal bracoDireito, BigDecimal antebracoEsquedo, BigDecimal antebracoDireito, BigDecimal gluteo,
-			BigDecimal imc,String identificacao, LocalDate dataInicio, LocalDate dataFim) {
+	public AvaliacaoFisica(Long id, Double peso, Double altura, Double peito, Double cintura,
+			Double panturrilhaDireita, Double panturrilhaEsquerda, Double coxaDireita, Double coxaEsqueda,
+			Double bracoEsquedo, Double bracoDireito, Double antebracoEsquedo, Double antebracoDireito, Double gluteo,
+			Double imc,String identificacao, LocalDate dataInicio, LocalDate dataFim) {
 		super();
 		this.id = id;
 		this.peso = peso;
@@ -187,115 +187,115 @@ public class AvaliacaoFisica implements Serializable {
 		this.identificacao = identificacao;
 	}
 
-	public BigDecimal getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(BigDecimal peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 
-	public BigDecimal getAltura() {
+	public Double getAltura() {
 		return altura;
 	}
 
-	public void setAltura(BigDecimal altura) {
+	public void setAltura(Double altura) {
 		this.altura = altura;
 	}
 
-	public BigDecimal getPeito() {
+	public Double getPeito() {
 		return peito;
 	}
 
-	public void setPeito(BigDecimal peito) {
+	public void setPeito(Double peito) {
 		this.peito = peito;
 	}
 
-	public BigDecimal getCintura() {
+	public Double getCintura() {
 		return cintura;
 	}
 
-	public void setCintura(BigDecimal cintura) {
+	public void setCintura(Double cintura) {
 		this.cintura = cintura;
 	}
 
-	public BigDecimal getPanturrilhaDireita() {
+	public Double getPanturrilhaDireita() {
 		return panturrilhaDireita;
 	}
 
-	public void setPanturrilhaDireita(BigDecimal panturrilhaDireita) {
+	public void setPanturrilhaDireita(Double panturrilhaDireita) {
 		this.panturrilhaDireita = panturrilhaDireita;
 	}
 
-	public BigDecimal getPanturrilhaEsquerda() {
+	public Double getPanturrilhaEsquerda() {
 		return panturrilhaEsquerda;
 	}
 
-	public void setPanturrilhaEsquerda(BigDecimal panturrilhaEsquerda) {
+	public void setPanturrilhaEsquerda(Double panturrilhaEsquerda) {
 		this.panturrilhaEsquerda = panturrilhaEsquerda;
 	}
 
-	public BigDecimal getCoxaDireita() {
+	public Double getCoxaDireita() {
 		return coxaDireita;
 	}
 
-	public void setCoxaDireita(BigDecimal coxaDireita) {
+	public void setCoxaDireita(Double coxaDireita) {
 		this.coxaDireita = coxaDireita;
 	}
 
-	public BigDecimal getCoxaEsqueda() {
+	public Double getCoxaEsqueda() {
 		return coxaEsqueda;
 	}
 
-	public void setCoxaEsqueda(BigDecimal coxaEsqueda) {
+	public void setCoxaEsqueda(Double coxaEsqueda) {
 		this.coxaEsqueda = coxaEsqueda;
 	}
 
-	public BigDecimal getBracoEsquedo() {
+	public Double getBracoEsquedo() {
 		return bracoEsquedo;
 	}
 
-	public void setBracoEsquedo(BigDecimal bracoEsquedo) {
+	public void setBracoEsquedo(Double bracoEsquedo) {
 		this.bracoEsquedo = bracoEsquedo;
 	}
 
-	public BigDecimal getBracoDireito() {
+	public Double getBracoDireito() {
 		return bracoDireito;
 	}
 
-	public void setBracoDireito(BigDecimal bracoDireito) {
+	public void setBracoDireito(Double bracoDireito) {
 		this.bracoDireito = bracoDireito;
 	}
 
-	public BigDecimal getAntebracoEsquedo() {
+	public Double getAntebracoEsquedo() {
 		return antebracoEsquedo;
 	}
 
-	public void setAntebracoEsquedo(BigDecimal antebracoEsquedo) {
+	public void setAntebracoEsquedo(Double antebracoEsquedo) {
 		this.antebracoEsquedo = antebracoEsquedo;
 	}
 
-	public BigDecimal getAntebracoDireito() {
+	public Double getAntebracoDireito() {
 		return antebracoDireito;
 	}
 
-	public void setAntebracoDireito(BigDecimal antebracoDireito) {
+	public void setAntebracoDireito(Double antebracoDireito) {
 		this.antebracoDireito = antebracoDireito;
 	}
 
-	public BigDecimal getGluteo() {
+	public Double getGluteo() {
 		return gluteo;
 	}
 
-	public void setGluteo(BigDecimal gluteo) {
+	public void setGluteo(Double gluteo) {
 		this.gluteo = gluteo;
 	}
 
-	public BigDecimal getImc() {
+	public Double getImc() {
 		return imc;
 	}
 
-	public void setImc(BigDecimal imc) {
+	public void setImc(Double imc) {
 		this.imc = imc;
 	}
 
