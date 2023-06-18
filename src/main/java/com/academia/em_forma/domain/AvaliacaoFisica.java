@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TB_AVALIACAOFISICA")
+@Table(name = "TB_AVALIACOESFISICAS")
 public class AvaliacaoFisica implements Serializable {
 
 	
@@ -40,13 +40,17 @@ public class AvaliacaoFisica implements Serializable {
 
 	@NotNull(message = "Informe o Aluno que foi avaliado")
 	@ManyToOne
-	@JoinColumn(name="aluno_id")
+	@JoinColumn(name="aluno_id_fk")
 	private Aluno aluno;
 	
 	@NotNull(message = "Informe o Instrutor que realizou a avaliação")
 	@ManyToOne
-	@JoinColumn(name="instrutor_id")
+	@JoinColumn(name="instrutor_id_fk")
 	private Instrutor instrutor;
+	
+	@Column(nullable = false, length = 9)
+	@Enumerated(EnumType.STRING)
+	private TIPOFISICO tipofisico;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "avaliacaoFisica")
@@ -305,6 +309,14 @@ public class AvaliacaoFisica implements Serializable {
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
+	}
+	
+	public TIPOFISICO getTipofisico() {
+		return tipofisico;
+	}
+
+	public void setTipofisico(TIPOFISICO tipofisico) {
+		this.tipofisico = tipofisico;
 	}
 
 	@Override

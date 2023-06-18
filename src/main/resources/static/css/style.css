@@ -1,7 +1,7 @@
 /*
  * Base structure
- */
- 
+
+  */
 
  #teste2 td,th{
   text-align: center;
@@ -36,14 +36,14 @@ body {
 }
 
 .container {
-	width: 100%;
+	width: 150%;
 	padding-top: 20px;
 	padding-left: 10px
 }
 
 /*
  * Sidebar
- */
+
 .sidebar {
     width: 0px;
     height: auto;
@@ -54,7 +54,7 @@ body {
     overflow: hidden;
     transition: width .5s;
 }
-
+ */
 .sidebar .nav {
 	margin-bottom: 0px;
 }

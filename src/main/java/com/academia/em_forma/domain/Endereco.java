@@ -6,7 +6,7 @@ import java.util.Objects;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ENDERECOS")
+@Table(name = "TB_ENDERECOS")
 public class Endereco implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -15,7 +15,7 @@ public class Endereco implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column( nullable = false , length = 150)
 	private String logradouro ;
 	@Column(nullable = false)
 	private String bairro;

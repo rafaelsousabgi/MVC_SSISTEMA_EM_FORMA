@@ -129,14 +129,14 @@ public class AlunoController {
 		return listar(model);
 	}
 	
-	@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
+	//@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
 	@GetMapping("/buscar/nome")
 	public String getPorNome(@RequestParam("nome") String nome, ModelMap model) {		
 		model.addAttribute("alunos", alunoService.buscarPorNome(nome));
 		return "/aluno/lista";
 	}
 	
-	@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
+	//@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
 	@GetMapping("/buscar/data")
     public String getPorDatas(@RequestParam(name="entrada", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate entrada,
                               @RequestParam(name="saida", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate saida,
@@ -146,25 +146,21 @@ public class AlunoController {
         return "/aluno/lista";
     }
 	
-	@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
+	//@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
 	@ModelAttribute("Avaliacoes")
 	public List<AvaliacaoFisica> listaDeAvaliacoes(){
 		return avaliacaoFisicaService.buscarTodos();
 	}
 	
-	@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
+	//@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
 	@ModelAttribute("fichastreino")
 	public List<FichaTreino> listaFichasTreinos(){
 		return fichaTreinoService.buscarTodos();
 	};
 	
-	@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
-	@ModelAttribute("tipofisicos")
-	public TIPOFISICO[] geTipofisicos(){
-		return TIPOFISICO.values();
-	}
 	
-	@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
+	
+	//@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
 	@ModelAttribute("ufs")
 	public UF[] getUfs() {
 		return UF.values();

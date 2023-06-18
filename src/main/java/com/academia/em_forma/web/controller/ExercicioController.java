@@ -104,7 +104,7 @@ public class ExercicioController {
 	        ) {
 
 	    int currentPage = page.orElse(1);
-	    int pageSize = size.orElse(3);	    
+	    int pageSize = size.orElse(20);	    
 	  
 
 	    List<Exercicio> exercicios = null ;

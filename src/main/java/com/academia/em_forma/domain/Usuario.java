@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuarios", indexes = {@Index(name = "idx_usuario_email", columnList = "email")})
+@Table(name = "TB_USUARIOS", indexes = {@Index(name = "idx_usuario_email", columnList = "email")})
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;

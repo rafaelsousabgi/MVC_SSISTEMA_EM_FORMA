@@ -34,6 +34,7 @@ import com.academia.em_forma.domain.Exercicio;
 import com.academia.em_forma.domain.FichaTreino;
 import com.academia.em_forma.domain.Instrutor;
 import com.academia.em_forma.domain.PerfilTipo;
+import com.academia.em_forma.domain.TIPOFISICO;
 import com.academia.em_forma.domain.Usuario;
 import com.academia.em_forma.repository.AvaliacaoFisicaRepository;
 import com.academia.em_forma.service.AlunoService;
@@ -134,67 +135,15 @@ public class AvaliacaoController {
 	public List<Instrutor> listaDeInstrutores(){
 		return instrutorService.buscarTodos();
 	}
-/**	
-	@GetMapping("/dadosavaliacoes/{id}")
-    public String  getAvaliacoesFisicasByUserId(@PathVariable("id") Long id, Aluno aluno, ModelMap model,
-    																			@AuthenticationPrincipal User user) {			
-			List<AvaliacaoFisica> avaliacoesFisicas = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoId(id , user.getUsername());
-			
-			
-		       model.addAttribute("avaliacoesFisicas", avaliacoesFisicas); 
-        return "avaliacao/lista" ;
-    }
-
-
-	
-	
-	
-	
 	
 	@GetMapping("/dadosavaliacoes")
-	public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrincipal User user, Pageable pageable ) {
-	    Page<AvaliacaoFisica> avaliacoesFisicas;
-
-	    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {
-	        avaliacoesFisicas = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoId(user.getUsername());
-	    } else if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
-	        avaliacoesFisicas = avaliacaoFisicaService.buscarAvaliacoesFisicasByInstrutorId(user.getUsername());
-	    } else {
-	        avaliacoesFisicas = new PageImpl<>(Collections.emptyList()); // Página vazia caso o perfil não seja reconhecido
-	    }
-
-	    model.addAttribute("pageAvaliacoesFisicas", avaliacoesFisicas);
-  
-	    return "/avaliacao/lista";
-	}
-	
-	@GetMapping("/dadosavaliacoes")
-    public String  getAvaliacoesFisicasByUserId( ModelMap model,  @AuthenticationPrincipal User user) {			
-		if(user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {	
-		List<AvaliacaoFisica> avaliacoesFisicas = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoId(user.getUsername());
-		model.addAttribute("avaliacoesFisicas",avaliacoesFisicas);	
-		
-		}
-		
-		if(user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
-			List<AvaliacaoFisica> avaliacoesFisicas = avaliacaoFisicaService.buscarAvaliacoesFisicasByInstrutorId(user.getUsername());
-			model.addAttribute("avaliacoesFisicas",avaliacoesFisicas);	
-			return "avaliacao/lista";
-		
-		}
-		     
-        return "avaliacao/lista" ;
-    }
-
-**/	@GetMapping("/dadosavaliacoes")
 public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrincipal User user,
         @RequestParam("page") Optional<Integer> page,
         @RequestParam("size") Optional<Integer> size,
         HttpServletRequest request) {
     
     int currentPage = page.orElse(1);
-    int pageSize = size.orElse(3);
-    
+    int pageSize = size.orElse(3);  
    
 
     Page<AvaliacaoFisica> avaliacoesPage;
@@ -213,5 +162,11 @@ public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrinci
 
     return "avaliacao/lista";
 }
+
+@ModelAttribute("tipofisicos")
+public TIPOFISICO[] geTipofisicos(){
+	return TIPOFISICO.values();
+}
+
 	
 }

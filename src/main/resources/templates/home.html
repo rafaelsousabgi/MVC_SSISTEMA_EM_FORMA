@@ -25,50 +25,42 @@ layout:decorate="~{layout}">
 				<div class="col-4">
 					<div class="list-group" id="list-tab" role="tablist">
 					
-						<a class="list-group-item list-group-item-action active"
-							id="list-spring-boot-list" data-toggle="list" href="#spring-boot"
-							role="tab" aria-controls="spring-boot">Treino</a>
+						<a class="list-group-item list-group-item-action active" sec:authorize="hasAuthority('INSTRUTOR')"
+							id="list-avaliacao-fisica" data-toggle="list" href="#avaliacao-fisica"
+							role="tab" aria-controls="avaliacao-fisica">Cadastrar Avaliação Fisica</a>
 							 <a
-							class="list-group-item list-group-item-action" id="list-sts-list"
-							data-toggle="list" href="#sts" role="tab" aria-controls="sts">Spring
-							Tool Suite</a>
-							 <a class="list-group-item list-group-item-action"
-							id="list-thymeleaf-list" data-toggle="list" href="#thymeleaf"
-							role="tab" aria-controls="thymeleaf">Thymeleaf</a> 
+							class="list-group-item list-group-item-action" id="altera-senha"sec:authorize="hasAnyAuthority('INSTRUTOR','ALUNO')"
+							data-toggle="list" href="#senha" role="tab" aria-controls="senha">Alterar Senha</a>
 							
+							 <a class="list-group-item list-group-item-action" sec:authorize="hasAuthority('INSTRUTOR')"
+							id="list-thymeleaf-list" data-toggle="list" href="#thymeleaf"
+							role="tab" aria-controls="thymeleaf">Cadastrar Ficha de Treino</a> 				
+										
 							<a
-							class="list-group-item list-group-item-action"
+							class="list-group-item list-group-item-action" sec:authorize="hasAuthority('INSTRUTOR')"
 							id="list-webjars-list" data-toggle="list" href="#webjars"
-							role="tab" aria-controls="webjars">WebJars</a>
+							role="tab" aria-controls="webjars" >Cadastrar Exercicios</a>
 							 
-							 <a class="list-group-item list-group-item-action"
+							 <a class="list-group-item list-group-item-action" sec:authorize="hasAnyAuthority('INSTRUTOR','ALUNO')"
 							id="list-hibernate-list" data-toggle="list" href="#hibernate"
-							role="tab" aria-controls="hibernate">Hibernate</a>
+							role="tab" aria-controls="hibernate">Listagem de Avaliações Fisicas</a>
 							 
-							 <a class="list-group-item list-group-item-action"							
+							 <a class="list-group-item list-group-item-action"		sec:authorize="hasAnyAuthority('INSTRUTOR','ALUNO')"					
 							id="list-bootstrap-list" data-toggle="list" href="#bootstrap"
-							role="tab" aria-controls="bootstrap">Bootstrap 4</a>
+							role="tab" aria-controls="bootstrap">Listagem de Treinos</a>
 					</div>
 				</div>
 				<div class="col-8">
 					<div class="tab-content" id="nav-tabContent">
-						<div class="tab-pane fade show active" id="spring-boot"
-							role="tabpanel" aria-labelledby="list-spring-boot-list">
-							<a href="/aluno/cadastro">Aluno</a>
-							makes it easy to create stand-alone, production-grade Spring
-							based Applications that you can "just run". We take an
-							opinionated view of the Spring platform and third-party libraries
-							so you can get started with minimum fuss. Most Spring Boot
-							applications need very little Spring configuration.
+						<div class="tab-pane fade show active" id="avaliacao-fisica" sec:authorize="hasAuthority('INSTRUTOR')"
+							role="tabpanel" aria-labelledby="list-avaliacao-fisica">
+							<a href="/avaliacoes/cadastrar">As avaliações fisicas</a>
+							devem ser cadastradas corretamente, informando o aluno e o seu nome como instrutor.
+							 
 						</div>
-						<div class="tab-pane fade" id="sts" role="tabpanel"
-							aria-labelledby="list-sts-list">
-							The <a href="https://spring.io/tools">Spring Tool Suite</a> is an
-							Eclipse-based development environment that is customized for
-							developing Spring applications. It provides a ready-to-use
-							environment to implement, debug, run, and deploy your Spring
-							applications, including integrations for Pivotal tc Server,
-							Pivotal Cloud Foundry, Git, Maven, AspectJ, and more.
+						<div class="tab-pane fade" id="senha" role="tabpanel"
+							aria-labelledby="altera-senha">
+							The <a href="/u/editar/senha">Alteração de senha</a> a senha deve conter ate 6 digitos
 						</div>
 						<div class="tab-pane fade" id="thymeleaf" role="tabpanel"
 							aria-labelledby="list-thymeleaf-list">

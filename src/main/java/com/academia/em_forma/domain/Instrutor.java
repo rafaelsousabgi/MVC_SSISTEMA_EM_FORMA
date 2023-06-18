@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @SuppressWarnings("serial")
-@Table(name="INSTRUTORES")
+@Table(name="TB_INSTRUTORES")
 public class Instrutor extends Pessoa<Long> {
 	
 	@Column(name = "cref", unique = true, nullable = false)
@@ -25,12 +25,10 @@ public class Instrutor extends Pessoa<Long> {
 	@OneToMany(mappedBy = "instrutor")
 	private List<AvaliacaoFisica> avaliacoes;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "instrutor")
-	private List<Agendamento> agendamentos;
+	
 	
 	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "id_usuario_fk")
 	private Usuario usuario;
 	
 	public Instrutor() {
@@ -41,7 +39,7 @@ public class Instrutor extends Pessoa<Long> {
 
 	public Instrutor(Long id, String nome, String sexo, String estadoCivil, String rg, String cpf, String email,
 			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida, Endereco endereco) {
-		super(id, nome, sexo, estadoCivil, rg, cpf, email, telefone, profissao, dataEntrada, dataSaida, endereco);
+		super(id, nome, sexo, estadoCivil, rg, cpf, telefone, profissao, dataEntrada, dataSaida, endereco);
 		
 		
 		
@@ -88,15 +86,7 @@ public class Instrutor extends Pessoa<Long> {
 
 
 
-	public List<Agendamento> getAgendamentos() {
-		return agendamentos;
-	}
 
-
-
-	public void setAgendamentos(List<Agendamento> agendamentos) {
-		this.agendamentos = agendamentos;
-	}
 
 
 

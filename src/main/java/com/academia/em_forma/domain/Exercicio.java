@@ -27,10 +27,15 @@ public class Exercicio implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	@Column( nullable = false,length = 100)
 	private String nomeEquipamento;
+	@Column( nullable = false , length = 4)
 	private int serie;	
+	@Column( nullable = false , length = 4)
 	private int repeticao;
+	@Column( nullable = false , length = 4)
+	private int duracaomin;
+	@Column( nullable = false , length = 100)
 	private String nomeGrupoMuscular;
 	
 
@@ -39,31 +44,23 @@ public class Exercicio implements Serializable{
 	private DIA dia;
 	
 	
-	/**@ManyToMany
-	@JoinTable(name = "TB_TREINO_EXERCICIOS",
-	joinColumns = @JoinColumn(name="EXERCICIO_ID"),
-	inverseJoinColumns = @JoinColumn(name="FICHATREINO_ID"))**/
-	
 	@ManyToOne
 	@JoinColumn(name="id_fichaTreino_fk")
 	private FichaTreino fichaTreinos;
 	
-	@ManyToMany
-	@JoinTable(name = "TB_EXERCICIOS_GRUPOMUSCULAR",
-			joinColumns = @JoinColumn(name="EXERCICIO_ID"),
-			inverseJoinColumns = @JoinColumn(name="GRUPOMUSCULAR_ID"))
-	private List<GrupoMuscular> gruposMusculares;
+
 	
 	public Exercicio() {
 		
 	}
 	
-	public Exercicio(Long id, String nomeEquipamento, int serie, int repeticao, String nomeGrupoMuscular) {
+	public Exercicio(Long id, String nomeEquipamento, int serie, int repeticao, String nomeGrupoMuscular, int duracaomin) {
 		super();
 		this.id = id;
 		this.nomeEquipamento = nomeEquipamento;
 		this.serie = serie;
 		this.repeticao = repeticao;
+		this.duracaomin= duracaomin;
 		this.nomeGrupoMuscular= nomeGrupoMuscular;
 		
 		
@@ -111,13 +108,12 @@ public class Exercicio implements Serializable{
 		this.fichaTreinos = fichaTreinos;
 	}
 	
-	public List<GrupoMuscular> getGrupoMuscular() {
-		return gruposMusculares;
+	public int getDuracaomin() {
+		return duracaomin;
 	}
-	
-	
-	public void setGrupoMuscular(List<GrupoMuscular> gruposMusculares) {
-		this.gruposMusculares = gruposMusculares;
+
+	public void setDuracaomin(int duracaomin) {
+		this.duracaomin = duracaomin;
 	}
 	
 	public String getNomeGrupoMuscular() {
@@ -143,6 +139,8 @@ public class Exercicio implements Serializable{
 		Exercicio other = (Exercicio) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 	
 	
 }

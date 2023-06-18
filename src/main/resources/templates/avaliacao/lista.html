@@ -14,8 +14,8 @@
 	                        <span>Lista Avaliações</span>
 	                    </li>
 	                </ul>
-	                <a class="btn btn-primary btn-md" th:href="@{/avaliacoes/cadastrar}" role="button">
-	                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+	                <a class="btn btn-primary btn-md" th:href="@{/avaliacoes/cadastrar}" role="button" sec:authorize="hasAuthority('INSTRUTOR')">
+	                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true" ></span>
 	                    <span>Cadastrar Avaliação</span>
 	                </a>
 	            </div>
@@ -23,7 +23,7 @@
 	
 	        <div class="container">
 	
-	            <p>
+	            <p sec:authorize="hasAuthority('INSTRUTOR')">
 	                <i class="oi oi-magnifying-glass"></i><span></span>
 	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
 	                        aria-controls="collapseNome">Nome Aluno
@@ -71,7 +71,7 @@
 	                <div class="col">
 	                    <div class="collapse" id="collapseData">
 	
-	                        <nav class="navbar navbar-light bg-light">
+	                        <nav class="navbar navbar-light bg-light" sec:authorize="hasAuthority('INSTRUTOR')">
 	                            <form class="form-inline" method="GET" action="/avaliacoes/buscar/data">
 	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
 	                                       name="entrada" />
@@ -88,10 +88,10 @@
 	
 	          <div class="table-responsive">
     <div th:replace="~{fragments/alert}"></div>
-    <table class="table table-striped table-hover table-sm" id="teste" width="100%" border="1px" th:if="${avaliacoesPage}">
+    <table class="table table-striped table-hover table-sm" id="teste" width="50%" border="1px" th:if="${avaliacoesPage}">
         <thead>
             <tr>
-                <th>#</th>
+                <th>Identificação</th>
                 <th>Altura</th>
                 <th>Peitoral</th>
                 <th>Peso</th>
@@ -108,12 +108,12 @@
                 <th>IMC</th>
                 <th>Data de Inicio</th>
                 <th>Data fim da avaliação</th>
-                <th>Ação</th>
+                <th sec:authorize="hasAuthority('INSTRUTOR')">Ação</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="a : ${avaliacoesPage.content}">
-                <td th:text="${a.id}"></td>
+                <td th:text="${a.identificacao}"></td>
                 <td th:text="${a.altura}"></td>
                 <td th:text="${a.peito}"></td>
                 <td th:text="${a.peso}"></td>
@@ -130,9 +130,9 @@
                 <td th:text="${a.imc}"></td>
                 <td th:text="${#temporals.format(a.dataInicio, 'dd/MM/yyyy')}"></td>
                 <td th:text="${#temporals.format(a.dataFim, 'dd/MM/yyyy')}"></td>
-                <td>
+                <td sec:authorize="hasAuthority('INSTRUTOR')">
                     <a class="btn btn-info btn-sm" th:href="@{/avaliacoes/editar/{id} (id=${a.id})}" role="button">
-                        <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+                        <span class="oi oi-brush" title="Editar" aria-hidden="true" ></span>
                     </a>
                     <button th:id="${'btn_avaliacoes/excluir/' + a.id}" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
                         <span class="oi oi-trash" title="Excluir" aria-hidden="true"></span>

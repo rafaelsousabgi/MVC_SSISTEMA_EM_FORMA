@@ -7,12 +7,10 @@ import java.util.Objects;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
 
 
-@Table(name="TB_PESSOA")
+
 @SuppressWarnings("serial")
 @MappedSuperclass
 public abstract class Pessoa <ID extends Serializable> implements Serializable {
@@ -24,11 +22,13 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	
 	@Column(name = "nome", nullable = false, unique = true, length = 60)
 	protected  String nome;
+	@Column( nullable = false , length = 20)
 	protected  String sexo;
+	@Column( nullable = false , length = 100)
 	protected  String estadoCivil;
 	protected  String rg;
 	protected  String cpf;
-	protected  String email;
+	@Column( nullable = false , length = 15)
 	protected  String telefone;	
 	protected  String profissao;
 	
@@ -55,16 +55,17 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	}
 	
 
-	public Pessoa(ID id, String nome, String sexo, String estadoCivil, String rg, String cpf, String email,
+	public Pessoa(ID id, String nome, String sexo, String estadoCivil, String rg, String cpf,
 			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida,Endereco endereco  ) {
 		super();
 		this.id = id;
+		
+		
 		this.nome = nome;
 		this.sexo = sexo;
 		this.estadoCivil = estadoCivil;
 		this.rg = rg;
-		this.cpf = cpf;
-		this.email = email;
+		this.cpf = cpf;		
 		this.telefone = telefone;
 		this.profissao = profissao;
 		this.dataEntrada = dataEntrada;
@@ -130,12 +131,7 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
 	public String getTelefone() {
 		return telefone;
 	}
@@ -185,7 +181,7 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	@Override
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", estadoCivil=" + estadoCivil + ", rg=" + rg
-				+ ", cpf=" + cpf + ", email=" + email + ", telefone=" + telefone + ", profissao=" + profissao
+				+ ", cpf=" + cpf + ", telefone=" + telefone + ", profissao=" + profissao
 				+ ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + ", endereco=" + endereco + "]";
 	}
 	

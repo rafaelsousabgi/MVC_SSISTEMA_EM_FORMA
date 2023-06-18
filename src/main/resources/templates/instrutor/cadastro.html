@@ -38,13 +38,13 @@
 	                        </div>
 	                        </div>
 	                 	                 
-	                  <div class="form-group col-md-6">
+	                  <!--  <div class="form-group col-md-6">
 	                        <label for="email">Email</label>
 	                        <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="name@exemplo.com"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
-	                    </div>
+	                    </div>-->
 	                   
 	             </div>
 	          
@@ -64,9 +64,6 @@
 	
 	                        </div>
 	                    </div>
-	              </div>
-	                   
-	                   <div class="form-row">
 	                    <div class="form-group col-md-4">
 	                        <label for="rg">RG</label>
 	                        <input type="text" class="form-control" id="rg" th:field="*{rg}"/>
@@ -74,6 +71,10 @@
 	
 	                        </div>
 	                    </div>
+	              </div>
+	                   
+	                   <div class="form-row">
+	                    
 	                    <div class="form-group col-md-4">
 	                        <label for="cpf">CPF</label>
 	                        <input type="text" class="form-control" id="cpf" th:field="*{cpf}" />
@@ -89,11 +90,6 @@
 	
 	                        </div>
 	                    </div>
-	                    </div>
-	                   
-	              
-	                
-	                <div class="form-row">	                     
 	                    <div class="form-group col-md-4">
 	                        <label for="telefone">Telefone</label>
 	                        <input type="text" class="form-control" id="telefone" placeholder="18-1234-12345"
@@ -101,9 +97,12 @@
 	                        <div class="invalid-feedback">
 	
 	                        </div>
-	                    </div>	            
+	                    </div>
+	                    </div>
+	                   
+	              
 	                
-	                 
+	                <div class="form-row">	
 	                    <div class="form-group col-md-4">
 	                        <label for="profissao">Profissão</label>
 	                        <input type="text" class="form-control" id="profissao" 
@@ -166,7 +165,7 @@
 	
 	                        </div>
 	                    </div>
-	                
+	                </div>
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="bairro">Bairro</label>
@@ -175,7 +174,7 @@
 	
 	                        </div>
 	                    </div>
-	                    <div class="form-group col-md-4">
+	                    <div class="form-group col-md-2">
 	                        <label for="uf">UF</label>
 	                        <select id="uf" class="form-control" th:field="*{endereco.uf}">
 	                            <option value="">Selecione...</option>
@@ -187,7 +186,7 @@
 	
 	                        </div>
 	                    </div>
-	                    <div class="form-group col-md-2">
+	                    <div class="form-group col-md-4">
 	                        <label for="cep">Cep</label>
 	                        <input type="text" class="form-control" id="cep" data-mask="00000-000" th:field="*{endereco.cep}"/>
 	                        <div class="invalid-feedback">
@@ -195,14 +194,14 @@
 	                        </div>
 	                    </div>
 	             
-	                
+	                </div>
 	                
 	                
 	                <input type="hidden" name="uid" th:field="*{usuario.id}">
 	                <input type="hidden" id="id" th:field="*{id}"/>
 	                <input type="hidden" id="endereco.id" th:field="*{endereco.id}">
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-	                </div>
+	                
 	                
 	            </form>
 	        </div>

@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "perfis")
+@Table(name = "TB_PERFIS")
 public class Perfil implements Serializable {
 	
 private static final long serialVersionUID = 1L;
@@ -19,14 +19,7 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(name = "descricao", nullable = false, unique = true)
 	private String desc;
-	
-	//@ManyToMany(mappedBy = "perfis")
-	//private List<Usuario> usuarios;
-	
-	//@Enumerated(EnumType.STRING)
-	//private PerfilTipo perfilTipo;
-	
-	
+		
 	
 	public Perfil() {
 		super();

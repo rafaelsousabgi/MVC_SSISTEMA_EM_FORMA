@@ -41,6 +41,19 @@
 	                               th:field="*{identificacao}"/>
 	                           <div class="invalid-feedback">
 	                    </div>
+	                    </div>
+	                     <div class="form-group col-md-6">
+	                        <label for="tipofisico">Tipo Fisico</label>
+	                        <select id="tipofisico" class="form-control" th:field="*{tipofisico}">
+	                            <option value="">Selecione...</option>
+	                            <option th:each="t : ${tipofisicos}"
+	                             th:value="${t.sigla} " th:text="${t.sigla}">AC</option>                        
+	                          
+	                        </select>
+	                        <div class="invalid-feedback">
+	
+	                        </div>
+	                    </div>
 	           		
 	           		</div>
 	           
@@ -78,6 +91,8 @@
 	
 	                        </div>
 	                    </div>
+	                    </div>
+	                    <div class="form-row">
 	                    <div class="form-group col-md-3">
 	                        <label for="panturrilhaDireita">Panturrilha Direita</label>
 	                        <input type="text" class="form-control" id="panturrilhaDireita" data-mask="#.##0,00"
@@ -85,7 +100,8 @@
 	                        <div class="invalid-feedback">
 	
 	                        </div>
-	                    </div>
+	                    </div>                    
+	                    
 	                    <div class="form-group col-md-3">
 	                        <label for="panturrilhaEsquerda">Panturrilha Esquerda</label>
 	                        <input type="text" class="form-control" id="panturrilhaEsquerda" data-mask="#.##0,00"
@@ -110,9 +126,9 @@
 	
 	                        </div>
 	                    </div>
+	                    </div>
 	                    
-	                    
-	                    
+	                    <div class="form-row">
 	                    <div class="form-group col-md-3">
 	                        <label for="bracoEsquedo">Braço Esquerdo</label>
 	                        <input type="text" class="form-control" id="bracoEsquedo" data-mask="#.##0,00"
@@ -121,6 +137,7 @@
 	
 	                        </div>
 	                    </div>
+	                    
 	                    
 	                    <div class="form-group col-md-3">
 	                        <label for="bracoDireito">Braco Direito</label>
@@ -146,6 +163,8 @@
 	
 	                        </div>
 	                    </div>
+	                    </div>
+	                    <div class="form-row">
 	                    <div class="form-group col-md-3">
 	                        <label for="gluteo">Gluteo</label>
 	                        <input type="text" class="form-control" id="gluteo" data-mask="#.##0,00"
@@ -154,6 +173,7 @@
 	
 	                        </div>
 	                    </div>
+	                    
 	                    <div class="form-group col-md-3">
 	                        <label for="imc">IMC</label>
 	                        <input type="text" class="form-control" id="imc" data-mask="#.##0,00"
@@ -205,7 +225,7 @@
 	                </div>
 	                
 	              
-	                <input type="hidden" id="id" th:field="*{id}"/>                
+	                <input type="hidden" id="id" th:field="*{id}"/>           
 	               
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 	            </form>

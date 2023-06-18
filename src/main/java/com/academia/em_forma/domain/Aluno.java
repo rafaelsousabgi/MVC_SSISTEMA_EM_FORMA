@@ -22,9 +22,7 @@ public class Aluno extends Pessoa<Long>{
 	
 	private String objetivo;
 	
-	@Column(nullable = false, length = 9)
-	@Enumerated(EnumType.STRING)
-	private TIPOFISICO tipofisico;
+	
 	
 	@JsonIgnore
 	@OneToMany(mappedBy ="aluno" )
@@ -34,12 +32,10 @@ public class Aluno extends Pessoa<Long>{
 	@OneToMany(mappedBy = "aluno")
 	private List<FichaTreino> fichaTreinos;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "aluno")
-	private List<Agendamento> agendamentos;
+
 	
 	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "id_usuario_fk")
 	private Usuario usuario;
 
 	public Aluno() {
@@ -47,9 +43,9 @@ public class Aluno extends Pessoa<Long>{
 	}
 
 	
-	public Aluno(Long id, String nome, String sexo, String estadoCivil, String rg, String cpf, String email,
+	public Aluno(Long id, String nome, String sexo, String estadoCivil, String rg, String cpf,
 			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida , Endereco endereco) {
-		super(id, nome, sexo, estadoCivil, rg, cpf, email, telefone, profissao, dataEntrada , dataSaida ,endereco);
+		super(id, nome, sexo, estadoCivil, rg, cpf, telefone, profissao, dataEntrada , dataSaida ,endereco);
 		this.objetivo = objetivo;
 	}
 
@@ -60,16 +56,6 @@ public class Aluno extends Pessoa<Long>{
 	
 	public Aluno(Usuario usuario) {
 		this.usuario = usuario;
-	}
-	
-
-
-	public TIPOFISICO getTipofisico() {
-		return tipofisico;
-	}
-
-	public void setTipofisico(TIPOFISICO tipofisico) {
-		this.tipofisico = tipofisico;
 	}
 
 	public String getObjetivo() {
@@ -98,16 +84,6 @@ public class Aluno extends Pessoa<Long>{
 
 	public void setFichaTreinos(List<FichaTreino> fichaTreinos) {
 		this.fichaTreinos = fichaTreinos;
-	}
-
-
-	public List<Agendamento> getAgendamentos() {
-		return agendamentos;
-	}
-
-
-	public void setAgendamentos(List<Agendamento> agendamentos) {
-		this.agendamentos = agendamentos;
 	}
 
 

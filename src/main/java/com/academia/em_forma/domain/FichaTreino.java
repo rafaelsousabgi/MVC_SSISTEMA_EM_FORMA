@@ -19,7 +19,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "FICHAS_TREINO")
+@Table(name = "TB_FICHAS_TREINO")
 public class FichaTreino implements Serializable {
 
 	
@@ -39,12 +39,6 @@ public class FichaTreino implements Serializable {
 	private String descricao;	          
 	
 	
-	/**@ManyToMany(mappedBy = "fichaTreinos")
-	
-	@ManyToMany
-	@JoinTable(name = "TB_TREINO_EXERCICIOS",
-	joinColumns = @JoinColumn(name="EXERCICIO_ID"),
-	inverseJoinColumns = @JoinColumn(name="FICHATREINO_ID"))**/
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "fichaTreinos")	
@@ -52,12 +46,12 @@ public class FichaTreino implements Serializable {
 	
 	@NotNull(message = "Informe a avaliação Fisica referente a esse treino")
 	@ManyToOne
-	@JoinColumn(name="Avaliacao_id")
+	@JoinColumn(name="Avaliacao_id_fk")
 	private AvaliacaoFisica avaliacaoFisica;
 	
 	@NotNull(message = "Informe o Aluno referente a esse treino")
 	@ManyToOne
-	@JoinColumn(name="Aluno_id")
+	@JoinColumn(name="Aluno_id_fk")
 	private Aluno aluno;
 	
 	
@@ -78,8 +72,6 @@ public class FichaTreino implements Serializable {
 	public Aluno getAluno() {
 		return aluno;
 	}
-
-
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
