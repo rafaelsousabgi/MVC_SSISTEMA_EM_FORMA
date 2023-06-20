@@ -2,6 +2,7 @@ package com.academia.em_forma.domain;
 
 import java.io.Serializable;
 
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -23,31 +24,26 @@ import jakarta.persistence.*;
 @Table(name = "TB_AVALIACOESFISICAS")
 public class AvaliacaoFisica implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
-	@Column(nullable = false ,length = 100)
+
+	@Column(nullable = false, length = 100)
 	private String identificacao;
-	
-	
 
 	@NotNull(message = "Informe o Aluno que foi avaliado")
 	@ManyToOne
-	@JoinColumn(name="aluno_id_fk")
+	@JoinColumn(name = "aluno_id_fk")
 	private Aluno aluno;
-	
+
 	@NotNull(message = "Informe o Instrutor que realizou a avaliação")
 	@ManyToOne
-	@JoinColumn(name="instrutor_id_fk")
+	@JoinColumn(name = "instrutor_id_fk")
 	private Instrutor instrutor;
-	
+
+	@NotNull(message = "Informe o tipo fisico")
 	@Column(nullable = false, length = 9)
 	@Enumerated(EnumType.STRING)
 	private TIPOFISICO tipofisico;
@@ -55,73 +51,78 @@ public class AvaliacaoFisica implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "avaliacaoFisica")
 	private List<FichaTreino> fichaTreinos;
-	
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
-	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
+
+	@NumberFormat(style = Style.NUMBER) // , pattern ="##,##0.00" ,columnDefinition = "DECIMAL(7,2) DEFAULT 00.00" )
+	@NotNull(message = "Informe o peso")
+	@Column(nullable = false)
 	private Double peso;
+
+	@NumberFormat(style = Style.NUMBER) // , pattern ="##,##0.00", columnDefinition = "DECIMAL(7,2) DEFAULT 00.00")
+	@NotNull(message = "Informe a altura")
+	@Column(nullable = false)
+	private Double alturaa;
+
+	private String classificacaoIMC;
+
 	
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
-	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private Double altura;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double peito;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double cintura;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double panturrilhaDireita;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double panturrilhaEsquerda;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double coxaDireita;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double coxaEsqueda;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double bracoEsquedo;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double bracoDireito;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double antebracoEsquedo;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double antebracoDireito;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private Double gluteo;
-	@NumberFormat(style = Style.NUMBER, pattern ="#,##0.00" )
-	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private Double imc;
-	
+	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
+	@Column(columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
+	private double imc;
+
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_inicio", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataInicio;
-	
+
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_fim", columnDefinition = "DATE")
 	private LocalDate dataFim;
-	
-	
-	
+
 	public AvaliacaoFisica() {
-		
+
 	}
 
-	public AvaliacaoFisica(Long id, Double peso, Double altura, Double peito, Double cintura,
+	public AvaliacaoFisica(Long id, Double peso, Double alturaa, Double peito, Double cintura,
 			Double panturrilhaDireita, Double panturrilhaEsquerda, Double coxaDireita, Double coxaEsqueda,
 			Double bracoEsquedo, Double bracoDireito, Double antebracoEsquedo, Double antebracoDireito, Double gluteo,
-			Double imc,String identificacao, LocalDate dataInicio, LocalDate dataFim) {
+			Double imc, String identificacao, LocalDate dataInicio, LocalDate dataFim) {
 		super();
 		this.id = id;
 		this.peso = peso;
-		this.altura = altura;
+		this.alturaa = alturaa;
 		this.peito = peito;
 		this.cintura = cintura;
 		this.panturrilhaDireita = panturrilhaDireita;
@@ -133,14 +134,13 @@ public class AvaliacaoFisica implements Serializable {
 		this.antebracoEsquedo = antebracoEsquedo;
 		this.antebracoDireito = antebracoDireito;
 		this.gluteo = gluteo;
-		this.imc = imc;
+		// this.imc = imc = (peso /((alturaa * alturaa)/100));
 		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;	
+		this.dataFim = dataFim;
 		this.identificacao = identificacao;
-		
+		// recalcularIMC();
+
 	}
-	
-	
 
 	public List<FichaTreino> getFichaTreinos() {
 		return fichaTreinos;
@@ -181,7 +181,6 @@ public class AvaliacaoFisica implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 
 	public String getIdentificacao() {
 		return identificacao;
@@ -193,18 +192,22 @@ public class AvaliacaoFisica implements Serializable {
 
 	public Double getPeso() {
 		return peso;
+
 	}
 
 	public void setPeso(Double peso) {
 		this.peso = peso;
+		calcularIMC();
 	}
 
-	public Double getAltura() {
-		return altura;
+	public Double getAlturaa() {
+		return alturaa;
+
 	}
 
-	public void setAltura(Double altura) {
-		this.altura = altura;
+	public void setAlturaa(Double alturaa) {
+		this.alturaa = alturaa;
+		calcularIMC();
 	}
 
 	public Double getPeito() {
@@ -295,6 +298,38 @@ public class AvaliacaoFisica implements Serializable {
 		this.gluteo = gluteo;
 	}
 
+	private void calcularIMC() {
+		if (peso != null && alturaa != null) {
+			double alturaEmMetros = alturaa / 100;
+			imc = peso / (alturaEmMetros * alturaEmMetros);
+		} else {
+			imc = 0;
+		}
+	}
+	
+	public String getClassificacaoIMC() {
+		
+		if (imc != 0) {
+	        if (imc < 18.5) {
+	            return "Magreza";
+	        } else if (imc < 25.0) {
+	            return "Normal";
+	        } else if (imc < 30.0) {
+	            return "Sobrepeso";
+	        } else if (imc < 40.0) {
+	            return "Obesidade";
+	        } else {
+	            return "Obesidade Grave";
+	        }
+	    } else {
+	        return "Não calculado";
+	    }
+	}
+
+	public void setClassificacaoIMC(String classificacaoIMC) {
+		this.classificacaoIMC = classificacaoIMC;
+	}
+
 	public Double getImc() {
 		return imc;
 	}
@@ -310,7 +345,7 @@ public class AvaliacaoFisica implements Serializable {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-	
+
 	public TIPOFISICO getTipofisico() {
 		return tipofisico;
 	}
@@ -336,16 +371,18 @@ public class AvaliacaoFisica implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	@Override
-	public String toString() {
-		return "AvaliacaoFisica [id=" + id + ", identificacao=" + identificacao + ", aluno=" + aluno + ", instrutor="
-				+ instrutor + ", fichaTreinos=" + fichaTreinos + ", peso=" + peso + ", altura=" + altura + ", peito="
-				+ peito + ", cintura=" + cintura + ", panturrilhaDireita=" + panturrilhaDireita
-				+ ", panturrilhaEsquerda=" + panturrilhaEsquerda + ", coxaDireita=" + coxaDireita + ", coxaEsqueda="
-				+ coxaEsqueda + ", bracoEsquedo=" + bracoEsquedo + ", bracoDireito=" + bracoDireito
-				+ ", antebracoEsquedo=" + antebracoEsquedo + ", antebracoDireito=" + antebracoDireito + ", gluteo="
-				+ gluteo + ", imc=" + imc + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + "]";
-	}
-
-	
+	/**
+	 * @Override public String toString() { return "AvaliacaoFisica [id=" + id + ",
+	 *           identificacao=" + identificacao + ", aluno=" + aluno + ",
+	 *           instrutor=" + instrutor + ", fichaTreinos=" + fichaTreinos + ",
+	 *           peso=" + peso + ", alturaa=" + alturaa + ", peito=" + peito + ",
+	 *           cintura=" + cintura + ", panturrilhaDireita=" + panturrilhaDireita
+	 *           + ", panturrilhaEsquerda=" + panturrilhaEsquerda + ", coxaDireita="
+	 *           + coxaDireita + ", coxaEsqueda=" + coxaEsqueda + ", bracoEsquedo="
+	 *           + bracoEsquedo + ", bracoDireito=" + bracoDireito + ",
+	 *           antebracoEsquedo=" + antebracoEsquedo + ", antebracoDireito=" +
+	 *           antebracoDireito + ", gluteo=" + gluteo + ", imc=" + imc + ",
+	 *           dataInicio=" + dataInicio + ", dataFim=" + dataFim + "]"; }
+	 * 
+	 **/
 }

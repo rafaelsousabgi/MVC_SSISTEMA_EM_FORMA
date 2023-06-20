@@ -106,6 +106,7 @@
                 <th>Antebraco Direito</th>
                 <th>Gluteo</th>
                 <th>IMC</th>
+                <th>Classificação IMC</th>
                 <th>Data de Inicio</th>
                 <th>Data fim da avaliação</th>
                 <th sec:authorize="hasAuthority('INSTRUTOR')">Ação</th>
@@ -114,7 +115,7 @@
         <tbody>
             <tr th:each="a : ${avaliacoesPage.content}">
                 <td th:text="${a.identificacao}"></td>
-                <td th:text="${a.altura}"></td>
+                <td th:text="${a.alturaa}"></td>
                 <td th:text="${a.peito}"></td>
                 <td th:text="${a.peso}"></td>
                 <td th:text="${a.cintura}"></td>
@@ -128,6 +129,7 @@
                 <td th:text="${a.antebracoDireito}"></td>
                 <td th:text="${a.gluteo}"></td>
                 <td th:text="${a.imc}"></td>
+                <td th:text="${a.classificacaoIMC}"></td>
                 <td th:text="${#temporals.format(a.dataInicio, 'dd/MM/yyyy')}"></td>
                 <td th:text="${#temporals.format(a.dataFim, 'dd/MM/yyyy')}"></td>
                 <td sec:authorize="hasAuthority('INSTRUTOR')">

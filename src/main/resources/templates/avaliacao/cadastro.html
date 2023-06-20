@@ -58,15 +58,13 @@
 	           		</div>
 	           
 	             <div class="form-row">
-	                <div class="form-group col-md-3">
-	                        <label for="altura">Altura</label>
-	                        <input type="text" class="form-control" id="altura" data-mask="#.##0,00"
-	                               data-mask-reverse="true" th:field="*{altura}"/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                        </div>
-	                    
+					  <div class="form-group col-md-3">
+							    <label for="alturaa">Altura</label>
+							    <input type="text" class="form-control" id="alturaa" name="alturaa" step="0.1" th:field="*{alturaa}"
+							           data-thousands-separator="" data-decimal-separator=","/>
+							    <div class="invalid-feedback"></div>
+							</div>
+								                    
 	                    <div class="form-group col-md-3">
 	                        <label for="peito">Peitoral</label>
 	                        <input type="text" class="form-control" id="peito" data-mask="#.##0,00"
@@ -75,14 +73,33 @@
 	
 	                        </div>
 	                    </div>
+	                    
+	                    
+	                    <div class="form-group col-md-3">
+						    <label for="peso">Peso</label>
+						    <input type="text" class="form-control" id="peso" name="peso" step="0.1" th:field="*{peso}"
+						           data-thousands-separator="" data-decimal-separator=","/>
+						    <div class="invalid-feedback"></div>
+						</div>
+							                    
+	                    
+	                    <!--
+	                    <div class="form-group col-md-3">
+					    <label for="peso">Peso</label>
+						    <input type="text" class="form-control" id="peso" name="peso" 
+						    step="0.1" th:field="*{peso}" data-thousands-separator="" data-decimal-separator="," />
+						    <div class="invalid-feedback"></div>
+						</div>
+	                    
+	                      
 	                    <div class="form-group col-md-3">
 	                        <label for="peso">Peso</label>
-	                        <input type="text" class="form-control" id="peso" data-mask="#.##0,00"
-	                               data-mask-reverse="true" th:field="*{peso}"/>
+	                        <input type="number" class="form-control" id="peso" th:field="*{peso}" /><!--   data-mask="##.##00,00"
+	                               data-mask-reverse="true"
 	                        <div class="invalid-feedback">
 	
 	                        </div>
-	                    </div>
+	                    </div>-->
 	                    <div class="form-group col-md-3">
 	                        <label for="cintura">Cintura</label>
 	                        <input type="text" class="form-control" id="cintura" data-mask="#.##0,00"
@@ -174,14 +191,14 @@
 	                        </div>
 	                    </div>
 	                    
-	                    <div class="form-group col-md-3">
+	                   <!--   <div class="form-group col-md-3">
 	                        <label for="imc">IMC</label>
 	                        <input type="text" class="form-control" id="imc" data-mask="#.##0,00"
 	                               data-mask-reverse="true" th:field="*{imc}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
-	                    </div>
+	                    </div>-->
 	                    </div>
 	                    <div class="form-row">
 	                    <div class="form-group col-md-6">

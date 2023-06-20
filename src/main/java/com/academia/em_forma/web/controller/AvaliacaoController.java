@@ -104,7 +104,11 @@ public class AvaliacaoController {
 	
 
 	@PostMapping("/editar")
-	public String editar(AvaliacaoFisica avaliacaoFisica , RedirectAttributes attr) {
+	public String editar(@Valid AvaliacaoFisica avaliacaoFisica, BindingResult result, RedirectAttributes attr) {
+	    if (result.hasErrors()) {
+	        return "/avaliacao/cadastro";
+	    }
+		
 		avaliacaoFisicaService.editar(avaliacaoFisica);
 		attr.addFlashAttribute("success","Avaliação Editada com sucesso.");
 		return "redirect:/avaliacoes/cadastrar";
@@ -137,7 +141,7 @@ public class AvaliacaoController {
 	}
 	
 	@GetMapping("/dadosavaliacoes")
-public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrincipal User user,
+    public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrincipal User user,
         @RequestParam("page") Optional<Integer> page,
         @RequestParam("size") Optional<Integer> size,
         HttpServletRequest request) {
