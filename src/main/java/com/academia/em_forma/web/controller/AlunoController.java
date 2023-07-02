@@ -136,6 +136,7 @@ public class AlunoController {
 		return "/aluno/lista";
 	}
 	
+	
 	//@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
 	@GetMapping("/buscar/data")
     public String getPorDatas(@RequestParam(name="entrada", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate entrada,
@@ -152,15 +153,15 @@ public class AlunoController {
 		return avaliacaoFisicaService.buscarTodos();
 	}
 	
-	//@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
+	
 	@ModelAttribute("fichastreino")
 	public List<FichaTreino> listaFichasTreinos(){
-		return fichaTreinoService.buscarTodos();
+		return fichaTreinoService.buscarTodosDao();
 	};
 	
 	
 	
-	//@PreAuthorize("hasAnyAuthority('INSTRUTOR')")
+	
 	@ModelAttribute("ufs")
 	public UF[] getUfs() {
 		return UF.values();

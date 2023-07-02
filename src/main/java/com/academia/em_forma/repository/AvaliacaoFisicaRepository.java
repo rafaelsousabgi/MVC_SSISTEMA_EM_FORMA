@@ -1,12 +1,14 @@
 package com.academia.em_forma.repository;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.academia.em_forma.domain.AvaliacaoFisica;
 import com.academia.em_forma.util.HistoricoAlunoAvaliacao;
@@ -88,12 +90,23 @@ public interface AvaliacaoFisicaRepository extends JpaRepository<AvaliacaoFisica
 	        "from AvaliacaoFisica a " +
 	        "where a.aluno.usuario.email like :email")	
 	Page<HistoricoAlunoAvaliacao> findHistoricoByAlunoEmail(String email, Pageable pageable);
+	:nomeAluno
 
 **/	
 
-	 @Query("select a from AvaliacaoFisica a where a.aluno.usuario.email like :email")
+	    @Query("select a from AvaliacaoFisica a where a.aluno.usuario.email like :email")
 	    Page<AvaliacaoFisica> findListaAvaliacoesByAlunoEmail(String email, Pageable pageable);
 
 	    @Query("select ai from AvaliacaoFisica ai where ai.instrutor.usuario.email like :email")
 	    Page<AvaliacaoFisica> findListaAvaliacoesByInstrutorEmail(String email, Pageable pageable);
+	    
+	    @Query("SELECT af FROM AvaliacaoFisica af WHERE af.aluno.nome LIKE CONCAT('%',?1 , '%')")
+	    Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, Pageable pageable);
+        
+	    @Query("SELECT af FROM AvaliacaoFisica af WHERE af.dataInicio >=?1 and af.dataFim <=?2 order by af.dataInicio asc")
+		Page<AvaliacaoFisica> findByDataEntradaDataFim(LocalDate dataInicio, LocalDate data_fim, Pageable pageable );
+	    @Query("SELECT af FROM AvaliacaoFisica af WHERE af.dataInicio = ?1 order by af.dataInicio asc")
+		Page<AvaliacaoFisica> findByDataInicio(LocalDate dataInicio, Pageable pageable);
+	    @Query("SELECT af FROM AvaliacaoFisica af WHERE af.dataFim = ?1 order by af.dataInicio asc")
+		Page<AvaliacaoFisica> findByDataFim(LocalDate data_fim, Pageable pageable);
 }

@@ -28,6 +28,9 @@ public interface ExercicioRepository  extends JpaRepository<Exercicio, Long>{
 
     @Query("SELECT e FROM Exercicio e JOIN e.fichaTreinos ft JOIN ft.avaliacaoFisica af WHERE af.instrutor.usuario.email LIKE :email")
     Page<Exercicio> findByExercicioByInstrutorEmail(String email, Pageable pageable);
+    
+   /** @Query("SELECT e FROM Exercicio e JOIN e.fichaTreinos ft JOIN ft.aluno a WHERE a.nomel LIKE :nome")
+    Page<Exercicio> findByExercicioByAlunoNome(String nome, Pageable pageable);**/
 
 
 }

@@ -1,5 +1,6 @@
 package com.academia.em_forma.web.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -101,8 +104,6 @@ public class AvaliacaoController {
 		return "/avaliacao/cadastro";
 	}
 	
-	
-
 	@PostMapping("/editar")
 	public String editar(@Valid AvaliacaoFisica avaliacaoFisica, BindingResult result, RedirectAttributes attr) {
 	    if (result.hasErrors()) {
@@ -129,6 +130,37 @@ public class AvaliacaoController {
 		return "/dadosavaliacoes/{id}";
 	}
 	
+	@GetMapping("/dadosavaliacoes")
+    public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrincipal User user,
+        @RequestParam("page") Optional<Integer> page,
+        @RequestParam("size") Optional<Integer> size,
+        HttpServletRequest request) {
+    
+    int currentPage = page.orElse(0);
+    int pageSize = size.orElse(3);  
+   
+
+    Page<AvaliacaoFisica> avaliacoesPage;
+
+    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {
+        avaliacoesPage = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoIdPaginado(user.getUsername(), currentPage , pageSize);
+    } else if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
+        avaliacoesPage = avaliacaoFisicaService.buscarAvaliacoesFisicasByInstrutorIdPaginado(user.getUsername(), currentPage , pageSize);
+    } else {
+        return "/avaliacao/lista";
+    }
+
+    model.addAttribute("avaliacoesFisicas", avaliacoesPage.getContent());
+    model.addAttribute("avaliacoesPage", avaliacoesPage);
+    model.addAttribute("request", request);
+
+    return "/avaliacao/lista";
+}
+
+	@ModelAttribute("tipofisicos")
+	public TIPOFISICO[] geTipofisicos(){
+		return TIPOFISICO.values();
+	}
 	
 	@ModelAttribute("alunos")
 	public List<Aluno> listaDeAlunos(){
@@ -140,37 +172,36 @@ public class AvaliacaoController {
 		return instrutorService.buscarTodos();
 	}
 	
-	@GetMapping("/dadosavaliacoes")
-    public String getAvaliacoesFisicasByUserId(ModelMap model, @AuthenticationPrincipal User user,
-        @RequestParam("page") Optional<Integer> page,
-        @RequestParam("size") Optional<Integer> size,
-        HttpServletRequest request) {
-    
-    int currentPage = page.orElse(1);
-    int pageSize = size.orElse(3);  
-   
 
-    Page<AvaliacaoFisica> avaliacoesPage;
+	@GetMapping("/buscar/nome")
+	public String pesquisarAluno(@RequestParam("nome") String nome, ModelMap model ,@RequestParam("page") Optional<Integer> page,
+	        @RequestParam("size") Optional<Integer> size,
+	        HttpServletRequest request) {
+		
+	    int currentPage = page.orElse(0);
+	    int pageSize = size.orElse(2); 
+	    
+	    Page<AvaliacaoFisica> avaliacoesPage = avaliacaoFisicaService.buscarPorNomeAluno(nome, currentPage , pageSize);
+	    model.addAttribute("avaliacoesPage", avaliacoesPage);
+	    model.addAttribute("request", request);
+	    return "/avaliacao/listaconsulta";
+	}
+	
+	@GetMapping("/buscar/data")
+    public String getPorDatas(@RequestParam(name="dataInicio", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+                              @RequestParam(name="data_fim", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data_fim,
+                              ModelMap model, 
+                              @RequestParam("page") Optional<Integer> page,
+	                  	      @RequestParam("size") Optional<Integer> size,
+	                	      HttpServletRequest request) {
 
-    if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.ALUNO.getDesc()))) {
-        avaliacoesPage = avaliacaoFisicaService.buscarAvaliacoesFisicasByAlunoIdPaginado(user.getUsername(), currentPage , pageSize);
-    } else if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.INSTRUTOR.getDesc()))) {
-        avaliacoesPage = avaliacaoFisicaService.buscarAvaliacoesFisicasByInstrutorIdPaginado(user.getUsername(), currentPage , pageSize);
-    } else {
-        return "avaliacao/lista";
+		int currentPage = page.orElse(0);
+	    int pageSize = size.orElse(3); 
+	    
+		Page<AvaliacaoFisica> avaliacoesPage = avaliacaoFisicaService.buscarPorDatas(dataInicio, data_fim, currentPage , pageSize);
+        model.addAttribute("avaliacoesPage", avaliacoesPage );
+        model.addAttribute("request", request);
+	    return "/avaliacao/listaconsulta";
     }
-
-    model.addAttribute("avaliacoesFisicas", avaliacoesPage.getContent());
-    model.addAttribute("avaliacoesPage", avaliacoesPage);
-    model.addAttribute("request", request);
-
-    return "avaliacao/lista";
-}
-
-@ModelAttribute("tipofisicos")
-public TIPOFISICO[] geTipofisicos(){
-	return TIPOFISICO.values();
-}
-
 	
 }

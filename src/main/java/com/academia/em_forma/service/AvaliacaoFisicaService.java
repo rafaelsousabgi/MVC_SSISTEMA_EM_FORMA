@@ -1,5 +1,6 @@
 package com.academia.em_forma.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,8 @@ public interface AvaliacaoFisicaService {
 	//Object buscarAvaliacoesFisicasByInstrutorId(String email, HttpServletRequest request);
 	Page<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoIdPaginado(String email, int currentPage, int pageSize);
 	Page<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorIdPaginado(String email, int currentPage, int pageSize);
+	Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int currentPage, int pageSize);
+	Page<AvaliacaoFisica> buscarPorDatas(LocalDate dataInicio, LocalDate data_fim, int currentPage, int pageSize);
 	
 	
 	

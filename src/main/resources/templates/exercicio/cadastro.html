@@ -17,7 +17,7 @@
 	                    </li>
 	                </ul>
 	            </div>
-	            <a class="btn btn-primary btn-md" href="/exercicios/listar" role="button">
+	            <a class="btn btn-primary btn-md" href="/exercicios/listar-individual" role="button">
 	                <span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
 	                <span>Listar Exercicios</span>
 	            </a>
@@ -29,27 +29,8 @@
 	        	
 	            <form th:action=" ${exercicio.id==null} ? @{/exercicios/salvar} : @{/exercicios/editar}" 
 	            th:object="${exercicio}" method="POST">
-	                <div class="form-row">
-	                    <div class="form-group col-md-6">
-	                        <label for="nomeEquipamento">Nome do Equipamento</label>
-	                        <input type="text" class="form-control" id="nomeequipamento" placeholder="Nome do equiapamento" 
-	                        autofocus="autofocus" th:field="*{nomeEquipamento}"   th/>
-	                    </div>
-	                    <div class="form-group col-md-6">
-	                        <label for="nomeGrupoMuscular">Grupo muscular/Musculo</label>
-	                        <input type="text" class="form-control" id="nomeGrupoMuscular" placeholder=" grupo muscular ou musculo" 
-	                        autofocus="autofocus" th:field="*{nomeGrupoMuscular}"   th/>
-	                    </div>
-	                    <div class="form-group col-md-6">
-	                        <label for="serie">Serie</label>
-	                        <input type="number" class="form-control" id="serie" placeholder="serie" autofocus="autofocus"
-	                               th:field="*{serie}"/>
-	                    </div>
-	                    <div class="form-group col-md-6">
-	                        <label for="repeticao">Repetição</label>
-	                        <input type="number" class="form-control" id="serie" placeholder="serie" autofocus="autofocus"
-	                               th:field="*{repeticao}"/>
-	                    </div>
+	            
+	            <div class="form-row">
 	                    <div class="form-group col-md-4">
 	                        <label for="dia">Dia</label>
 	                        <select id="dia" class="form-control" th:field="*{dia}">
@@ -74,6 +55,38 @@
 	                        <div class="invalid-feedback"></div>
 	                    </div>
 	                    </div>
+	            
+	            
+	                <div class="form-row">
+	                    <div class="form-group col-md-4">
+	                        <label for="nomeEquipamento">Nome do Equipamento</label>
+	                        <input type="text" class="form-control" id="nomeequipamento" placeholder="Nome do equiapamento" 
+	                        autofocus="autofocus" th:field="*{nomeEquipamento}"   th/>
+	                    </div>
+	                    <div class="form-group col-md-4">
+	                        <label for="nomeGrupoMuscular">Grupo muscular/Musculo</label>
+	                        <input type="text" class="form-control" id="nomeGrupoMuscular" placeholder=" grupo muscular ou musculo" 
+	                        autofocus="autofocus" th:field="*{nomeGrupoMuscular}"   th/>
+	                    </div>
+	                    </div>
+	                     <div class="form-row">
+	                    <div class="form-group col-md-2">
+	                        <label for="serie">Serie</label>
+	                        <input type="number" class="form-control" id="serie" placeholder="serie" autofocus="autofocus"
+	                               th:field="*{serie}"/>
+	                    </div>
+	                    <div class="form-group col-md-2">
+	                        <label for="repeticao">Repetição</label>
+	                        <input type="number" class="form-control" id="serie" placeholder="serie" autofocus="autofocus"
+	                               th:field="*{repeticao}"/>
+	                    </div>
+	                    <div class="form-group col-md-2">
+	                        <label for="duracaomin">Duração</label>
+	                        <input type="number" class="form-control" id="duracaomin" placeholder="descanso" autofocus="autofocus"
+	                               th:field="*{duracaomin}"/>
+	                    </div>
+	                    </div>
+	                     
 	                    
 	                <input type="hidden" id="id" th:field="*{id}"/>
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>

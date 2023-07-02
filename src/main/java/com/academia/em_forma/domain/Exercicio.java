@@ -29,11 +29,11 @@ public class Exercicio implements Serializable{
 	private Long id;
 	@Column( nullable = false,length = 100)
 	private String nomeEquipamento;
-	@Column( nullable = false , length = 4)
+	@Column(  length = 4)
 	private int serie;	
-	@Column( nullable = false , length = 4)
+	@Column(  length = 4)
 	private int repeticao;
-	@Column( nullable = false , length = 4)
+	@Column(  length = 4)
 	private int duracaomin;
 	@Column( nullable = false , length = 100)
 	private String nomeGrupoMuscular;

@@ -32,33 +32,26 @@
 	                <table class="table table-striped table-hover table-sm">
 	                    <thead>                    
 	                         <tr> 
-	                        <th>#</th>	                        
+	                        <th>Ficha de Treino</th>	
+	                        <th>Descrição</th>                        
 	                        <th>Equipamento</th>
 	                        <th>Serie</th>
 	                        <th>Repetições</th>	                        
 	                        <th>Dia</th>	                        
-	                        <th>Grupo Muscular/Musculo</th>
-	                        <th>Treino</th>
+	                        <th>Grupo Muscular/Musculo</th>	                        
 	                        <th>Ação</th>
 	                        
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                    <tr th:each= "e : ${exercicios}">	                    
-	                    
-		              
+	                    <tr th:each= "e : ${exercicios}">   
 							<td th:text="${e.fichaTreino.nome}"></td>
-							<td th:text="${e.fichaTreino.descricao}"></td>
-	                   		<td th:text="${e.id}">1</td> 
+							<td th:text="${e.fichaTreino.descricao}"></td>	                   	 
 	                        <td th:text="${e.nomeEquipamento}"></td>
 	                        <td th:text="${e.serie}"></td>
 	                        <td th:text="${e.repeticao}"></td>
 	                        <td th:text="${e.dia}"></td>
-	                        <td th:text="${e.nomeGrupoMuscular}"></td>
-	                        <td th:text="${e.fichaTreino.nome}"></td>
-	                        
-	                       
-	                       
+	                        <td th:text="${e.nomeGrupoMuscular}"></td> 
 	                        
 	                        <td colspan="2">
 	                            <a class="btn btn-info btn-sm" th:href="@{/exercicios/editar/{id} (id=${e.id})}" role="button">
@@ -74,9 +67,7 @@
 	                       
 	                       
 	                    </tr>      
-	                   <tr><td><ul><li></li></ul></td>
-	                       <td><ul><li></li></ul></td>
-	                       <td><ul><li></li></ul></td></tr>
+	                
 	                    </tbody>
 	                </table>
 	            </div>

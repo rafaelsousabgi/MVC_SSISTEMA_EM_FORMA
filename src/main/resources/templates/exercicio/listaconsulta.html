@@ -70,24 +70,23 @@
                     </tbody>
                 </table>
             </div>
-            <nav>
-		        <ul class="pagination">
-		            <li class="page-item" th:classappend="${exerciciosPage.first ? 'disabled' : ''}">
-		                <a class="page-link" th:href="@{${request.requestURI}(page=0, size=${exerciciosPage.size})}">Primeira</a>
-		            </li>
-		            <li class="page-item" th:classappend="${exerciciosPage.first ? 'disabled' : ''}">
-		                <a class="page-link" th:href="@{${request.requestURI}(page=${exerciciosPage.number - 1}, size=${exerciciosPage.size})}">Anterior</a>
-		            </li>
-		            <li class="page-item" th:classappend="${exerciciosPage.last ? 'disabled' : ''}">
-		                <a class="page-link" th:href="@{${request.requestURI}(page=${exerciciosPage.number + 1}, size=${exerciciosPage.size})}">Próxima</a>
-		            </li>
-		            <li class="page-item" th:classappend="${exerciciosPage.last ? 'disabled' : ''}">
-		                <a class="page-link" th:href="@{${request.requestURI}(page=${exerciciosPage.totalPages}, size=${exerciciosPage.size})}">Última</a>
-		            </li>
-		        </ul>
-		</nav>
         </div>
-		
+		<nav>
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${exerciciosPage.first ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{${request.requestURI}(page=0, size=${exerciciosPage.size})}">Primeira</a>
+            </li>
+            <li class="page-item" th:classappend="${exerciciosPage.first ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{${request.requestURI}(page=${exerciciosPage.number - 1}, size=${exerciciosPage.size})}">Anterior</a>
+            </li>
+            <li class="page-item" th:classappend="${exerciciosPage.last ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{${request.requestURI}(page=${exerciciosPage.number + 1}, size=${exerciciosPage.size})}">Próxima</a>
+            </li>
+            <li class="page-item" th:classappend="${exerciciosPage.last ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{${request.requestURI}(page=${exerciciosPage.totalPages}, size=${exerciciosPage.size})}">Última</a>
+            </li>
+        </ul>
+</nav>
         <div th:replace="~{fragments/modal ::modal}"></div>
     </section>
     <script th:src="~{}" th:fragment="js"></script>

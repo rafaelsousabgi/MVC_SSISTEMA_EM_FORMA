@@ -1,135 +1,86 @@
-/*
- * Base structure
-
-  */
-
- #teste2 td,th{
+#teste2 td {
   text-align: center;
-  width:  10%;
-   border: 1px;
-};
- 
+  width: 5%;
+  border: 1px solid;
+}
+
 html, body {
-	height: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-	padding-top: 56px;
-	padding-left: 0;
-} 
-
-/*
- * main layout
- */
-.layout-main {
-    display: flex;
-    min-height: calc(100vh - 52px);
-    overflow: hidden;
+  padding-top: 56px;
+  padding-left: 0;
 }
 
-/*
- * Content
- */
+.layout-main {
+  display: flex;
+  min-height: calc(100vh - 52px);
+  overflow: hidden;
+}
+
 .layout-content {
-    width: 100%;
-    padding-top: 10px;
+  flex: 1;
+  padding-top: 10px;
 }
 
 .container {
-	width: 150%;
-	padding-top: 20px;
-	padding-left: 10px
+  width: 75%;
+  padding-top: 20px;
+  padding-left: 10px;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
-/*
- * Sidebar
-
-.sidebar {
-    width: 0px;
-    height: auto;
-    border-top: 1px solid #eee;
-    border-right: 1px solid #eee;    
-    background-color: #f8f9fa;
-    flex-shrink: 0;
-    overflow: hidden;
-    transition: width .5s;
-}
- */
 .sidebar .nav {
-	margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .sidebar .nav-item {
-	width: 100%;
-}
-
-.sidebar .nav-item {
-	margin-left: 0;
+  width: 100%;
+  margin-left: 0;
 }
 
 .sidebar .nav-link {
-	border-radius: 0;
-} 
-
-.sidebar ul li:hover a, .menu ul li.active a{
-    color: #777777;
+  border-radius: 0;
 }
 
-.sidebar ul{
-    list-style: none;
-    padding: 10px 0px;
+.sidebar ul {
+  list-style: none;
+  padding: 10px 0;
 }
 
-.sidebar ul li a{
-    display: block;
-    color:#1a1a1a;
-    padding: 10px 15px;
-    white-space: nowrap;
+.sidebar ul li a {
+  display: block;
+  color: #1a1a1a;
+  padding: 10px 15px;
+  white-space: nowrap;
 }
 
-.sidebar.sidebar-open {
-    width: 250px;
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1e94d2;
 }
 
-/*
- * nav-pills home
- */
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-	color: #fff;
-	background-color: #1e94d2;
-}
-
-/*
- * toogle do navbar do menu
- */ 
-
-.navbar-toggle {
-    display: inline-block;
-    margin-left: 10px;
-}
-
-/*
- * Footer
- */
 .layout-footer {
-	position: relative;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: 0;
-	height: 50px;
-	border-top: 1px solid #eeeeee;
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  height: 50px;
+  border-top: 1px solid #eeeeee;
 }
 
 .footer-copy {
-	font-size: 92%;
-	display: block;
-	color: #777777;
-	text-align: center;
+  font-size: 92%;
+  display: block;
+  color: #777777;
+  text-align: center;
 }
-
-
-********************
 
 .jumbotron {
   padding-top: 3rem;
@@ -163,31 +114,30 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
-.modal .modal-body input, .modal .modal-body textarea{
-    border: 1px solid #e6e6e6;
-    box-shadow: none;
+.modal .modal-body input,
+.modal .modal-body textarea {
+  border: 1px solid #e6e6e6;
+  box-shadow: none;
 }
 
 .modal-header h4.modal-title {
-    font-weight: 300;
-    font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .modal-body label {
-    font-weight: 400;
-    font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
 }
 
-/* jQuery loading autocomplete */
 .ui-autocomplete-loading {
   background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
 }
 
 .example-item {
-        width: 25%;
-        height: 150px;
-        display: inline; /* Adicionamos apenas essa linha */
-    }
+  width: 100%;
+  height: 150px;
+}

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -104,12 +105,14 @@ public class InstrutorController {
 		return listar(model);
 	}
 	
+	//@PreAuthorize("hasAnyAuthority('INSTRUTOR','ADMIN')")
 	@GetMapping("/buscar/nome")
 	public String getPorNome(@RequestParam("nome") String nome, ModelMap model) {		
 		model.addAttribute("instrutores", instrutorservice.buscarPorNome(nome));
 		return "/instrutor/lista";
 	}
 	
+	//@PreAuthorize("hasAnyAuthority('INSTRUTOR','ADMIN')")
 	@GetMapping("/buscar/data")
     public String getPorDatas(@RequestParam(name="entrada", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate entrada,
                               @RequestParam(name="saida", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate saida,

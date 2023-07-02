@@ -4,6 +4,9 @@ import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.academia.em_forma.domain.Aluno;
@@ -64,8 +68,20 @@ public class FichaTreinoController {
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model ) {
-		model.addAttribute("fichasTreinos", fichaTreinoService.buscarTodos());
+		model.addAttribute("fichasTreinos", fichaTreinoService.buscarTodosDao());
 		return "/fichatreino/lista";
+	}
+	
+	
+	@GetMapping("/listar/paginado")
+	public String listar(ModelMap model, @RequestParam(defaultValue = "0") int page) {
+	    int pageSize = 3; // número de itens por página
+	    Pageable pageable = PageRequest.of(page, pageSize);
+	    Page<FichaTreino> fichasTreinos = fichaTreinoService.buscarTodos(pageable);
+	    model.addAttribute("fichasTreinos", fichasTreinos);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", fichasTreinos.getTotalPages());
+	    return "/fichatreino/lista";
 	}
 	
 	@PostMapping("/salvar")
@@ -107,14 +123,14 @@ public class FichaTreinoController {
 	} **/
 	
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+	public String excluir(@PathVariable("id") Long id,RedirectAttributes attr) {
 		if(fichaTreinoService.fichaTemExercicios(id)) {
-			model.addAttribute("fail","Ficha de Treino não removida. Possui Exercicios(s) vinculado(s)");
+			attr.addFlashAttribute("fail","Ficha de Treino não removida. Possui Exercicio(s) vinculado(s)");
 		}else {
 			fichaTreinoService.excluir(id);
-			model.addAttribute("success","Ficha de Treino excluido com sucesso.");
+			attr.addFlashAttribute("success","Ficha de Treino excluido com sucesso.");
 		}
-		return listar(model);
+		return "redirect:/fichastreinos/listar/paginado";
 	}
 	
 	

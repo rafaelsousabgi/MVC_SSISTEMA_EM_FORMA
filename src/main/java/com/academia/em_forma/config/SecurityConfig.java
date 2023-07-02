@@ -39,14 +39,14 @@ public class SecurityConfig  {
 			.requestMatchers("/u/**").hasAuthority(ADMIN)
 			
 			//ACESSOS PRIVADOS iNSTRUTOR
-			.requestMatchers("/instrutores/cadastrar","/instrutores/salvar", "/instrutores/editar","/instrutores/editar/{id}","/instrutores/excluir/{id}","/instrutores/dados" ).hasAnyAuthority(INSTRUTOR,ADMIN)
+			.requestMatchers("/instrutores/cadastrar","/instrutores/salvar", "/instrutores/editar","/instrutores/editar/{id}","/instrutores/excluir/{id}","/instrutores/dados", "/instrutores/listar","/instrutores/buscar/data","/instrutores/buscar/nome").hasAnyAuthority(INSTRUTOR,ADMIN)
 			.requestMatchers("/instrutores/**").hasAnyAuthority(INSTRUTOR )
 			
 			.requestMatchers("/fichastreinos/listar","/exercicios/listar","/exercicios/listar/dadosexercicios/individual","/avaliacoes/listar","/avaliacoes/dadosavaliacoes").hasAnyAuthority(ALUNO,INSTRUTOR)
 			.requestMatchers("/fichastreinos/**","/exercicios/**","/avaliacoes/**").hasAuthority(INSTRUTOR)
 			
 			//ACESSOS PRIVADOS Aluno
-			.requestMatchers("/alunos/listar","/alunos/cadastrar","/alunos/cadastrar","/alunos/salvar").hasAnyAuthority(ALUNO,INSTRUTOR)
+			.requestMatchers("/alunos/listar","/alunos/cadastrar","/alunos/cadastrar","/alunos/salvar","/alunos/buscar/data","/alunos/buscar/nome").hasAnyAuthority(ALUNO,INSTRUTOR,ADMIN)
 			.requestMatchers("/alunos/**").hasAuthority(ALUNO)
 			
 			
@@ -55,7 +55,7 @@ public class SecurityConfig  {
 			)
 		.formLogin()
 			.loginPage("/login")
-			.defaultSuccessUrl("/", true)
+			.defaultSuccessUrl("/home2", true)
 			.failureUrl("/login-error")
 			.permitAll()
 	    .and()

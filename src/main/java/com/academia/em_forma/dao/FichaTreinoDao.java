@@ -2,6 +2,9 @@ package com.academia.em_forma.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.academia.em_forma.domain.FichaTreino;
 
 public interface FichaTreinoDao {
@@ -15,5 +18,7 @@ public interface FichaTreinoDao {
 	FichaTreino findById(Long id);
 	
 	List<FichaTreino> findAll();
+
+	//Page<FichaTreino> findAll(Pageable pageable);
 
 }

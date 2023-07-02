@@ -64,6 +64,8 @@
 	                                       th:name="dataInicio" />
 	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
 	                                       th:name="data_fim" />
+	                                <input type="hidden" name="page" th:value="${request.getParameter('page')}" />
+    								<input type="hidden" name="size" th:value="${request.getParameter('size')}" />
 	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
 	                            </form>
 	                        </nav>
@@ -134,20 +136,24 @@
 <nav th:if="${avaliacoesPage}">
     <ul class="pagination">
         <li class="page-item" th:classappend="${avaliacoesPage.first ? 'disabled' : ''}">
-            <a class="page-link" th:href="@{${request.requestURI}(page=0, size=${avaliacoesPage.size})}">Primeira</a>
+            <a class="page-link" th:href="@{${request.requestURI}(page=0, size=${avaliacoesPage.size}, nome=${request.getParameter('nome')})}">Primeira</a>
         </li>
         <li class="page-item" th:classappend="${avaliacoesPage.first ? 'disabled' : ''}">        
-            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.number -1}, size=${avaliacoesPage.size})}">Anterior</a>
+            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.number -1}, size=${avaliacoesPage.size}, nome=${request.getParameter('nome')})}">Anterior</a>
         </li>
         <li class="page-item" th:classappend="${avaliacoesPage.last ? 'disabled' : ''}">
-            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.number +1}, size=${avaliacoesPage.size})}">Próxima</a>
+            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.number +1}, size=${avaliacoesPage.size}, nome=${request.getParameter('nome')})}">Próxima</a>
         </li>
         <li class="page-item" th:classappend="${avaliacoesPage.last ? 'disabled' : ''}">
-            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.totalPages}, size=${avaliacoesPage.size})}">Última</a>
+            <a class="page-link" th:href="@{${request.requestURI}(page=${avaliacoesPage.totalPages}, size=${avaliacoesPage.size}, nome=${request.getParameter('nome')})}">Última</a>
         </li>
     </ul>
 </nav>
+
     </div>
+    <div class="d-flex justify-content-center">
+    <a class="btn btn-primary" href="/avaliacoes/dadosavaliacoes">Voltar</a>
+</div>
     <div th:replace="~{fragments/modal :: modal}"></div>
 </section>
 <script	th:src="@{/js/usuario.js(v=${version})}" th:fragment="js"></script>

@@ -18,7 +18,6 @@ public class AlunoDaoImpl extends AbstractDao<Aluno, Long> implements AlunoDao {
 		return createQuery("select a from Aluno a where a.nome like concat('%',?1,'%') ", nome);
 		
 	}
-
 	
 
 	@Override

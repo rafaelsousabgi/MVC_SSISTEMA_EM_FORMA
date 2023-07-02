@@ -23,16 +23,14 @@ import jakarta.validation.constraints.Size;
 public class FichaTreino implements Serializable {
 
 	
-	private static final long serialVersionUID = 1L;
-	
-	
+	private static final long serialVersionUID = 1L;	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	
-	@Column( nullable = false , unique = true,length = 100)
+	@Column( nullable = false,length = 100)
 	private String nome;
 	
 	@Column(nullable = false, length = 200)

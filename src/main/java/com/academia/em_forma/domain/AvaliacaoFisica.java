@@ -48,9 +48,14 @@ public class AvaliacaoFisica implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TIPOFISICO tipofisico;
 
+	/**
 	@JsonIgnore
 	@OneToMany(mappedBy = "avaliacaoFisica")
-	private List<FichaTreino> fichaTreinos;
+	private List<FichaTreino> fichaTreinos;**/
+	
+	@JsonIgnore
+    @OneToMany(mappedBy = "avaliacaoFisica", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FichaTreino> fichaTreinos;
 
 	@NumberFormat(style = Style.NUMBER) // , pattern ="##,##0.00" ,columnDefinition = "DECIMAL(7,2) DEFAULT 00.00" )
 	@NotNull(message = "Informe o peso")

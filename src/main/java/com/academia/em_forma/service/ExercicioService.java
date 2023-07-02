@@ -13,11 +13,10 @@ public interface ExercicioService {
 	void excluir(Long id);
 	Exercicio buscarPorId(Long id);
 	List<Exercicio> buscarTodos();
-	boolean exercicioTemFichaTreino(Long id);
-	//List<Exercicio> buscarExerciciosByAvaliacaoAlunoId(String email);
-	//List<Exercicio> buscarAvaliacoesFisicasByInstrutorId(String email);
+	boolean exercicioTemFichaTreino(Long id);	
 	Page<Exercicio> buscarExerciciosByAvaliacaoAlunoIdPaginado(String email, int currentPage, int pageSize);
 	Page<Exercicio> buscarAvaliacoesFisicasByInstrutorIdPaginado(/**String email,**/int currentPage, int pageSize);
+	//Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int currentPage, int pageSize);
 	
 	/**boolean exerciciosTemtreino(Long id);**/
 

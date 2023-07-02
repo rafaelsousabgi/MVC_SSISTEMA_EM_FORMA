@@ -139,7 +139,8 @@
 	        <div th:replace="~{fragments/modal :: modal}"></div>
 	        
 	    </section>
-	    <script	th:src="~{}" th:fragment="js"></script>
+	    <script	th:src="@{/js/usuario.js(v=${version})}" th:fragment="js"></script>
 	<script th:inline="javascript" th:fragment="inlinescript"></script>
+	   
 </body>
 </html>		

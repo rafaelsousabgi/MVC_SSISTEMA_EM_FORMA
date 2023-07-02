@@ -69,13 +69,13 @@ public class ExercicioServiceImpl implements ExercicioService{
 	
 	@Transactional(readOnly = true)
 	public Page<Exercicio> buscarExerciciosByAvaliacaoAlunoIdPaginado(String email, int page, int size) {
-	    Pageable pageable = PageRequest.of(page -0, size);
+	    Pageable pageable = PageRequest.of(page, size);
 	    return exercicioRepository.findByExercicioByAlunoEmail(email, pageable);
 	}
 
 	@Transactional(readOnly = true)
 	public Page<Exercicio> buscarAvaliacoesFisicasByInstrutorIdPaginado( int page, int size) {
-	    Pageable pageable = PageRequest.of(page -0, size);
+	    Pageable pageable = PageRequest.of(page , size);
 	    return exercicioRepository.findAll(pageable);
 	}
 /**
@@ -104,7 +104,13 @@ public class ExercicioServiceImpl implements ExercicioService{
 		}
 		return true;
 	}
-	**/
 	
+
+	@Override
+	public Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int currentPage, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	**/
 
 }

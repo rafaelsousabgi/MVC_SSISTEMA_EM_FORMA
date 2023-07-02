@@ -1,6 +1,8 @@
 package com.academia.em_forma.service;
 
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -138,16 +140,40 @@ public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService{
 	
 	@Transactional(readOnly = true)
 	public Page<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoIdPaginado(String email, int page, int size) {
-	    Pageable pageable = PageRequest.of(page -0, size);
+	    Pageable pageable = PageRequest.of(page, size);
 	    return avaliacaoFisicaRepository.findListaAvaliacoesByAlunoEmail(email, pageable);
 	}
 
 	@Transactional(readOnly = true)
 	public Page<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorIdPaginado(String email, int page, int size) {
-	    Pageable pageable = PageRequest.of(page -0, size);
+	    Pageable pageable = PageRequest.of(page , size);
 	    return avaliacaoFisicaRepository.findListaAvaliacoesByInstrutorEmail(email, pageable);
 	}
 
+	@Override
+	@Transactional(readOnly = true)	
+	public Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int page, int size) {
+		Pageable pageable = PageRequest.of(page , size);
+	    return avaliacaoFisicaRepository.buscarPorNomeAluno(nome, pageable);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<AvaliacaoFisica> buscarPorDatas(LocalDate dataInicio, LocalDate dataFim, int page, int size) {
+	    Pageable pageable = PageRequest.of(page, size);
+
+	    if (dataInicio != null && dataFim != null) {
+	        return avaliacaoFisicaRepository.findByDataEntradaDataFim(dataInicio, dataFim, pageable);
+	    } else if (dataInicio != null) {
+	        return avaliacaoFisicaRepository.findByDataInicio(dataInicio, pageable);
+	    } else if (dataFim != null) {
+	        return avaliacaoFisicaRepository.findByDataFim(dataFim, pageable);
+	    } else {
+	        return Page.empty();
+	    }
+	}
+
+	
 	
 	
 }

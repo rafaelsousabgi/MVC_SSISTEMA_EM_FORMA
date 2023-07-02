@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="Sistema para gerenciamento de alunos" />
 	<meta name="author" content="rafael" />
-	<link rel="icon" href="/image/favicon.png" />
+	<link rel="icon" href="/image/academia3.png" />
 
 	<!-- Bootstrap core CSS -->
 	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css(v=${version}) }" rel="stylesheet" />
@@ -29,8 +29,8 @@
 	
 	
 	<!--  **************************** -->
-	
-	<!--   <link href="/css/style.css" rel="stylesheet" /> Custom styles for this template -->
+	<link href="/css/style.css" rel="stylesheet" />
+	<!--    Custom styles for this template -->
 	
 </head>
 <body>
@@ -59,15 +59,16 @@
 	<!--Placed at the end of the document so the pages load faster -->
 	 <!-- <script src="/webjars/jquery/jquery.min.js"></script>
 	 <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script> 
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script> 
 	 <script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>-->
 	 
 	 <script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="/webjars/jquery/jquery.min.js"></script>
-	<script	
-	 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	
+	 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Adicione a referência para o jQuery Mask Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 	<!-- ********************************************* -->
 		<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -108,7 +109,28 @@
 	
 	<!-- ***********************codigo para o data mask*************************** -->
 	
+<script type="text/javascript">
+	
+		var url = '';
+		
+		$('button[id*="btn_"]').click(function() {
+			url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+		});
+		
+		$('#ok_confirm').click(function() {
+			document.location.href = url;
+		});
+	    
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+		
+		$(document).ready(function(){
+		    $(".navbar-toggle").click(function(){
+		        $(".sidebar").toggleClass("sidebar-open");
+		    })
+		});
 
-
+	</script>
 </body>
 </html>
