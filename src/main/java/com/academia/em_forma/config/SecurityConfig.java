@@ -46,7 +46,7 @@ public class SecurityConfig  {
 			.requestMatchers("/fichastreinos/**","/exercicios/**","/avaliacoes/**").hasAuthority(INSTRUTOR)
 			
 			//ACESSOS PRIVADOS Aluno
-			.requestMatchers("/alunos/listar","/alunos/cadastrar","/alunos/cadastrar","/alunos/salvar","/alunos/buscar/data","/alunos/buscar/nome").hasAnyAuthority(ALUNO,INSTRUTOR,ADMIN)
+			.requestMatchers("/alunos/listar","/alunos/cadastrar","/alunos/cadastrar","/alunos/salvar","/alunos/buscar/data","/alunos/buscar/nome","/alunos/listarContatos","/alunos/buscar/nomeContato").hasAnyAuthority(ALUNO,INSTRUTOR,ADMIN)
 			.requestMatchers("/alunos/**").hasAuthority(ALUNO)
 			
 			

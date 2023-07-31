@@ -17,6 +17,7 @@ public interface ExercicioService {
 	Page<Exercicio> buscarExerciciosByAvaliacaoAlunoIdPaginado(String email, int currentPage, int pageSize);
 	Page<Exercicio> buscarAvaliacoesFisicasByInstrutorIdPaginado(/**String email,**/int currentPage, int pageSize);
 	//Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int currentPage, int pageSize);
+	//List<Exercicio> buscarExerciciosPorNomeAluno(String nomeAluno);
 	
 	/**boolean exerciciosTemtreino(Long id);**/
 

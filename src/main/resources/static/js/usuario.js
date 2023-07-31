@@ -1,4 +1,4 @@
-//datatables - lista de médicos
+//datatables - lista de usuários
 $(document).ready(function() {
 	moment.locale('pt-BR');
 	var table = $('#table-usuarios').DataTable({

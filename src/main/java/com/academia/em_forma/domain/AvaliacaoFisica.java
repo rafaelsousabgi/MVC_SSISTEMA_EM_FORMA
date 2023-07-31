@@ -49,13 +49,14 @@ public class AvaliacaoFisica implements Serializable {
 	private TIPOFISICO tipofisico;
 
 	/**
+	 * @JsonIgnore
+	 * @OneToMany(mappedBy = "avaliacaoFisica") private List<FichaTreino>
+	 *                     fichaTreinos;
+	 **/
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "avaliacaoFisica")
-	private List<FichaTreino> fichaTreinos;**/
-	
-	@JsonIgnore
-    @OneToMany(mappedBy = "avaliacaoFisica", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FichaTreino> fichaTreinos;
+	@OneToMany(mappedBy = "avaliacaoFisica", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<FichaTreino> fichaTreinos;
 
 	@NumberFormat(style = Style.NUMBER) // , pattern ="##,##0.00" ,columnDefinition = "DECIMAL(7,2) DEFAULT 00.00" )
 	@NotNull(message = "Informe o peso")
@@ -68,8 +69,6 @@ public class AvaliacaoFisica implements Serializable {
 	private Double alturaa;
 
 	private String classificacaoIMC;
-
-	
 
 	@NumberFormat(style = Style.NUMBER, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
@@ -311,24 +310,24 @@ public class AvaliacaoFisica implements Serializable {
 			imc = 0;
 		}
 	}
-	
+
 	public String getClassificacaoIMC() {
-		
+
 		if (imc != 0) {
-	        if (imc < 18.5) {
-	            return "Magreza";
-	        } else if (imc < 25.0) {
-	            return "Normal";
-	        } else if (imc < 30.0) {
-	            return "Sobrepeso";
-	        } else if (imc < 40.0) {
-	            return "Obesidade";
-	        } else {
-	            return "Obesidade Grave";
-	        }
-	    } else {
-	        return "Não calculado";
-	    }
+			if (imc < 18.5) {
+				return "Magreza";
+			} else if (imc < 25.0) {
+				return "Normal";
+			} else if (imc < 30.0) {
+				return "Sobrepeso";
+			} else if (imc < 40.0) {
+				return "Obesidade";
+			} else {
+				return "Obesidade Grave";
+			}
+		} else {
+			return "Não calculado";
+		}
 	}
 
 	public void setClassificacaoIMC(String classificacaoIMC) {

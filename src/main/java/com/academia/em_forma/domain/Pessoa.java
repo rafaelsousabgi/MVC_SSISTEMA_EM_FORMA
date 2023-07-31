@@ -9,89 +9,79 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import jakarta.persistence.*;
 
-
-
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class Pessoa <ID extends Serializable> implements Serializable {
-	
-	
+public abstract class Pessoa<ID extends Serializable> implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private ID id;
-	
+
 	@Column(name = "nome", nullable = false, unique = true, length = 60)
-	protected  String nome;
-	@Column( nullable = false , length = 20)
-	protected  String sexo;
-	@Column( nullable = false , length = 100)
-	protected  String estadoCivil;
-	protected  String rg;
-	protected  String cpf;
-	@Column( nullable = false , length = 15)
-	protected  String telefone;	
-	protected  String profissao;
-	
+	protected String nome;
+	@Column(nullable = false, length = 20)
+	protected String sexo;
+	@Column(nullable = false, length = 100)
+	protected String estadoCivil;
+	protected String rg;
+	protected String cpf;
+	@Column(nullable = false, length = 15)
+	protected String telefone;
+	protected String profissao;
+
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataEntrada;
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_saida", columnDefinition = "DATE")
 	private LocalDate dataSaida;
-	
-	/**utilizando o cascadeType para excluir o endereco caso exclua o aluno ou instrutor**/
+
+	/**
+	 * utilizando o cascadeType para excluir o endereco caso exclua o aluno ou
+	 * instrutor
+	 **/
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id_fk")
 	private Endereco endereco;
-	
-	
-	
-	
-	
-
 
 	public Pessoa() {
 		super();
 	}
-	
 
-	public Pessoa(ID id, String nome, String sexo, String estadoCivil, String rg, String cpf,
-			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida,Endereco endereco  ) {
+	public Pessoa(ID id, String nome, String sexo, String estadoCivil, String rg, String cpf, String telefone,
+			String profissao, LocalDate dataEntrada, LocalDate dataSaida, Endereco endereco) {
 		super();
 		this.id = id;
-		
-		
+
 		this.nome = nome;
 		this.sexo = sexo;
 		this.estadoCivil = estadoCivil;
 		this.rg = rg;
-		this.cpf = cpf;		
+		this.cpf = cpf;
 		this.telefone = telefone;
 		this.profissao = profissao;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
 		this.endereco = endereco;
-		
+
 	}
-	
-	
-	
 
 	public ID getId() {
 		return id;
 	}
+
 	public void setId(ID id) {
 		this.id = id;
 	}
-	
+
 	public boolean hasNotId() {
 		return id == null;
 	}
-	
+
 	public boolean hasId() {
 		return id == null;
 	}
-	
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -99,42 +89,51 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
-	
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getSexo() {
 		return sexo;
 	}
+
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
 	public String getEstadoCivil() {
 		return estadoCivil;
 	}
+
 	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
+
 	public String getRg() {
 		return rg;
 	}
+
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+
 	public String getTelefone() {
 		return telefone;
 	}
+
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
@@ -142,29 +141,32 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 	public String getProfissao() {
 		return profissao;
 	}
+
 	public void setProfissao(String profissao) {
 		this.profissao = profissao;
 	}
-	
-	
+
 	public LocalDate getDataEntrada() {
 		return dataEntrada;
 	}
+
 	public void setDataEntrada(LocalDate dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
+
 	public LocalDate getDataSaida() {
 		return dataSaida;
 	}
+
 	public void setDataSaida(LocalDate dataSaida) {
 		this.dataSaida = dataSaida;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -177,16 +179,11 @@ public abstract class Pessoa <ID extends Serializable> implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-
 	@Override
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", estadoCivil=" + estadoCivil + ", rg=" + rg
-				+ ", cpf=" + cpf + ", telefone=" + telefone + ", profissao=" + profissao
-				+ ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + ", endereco=" + endereco + "]";
+				+ ", cpf=" + cpf + ", telefone=" + telefone + ", profissao=" + profissao + ", dataEntrada="
+				+ dataEntrada + ", dataSaida=" + dataSaida + ", endereco=" + endereco + "]";
 	}
-	
-	
-	
 
-	
 }

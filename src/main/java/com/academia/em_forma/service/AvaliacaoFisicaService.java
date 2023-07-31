@@ -32,6 +32,9 @@ public interface AvaliacaoFisicaService {
 	Page<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorIdPaginado(String email, int currentPage, int pageSize);
 	Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int currentPage, int pageSize);
 	Page<AvaliacaoFisica> buscarPorDatas(LocalDate dataInicio, LocalDate data_fim, int currentPage, int pageSize);
+	Page<AvaliacaoFisica> buscarAvaliacoesFisicasPaginado(int currentPage, int pageSize);
+	Page<AvaliacaoFisica> buscarPorNomeAlunoIns(String nome, int page, int size, String nomeInstrutor);
+	Page<AvaliacaoFisica> buscarPorNomeAlunoEInstrutor(String nomeAluno, int page, int size, String nomeInstrutor);
 	
 	
 	

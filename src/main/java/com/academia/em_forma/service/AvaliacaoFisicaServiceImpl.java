@@ -81,80 +81,30 @@ public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService{
 		return true;
 	}
 
-	/**
-	@Transactional(readOnly = true)
-	public Map<String, Object> buscarAvaliacoesFisicasByAlunoId(String email, HttpServletRequest request) {
-		dataTables.setRequest(request);
-		dataTables.setColunas(DatatablesColunas.AVALIACOES);		
-		Page<HistoricoAlunoAvaliacao> page = avaliacaoFisicaRepository.findHistoricoByAlunoEmail(email, dataTables.getPageable());
-		return dataTables.getResponse(page);
-	}
-
-	
-	@Transactional(readOnly = true)
-	public  Map<String, Object> buscarAvaliacoesFisicasByInstrutorId(String email, HttpServletRequest request) {
-		dataTables.setRequest(request);
-		dataTables.setColunas(DatatablesColunas.AVALIACOES);		
-		Page<AvaliacaoFisica> page = avaliacaoFisicaRepository.findListaAvaliacoesByInstrutorEmail(email, dataTables.getPageable());
-		return dataTables.getResponse(page);
-	}
-
-
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(Long id, String email) {
-		
-		return  avaliacaoFisicaRepository.findAvaliacoesFisicasByAlunoId(id, email);
-				
-		
-	}
-
-/**
-	
-	
-	
-	@Transactional(readOnly = true)
-	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(String email, Pageable pageable) {
-	    return avaliacaoFisicaRepository.findListaAvaliacoesByAlunoEmail(email, pageable);
-	}
-
-	@Transactional(readOnly = true)
-	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorId(String email, Pageable pageable) {
-	    return avaliacaoFisicaRepository.findListaAvaliacoesByInstrutorEmail(email, pageable);
-	}
-	
-	
-
-	@Transactional(readOnly = true)
-	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoId(String email) {
-		// TODO Auto-generated method stub
-		return avaliacaoFisicaRepository.findListaAvaliacoesByAlunoEmail(email);
-	}
-
-	@Transactional(readOnly = true)
-	public List<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorId(String email) {
-		// TODO Auto-generated method stub
-		return avaliacaoFisicaRepository.findListaAvaliacoesByInstrutorEmail(email);
-	}**/
-	
 	@Transactional(readOnly = true)
 	public Page<AvaliacaoFisica> buscarAvaliacoesFisicasByAlunoIdPaginado(String email, int page, int size) {
 	    Pageable pageable = PageRequest.of(page, size);
 	    return avaliacaoFisicaRepository.findListaAvaliacoesByAlunoEmail(email, pageable);
 	}
 
-	@Transactional(readOnly = true)
+	/**@Transactional(readOnly = true)
 	public Page<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorIdPaginado(String email, int page, int size) {
 	    Pageable pageable = PageRequest.of(page , size);
 	    return avaliacaoFisicaRepository.findListaAvaliacoesByInstrutorEmail(email, pageable);
-	}
+	}**/
 
 	@Override
 	@Transactional(readOnly = true)	
 	public Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int page, int size) {
 		Pageable pageable = PageRequest.of(page , size);
 	    return avaliacaoFisicaRepository.buscarPorNomeAluno(nome, pageable);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)    
+	public Page<AvaliacaoFisica> buscarPorNomeAlunoIns(String nome, int page, int size, String nomeInstrutor) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return avaliacaoFisicaRepository.buscarPorNomeAlunoEInstrutor(nome, nomeInstrutor, pageable);
 	}
 
 	@Override
@@ -173,7 +123,24 @@ public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService{
 	    }
 	}
 
+	@Override
+	public Page<AvaliacaoFisica> buscarAvaliacoesFisicasPaginado(int page, int size) {
+		Pageable pageable = PageRequest.of(page , size);
+		return avaliacaoFisicaRepository.findAll( pageable);
+	}
+
 	
 	
-	
+	@Override
+	@Transactional(readOnly = true)
+	public Page<AvaliacaoFisica> buscarPorNomeAlunoEInstrutor(String nomeAluno, int page, int size, String nomeInstrutor) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return avaliacaoFisicaRepository.buscarPorNomeAlunoEInstrutor(nomeAluno, nomeInstrutor, pageable);
+	}
+
+	@Transactional(readOnly = true)
+	public Page<AvaliacaoFisica> buscarAvaliacoesFisicasByInstrutorIdPaginado(String email, int page, int size) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return avaliacaoFisicaRepository.findListaAvaliacoesByInstrutorEmail(email, pageable);
+	}
 }

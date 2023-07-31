@@ -18,80 +18,94 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="TB_EXERCICIOS")
-public class Exercicio implements Serializable{
+@Table(name = "TB_EXERCICIOS")
+public class Exercicio implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column( nullable = false,length = 100)
+	@Column(nullable = false, length = 100)
 	private String nomeEquipamento;
-	@Column(  length = 4)
-	private int serie;	
-	@Column(  length = 4)
+	@Column(length = 4)
+	private int serie;
+	@Column(length = 4)
 	private int repeticao;
-	@Column(  length = 4)
+	@Column(length = 4)
 	private int duracaomin;
-	@Column( nullable = false , length = 100)
+	@Column(length = 4)
+	private int carga;
+	@Column(nullable = false, length = 100)
 	private String nomeGrupoMuscular;
-	
 
 	@Column(nullable = false, length = 3)
 	@Enumerated(EnumType.STRING)
 	private DIA dia;
-	
-	
-	@ManyToOne
-	@JoinColumn(name="id_fichaTreino_fk")
-	private FichaTreino fichaTreinos;
-	
 
-	
+	@ManyToOne
+	@JoinColumn(name = "id_fichaTreino_fk")
+	private FichaTreino fichaTreinos;
+
 	public Exercicio() {
-		
+
 	}
-	
-	public Exercicio(Long id, String nomeEquipamento, int serie, int repeticao, String nomeGrupoMuscular, int duracaomin) {
+
+	public Exercicio(Long id, String nomeEquipamento, int serie, int repeticao,int carga, String nomeGrupoMuscular,
+			int duracaomin) {
 		super();
 		this.id = id;
 		this.nomeEquipamento = nomeEquipamento;
 		this.serie = serie;
 		this.repeticao = repeticao;
-		this.duracaomin= duracaomin;
-		this.nomeGrupoMuscular= nomeGrupoMuscular;
-		
-		
+		this.duracaomin = duracaomin;
+		this.carga= carga;
+		this.nomeGrupoMuscular = nomeGrupoMuscular;
+
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNomeEquipamento() {
 		return nomeEquipamento;
 	}
+
 	public void setNomeEquipamento(String nomeEquipamento) {
 		this.nomeEquipamento = nomeEquipamento;
 	}
+
 	public int getSerie() {
 		return serie;
 	}
+
 	public void setSerie(int serie) {
 		this.serie = serie;
 	}
+	
+	
+
+	public int getCarga() {
+		return carga;
+	}
+
+	public void setCarga(int carga) {
+		this.carga = carga;
+	}
+
 	public int getRepeticao() {
 		return repeticao;
 	}
+
 	public void setRepeticao(int repeticao) {
 		this.repeticao = repeticao;
-	}	
-	
+	}
+
 	public DIA getDia() {
 		return dia;
 	}
@@ -103,11 +117,11 @@ public class Exercicio implements Serializable{
 	public FichaTreino getFichaTreino() {
 		return fichaTreinos;
 	}
-	
+
 	public void setFichaTreino(FichaTreino fichaTreinos) {
 		this.fichaTreinos = fichaTreinos;
 	}
-	
+
 	public int getDuracaomin() {
 		return duracaomin;
 	}
@@ -115,7 +129,7 @@ public class Exercicio implements Serializable{
 	public void setDuracaomin(int duracaomin) {
 		this.duracaomin = duracaomin;
 	}
-	
+
 	public String getNomeGrupoMuscular() {
 		return nomeGrupoMuscular;
 	}
@@ -123,11 +137,12 @@ public class Exercicio implements Serializable{
 	public void setNomeGrupoMuscular(String nomeGrupoMuscular) {
 		this.nomeGrupoMuscular = nomeGrupoMuscular;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -140,24 +155,4 @@ public class Exercicio implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 
-	
-	
-	
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

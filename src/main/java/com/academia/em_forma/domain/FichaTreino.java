@@ -22,50 +22,43 @@ import jakarta.validation.constraints.Size;
 @Table(name = "TB_FICHAS_TREINO")
 public class FichaTreino implements Serializable {
 
-	
-	private static final long serialVersionUID = 1L;	
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
-	@Column( nullable = false,length = 100)
+
+	@Column(nullable = false, length = 100)
 	private String nome;
-	
+
 	@Column(nullable = false, length = 200)
-	private String descricao;	          
-	
-	
-	
+	private String descricao;
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "fichaTreinos")	
+	@OneToMany(mappedBy = "fichaTreinos")
 	private List<Exercicio> exercicios;
-	
+
 	@NotNull(message = "Informe a avaliação Fisica referente a esse treino")
 	@ManyToOne
-	@JoinColumn(name="Avaliacao_id_fk")
+	@JoinColumn(name = "Avaliacao_id_fk")
 	private AvaliacaoFisica avaliacaoFisica;
-	
+
 	@NotNull(message = "Informe o Aluno referente a esse treino")
 	@ManyToOne
-	@JoinColumn(name="Aluno_id_fk")
+	@JoinColumn(name = "Aluno_id_fk")
 	private Aluno aluno;
-	
-	
+
 	public FichaTreino() {
-		
+
 	}
 
 	public FichaTreino(Long id, String nome, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.descricao = descricao;	
-		
+		this.descricao = descricao;
+
 	}
-
-
 
 	public Aluno getAluno() {
 		return aluno;
@@ -79,12 +72,10 @@ public class FichaTreino implements Serializable {
 		return exercicios;
 	}
 
-	public void setExercicios (List<Exercicio> exercicios) {
+	public void setExercicios(List<Exercicio> exercicios) {
 		this.exercicios = exercicios;
 	}
 
-	
-	
 	public AvaliacaoFisica getAvaliacaoFisica() {
 		return avaliacaoFisica;
 	}
@@ -97,38 +88,30 @@ public class FichaTreino implements Serializable {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -142,8 +125,4 @@ public class FichaTreino implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-
-
-	
-	
 }

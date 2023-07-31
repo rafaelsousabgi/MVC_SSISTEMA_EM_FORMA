@@ -1,8 +1,8 @@
 package com.academia.em_forma.domain;
 
-
 public enum PerfilTipo {
-	ADMIN(1, "ADMIN"),	INSTRUTOR(2, "INSTRUTOR"), 	ALUNO(3, "ALUNO");
+	ADMIN(1, "ADMIN"), INSTRUTOR(2, "INSTRUTOR"), ALUNO(3, "ALUNO");
+
 	private long cod;
 	private String desc;
 

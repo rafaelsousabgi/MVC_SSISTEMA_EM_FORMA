@@ -152,8 +152,8 @@
 
     </div>
     <div class="d-flex justify-content-center">
-    <a class="btn btn-primary" href="/avaliacoes/dadosavaliacoes">Voltar</a>
-</div>
+    <a class="btn btn-primary" th:href="@{/avaliacoes/todos/dadosavaliacoes}">Voltar</a>
+	</div>
     <div th:replace="~{fragments/modal :: modal}"></div>
 </section>
 <script	th:src="@{/js/usuario.js(v=${version})}" th:fragment="js"></script>

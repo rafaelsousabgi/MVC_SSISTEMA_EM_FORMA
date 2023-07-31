@@ -16,44 +16,38 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="TB_ALUNOS")
+@Table(name = "TB_ALUNOS")
 @SuppressWarnings("serial")
-public class Aluno extends Pessoa<Long>{
-	
+public class Aluno extends Pessoa<Long> {
+
 	private String objetivo;
-	
-	
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy ="aluno" )
+	@OneToMany(mappedBy = "aluno")
 	private List<AvaliacaoFisica> avaliacaoFisica;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "aluno")
 	private List<FichaTreino> fichaTreinos;
-	
 
-	
 	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "id_usuario_fk")
 	private Usuario usuario;
 
 	public Aluno() {
-		
+
 	}
 
-	
-	public Aluno(Long id, String nome, String sexo, String estadoCivil, String rg, String cpf,
-			String telefone, String profissao, LocalDate dataEntrada, LocalDate dataSaida , Endereco endereco) {
-		super(id, nome, sexo, estadoCivil, rg, cpf, telefone, profissao, dataEntrada , dataSaida ,endereco);
+	public Aluno(Long id, String nome, String sexo, String estadoCivil, String rg, String cpf, String telefone,
+			String profissao, LocalDate dataEntrada, LocalDate dataSaida, Endereco endereco) {
+		super(id, nome, sexo, estadoCivil, rg, cpf, telefone, profissao, dataEntrada, dataSaida, endereco);
 		this.objetivo = objetivo;
 	}
-
 
 	public Aluno(Long id) {
 		super.setId(id);
 	}
-	
+
 	public Aluno(Usuario usuario) {
 		this.usuario = usuario;
 	}
@@ -66,38 +60,28 @@ public class Aluno extends Pessoa<Long>{
 		this.objetivo = objetivo;
 	}
 
-
 	public List<AvaliacaoFisica> getAvaliacaoFisica() {
 		return avaliacaoFisica;
 	}
-
 
 	public void setAvaliacaoFisica(List<AvaliacaoFisica> avaliacaoFisica) {
 		this.avaliacaoFisica = avaliacaoFisica;
 	}
 
-
 	public List<FichaTreino> getFichaTreinos() {
 		return fichaTreinos;
 	}
-
 
 	public void setFichaTreinos(List<FichaTreino> fichaTreinos) {
 		this.fichaTreinos = fichaTreinos;
 	}
 
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
-
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
-	
-	
 
 }

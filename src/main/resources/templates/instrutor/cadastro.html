@@ -15,7 +15,7 @@
 	                        </li>
 	                    </ul>
 	                </div>
-	                <a class="btn btn-primary btn-md" href="/instrutores/listar" role="button">
+	                <a class="btn btn-primary btn-md" href="/instrutores/listar" role="button" sec:authorize="hasAuthority('ADMIN')">
 	                    <span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
 	                    <span>Listar Instrutores</span>
 	                </a>
@@ -66,7 +66,8 @@
 	                    </div>
 	                    <div class="form-group col-md-4">
 	                        <label for="rg">RG</label>
-	                        <input type="text" class="form-control" id="rg" th:field="*{rg}"/>
+	                        <input type="text" class="form-control" id="rg"placeholder="000.000.000-00"
+	                               autofocus="autofocus"  data-mask="00.000.000-0" th:field="*{rg}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -77,22 +78,23 @@
 	                    
 	                    <div class="form-group col-md-4">
 	                        <label for="cpf">CPF</label>
-	                        <input type="text" class="form-control" id="cpf" th:field="*{cpf}" />
+	                        <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00"
+	                               autofocus="autofocus"  data-mask="000.000.000-00" th:field="*{cpf}" />
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-4">
 	                        <label for="cref">Cref</label>
-	                        <input type="text" class="form-control" id="cref" placeholder="CREF 000002-G/RJ"
-	                               autofocus="autofocus" th:field="*{cref}"/>
+	                        <input type="text" class="form-control" id="cref" placeholder="000002-G"
+	                               autofocus="autofocus" data-mask="000000-G"  th:field="*{cref}"/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-4">
 	                        <label for="telefone">Telefone</label>
-	                        <input type="text" class="form-control" id="telefone" placeholder="18-1234-12345"
+	                        <input type="text" class="form-control" id="telefone" placeholder="(18)-1234-12345"
 	                               autofocus="autofocus"  data-mask="(00)-0000-00000" th:field="*{telefone}"/>
 	                        <div class="invalid-feedback">
 	

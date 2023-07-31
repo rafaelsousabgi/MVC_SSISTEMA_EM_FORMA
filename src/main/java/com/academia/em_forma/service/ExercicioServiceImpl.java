@@ -16,101 +16,99 @@ import com.academia.em_forma.repository.ExercicioRepository;
 
 @Service
 @Transactional
-public class ExercicioServiceImpl implements ExercicioService{
+public class ExercicioServiceImpl implements ExercicioService {
 
 	@Autowired
 	public ExercicioDao dao;
-	
+
 	@Autowired
 	public ExercicioRepository exercicioRepository;
-	
+
 	@Override
 	public void salvar(Exercicio exercicio) {
 		dao.save(exercicio);
-		
-		
+
 	}
 
 	@Override
 	public void editar(Exercicio exercicio) {
 		dao.update(exercicio);
-		
+
 	}
 
 	@Override
 	public void excluir(Long id) {
 		dao.delete(id);
-		
+
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Exercicio buscarPorId(Long id) {
-		
+
 		return dao.findById(id);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Exercicio> buscarTodos() {
-		
+
 		return dao.findAll();
 	}
 
 	@Override
 	public boolean exercicioTemFichaTreino(Long id) {
-		if(buscarPorId(id).getFichaTreino()==null) {
+		if (buscarPorId(id).getFichaTreino() == null) {
 			return false;
 		}
 		return true;
 	}
-	
-	
-	
+
 	@Transactional(readOnly = true)
 	public Page<Exercicio> buscarExerciciosByAvaliacaoAlunoIdPaginado(String email, int page, int size) {
-	    Pageable pageable = PageRequest.of(page, size);
-	    return exercicioRepository.findByExercicioByAlunoEmail(email, pageable);
+		Pageable pageable = PageRequest.of(page, size);
+		return exercicioRepository.findByExercicioByAlunoEmail(email, pageable);
 	}
 
 	@Transactional(readOnly = true)
-	public Page<Exercicio> buscarAvaliacoesFisicasByInstrutorIdPaginado( int page, int size) {
-	    Pageable pageable = PageRequest.of(page , size);
-	    return exercicioRepository.findAll(pageable);
-	}
-/**
- * findByExercicioByInstrutorEmail( pageable);
-	}
- * 
-	@Transactional(readOnly = true)
-	public List<Exercicio> buscarExerciciosByAvaliacaoAlunoId(String email) {
-		
-		return exercicioRepository.findByExercicioByAlunoEmail(email) ;
-	}
-
-	@Transactional(readOnly = true)
-	public List<Exercicio> buscarAvaliacoesFisicasByInstrutorId(String email) {
-		
-		return exercicioRepository.findByExercicioByInstrutorEmail(email) ;
-	}
-
-	
-
-	
-	@Override
-	public boolean exerciciosTemtreino(Long id) {
-		if(buscarPorId(id).getFichaTreino().i) {
-			return false;
-		}
-		return true;
+	public Page<Exercicio> buscarAvaliacoesFisicasByInstrutorIdPaginado(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return exercicioRepository.findAll(pageable);
 	}
 	
-
-	@Override
-	public Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int currentPage, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	**/
+	/**
+	  public List<Exercicio> buscarExerciciosPorNomeAluno(String nomeAluno) {
+	        return exercicioRepository.buscarExerciciosPorNomeAluno(nomeAluno);
+	    }**/
+	
+	/**
+	 * findByExercicioByInstrutorEmail( pageable); }
+	 * 
+	 * @Transactional(readOnly = true) public List<Exercicio>
+	 *                         buscarExerciciosByAvaliacaoAlunoId(String email) {
+	 * 
+	 *                         return
+	 *                         exercicioRepository.findByExercicioByAlunoEmail(email)
+	 *                         ; }
+	 * 
+	 * @Transactional(readOnly = true) public List<Exercicio>
+	 *                         buscarAvaliacoesFisicasByInstrutorId(String email) {
+	 * 
+	 *                         return
+	 *                         exercicioRepository.findByExercicioByInstrutorEmail(email)
+	 *                         ; }
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @Override public boolean exerciciosTemtreino(Long id) {
+	 *           if(buscarPorId(id).getFichaTreino().i) { return false; } return
+	 *           true; }
+	 * 
+	 * 
+	 * @Override public Page<AvaliacaoFisica> buscarPorNomeAluno(String nome, int
+	 *           currentPage, int pageSize) { // TODO Auto-generated method stub
+	 *           return null; }
+	 **/
 
 }

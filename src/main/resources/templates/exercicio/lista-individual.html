@@ -18,8 +18,19 @@
                 <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
                 <span>Novo Exercicio</span>
             </a>
-        </nav>
-
+		</nav>
+		<!-- 
+		<form th:action="@{/exercicios/buscar}" method="get">
+		    <div class="form-row align-items-center mb-3">
+		        <div class="col-auto">
+		            <label for="nomeAluno" class="sr-only">Nome do Aluno</label>
+		            <input type="text" class="form-control" id="nomeAluno" name="nomeAluno" placeholder="Digite o nome do aluno">
+		        </div>
+		        <div class="col-auto">
+		            <button type="submit" class="btn btn-primary">Pesquisar</button>
+		        </div>
+		    </div>
+		</form> -->
         <div class="container">
             <div th:replace="~{fragments/alert}"></div>
 
@@ -32,33 +43,38 @@
                                 <b th:text="${listaExercicios[0].fichaTreino.nome}"></b>
                             </td>
                         </tr>
+                        <tr><th>DESCRIÇÃO </th>
+                            <td colspan="6">
+                                <b th:text="${listaExercicios[0].fichaTreino.descricao}"></b>
+                            </td></tr>
                         <tr>
                         	<th>NOME DO ALUNO</th>
-                            <td colspan="8">
+                            <td colspan="6">
                                 <b th:text="${listaExercicios[0].fichaTreino.aluno.nome}"></b>
                             </td>
+                            
                         </tr>
                         <tr>
                             <th>Equipamento</th>
-                            <th>Serie</th>
-                            <th>Repetições</th>
                             <th>Dia</th>
                             <th>Grupo Muscular</th>
+                            <th>Serie</th>
+                            <th>Repetições</th>
                             <th>Duração</th>
-                            <th>Ação</th>                            
+                            <th sec:authorize="hasAuthority('INSTRUTOR')">Ação</th>                            
                             
                         </tr>
                     </thead>
                     <tbody>
                     
                         <tr th:each="exercicio : ${listaExercicios}">
-                            <td th:text="${exercicio.nomeEquipamento}"></td>
-                            <td th:text="${exercicio.serie}"></td>
-                            <td th:text="${exercicio.repeticao}"></td>
+                            <td th:text="${exercicio.nomeEquipamento}"></td>                           
                             <td th:text="${exercicio.dia}"></td>
                             <td th:text="${exercicio.nomeGrupoMuscular}"></td>
+                             <td th:text="${exercicio.serie}"></td>
+                            <td th:text="${exercicio.repeticao}"></td>
                             <td th:text="${exercicio.duracaomin}"></td>
-                            <td colspan="3">
+                            <td colspan="3" sec:authorize="hasAuthority('INSTRUTOR')">
                                 <a class="btn btn-info btn-sm" th:href="@{/exercicios/editar/{id}(id=${exercicio.id})}" role="button">
                                     <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
                                 </a>
